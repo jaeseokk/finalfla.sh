@@ -1,0 +1,9 @@
+@import '../shared/mixins.scss';
+
+.SequencerTitle {
+  height: 150px;
+
+  @include for-small-screens() {
+    height: 80px;
+  }
+}

@@ -1,0 +1,8 @@
+@import '../shared/mixins.scss';
+
+.SequencerBolt {
+  width: 50px;
+  @include for-small-screens() {
+    width: 30px;
+  }
+}

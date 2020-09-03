@@ -1,0 +1,32 @@
+{"frames": {
+
+"d-4_23.png":
+{
+	"frame": {"x":0,"y":0,"w":1699,"h":1080},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":221,"y":0,"w":1699,"h":1080},
+	"sourceSize": {"w":1920,"h":1080}
+},
+"d-4_24.png":
+{
+	"frame": {"x":0,"y":0,"w":1699,"h":1080},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":221,"y":0,"w":1699,"h":1080},
+	"sourceSize": {"w":1920,"h":1080}
+}},
+"animations": {
+	"d-4": ["d-4_23.png","d-4_24.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "sprite-0-138.png",
+	"format": "RGBA8888",
+	"size": {"w":1699,"h":1080},
+	"scale": "1",
+	"related_multi_packs": [ "sprite-0-0.json", "sprite-0-1.json", "sprite-0-2.json", "sprite-0-3.json", "sprite-0-4.json", "sprite-0-5.json", "sprite-0-6.json", "sprite-0-7.json", "sprite-0-8.json", "sprite-0-9.json", "sprite-0-10.json", "sprite-0-11.json", "sprite-0-12.json", "sprite-0-13.json", "sprite-0-14.json", "sprite-0-15.json", "sprite-0-16.json", "sprite-0-17.json", "sprite-0-18.json", "sprite-0-19.json", "sprite-0-20.json", "sprite-0-21.json", "sprite-0-22.json", "sprite-0-23.json", "sprite-0-24.json", "sprite-0-25.json", "sprite-0-26.json", "sprite-0-27.json", "sprite-0-28.json", "sprite-0-29.json", "sprite-0-30.json", "sprite-0-31.json", "sprite-0-32.json", "sprite-0-33.json", "sprite-0-34.json", "sprite-0-35.json", "sprite-0-36.json", "sprite-0-37.json", "sprite-0-38.json", "sprite-0-39.json", "sprite-0-40.json", "sprite-0-41.json", "sprite-0-42.json", "sprite-0-43.json", "sprite-0-44.json", "sprite-0-45.json", "sprite-0-46.json", "sprite-0-47.json", "sprite-0-48.json", "sprite-0-49.json", "sprite-0-50.json", "sprite-0-51.json", "sprite-0-52.json", "sprite-0-53.json", "sprite-0-54.json", "sprite-0-55.json", "sprite-0-56.json", "sprite-0-57.json", "sprite-0-58.json", "sprite-0-59.json", "sprite-0-60.json", "sprite-0-61.json", "sprite-0-62.json", "sprite-0-63.json", "sprite-0-64.json", "sprite-0-65.json", "sprite-0-66.json", "sprite-0-67.json", "sprite-0-68.json", "sprite-0-69.json", "sprite-0-70.json", "sprite-0-71.json", "sprite-0-72.json", "sprite-0-73.json", "sprite-0-74.json", "sprite-0-75.json", "sprite-0-76.json", "sprite-0-77.json", "sprite-0-78.json", "sprite-0-79.json", "sprite-0-80.json", "sprite-0-81.json", "sprite-0-82.json", "sprite-0-83.json", "sprite-0-84.json", "sprite-0-85.json", "sprite-0-86.json", "sprite-0-87.json", "sprite-0-88.json", "sprite-0-89.json", "sprite-0-90.json", "sprite-0-91.json", "sprite-0-92.json", "sprite-0-93.json", "sprite-0-94.json", "sprite-0-95.json", "sprite-0-96.json", "sprite-0-97.json", "sprite-0-98.json", "sprite-0-99.json", "sprite-0-100.json", "sprite-0-101.json", "sprite-0-102.json", "sprite-0-103.json", "sprite-0-104.json", "sprite-0-105.json", "sprite-0-106.json", "sprite-0-107.json", "sprite-0-108.json", "sprite-0-109.json", "sprite-0-110.json", "sprite-0-111.json", "sprite-0-112.json", "sprite-0-113.json", "sprite-0-114.json", "sprite-0-115.json", "sprite-0-116.json", "sprite-0-117.json", "sprite-0-118.json", "sprite-0-119.json", "sprite-0-120.json", "sprite-0-121.json", "sprite-0-122.json", "sprite-0-123.json", "sprite-0-124.json", "sprite-0-125.json", "sprite-0-126.json", "sprite-0-127.json", "sprite-0-128.json", "sprite-0-129.json", "sprite-0-130.json", "sprite-0-131.json", "sprite-0-132.json", "sprite-0-133.json", "sprite-0-134.json", "sprite-0-135.json", "sprite-0-136.json", "sprite-0-137.json", "sprite-0-139.json", "sprite-0-140.json", "sprite-0-141.json", "sprite-0-142.json", "sprite-0-143.json", "sprite-0-144.json", "sprite-0-145.json", "sprite-0-146.json", "sprite-0-147.json", "sprite-0-148.json", "sprite-0-149.json", "sprite-0-150.json", "sprite-0-151.json", "sprite-0-152.json", "sprite-0-153.json", "sprite-0-154.json", "sprite-0-155.json", "sprite-0-156.json", "sprite-0-157.json", "sprite-0-158.json", "sprite-0-159.json", "sprite-0-160.json", "sprite-0-161.json", "sprite-0-162.json", "sprite-0-163.json", "sprite-0-164.json", "sprite-0-165.json", "sprite-0-166.json", "sprite-0-167.json", "sprite-0-168.json", "sprite-0-169.json", "sprite-0-170.json", "sprite-0-171.json", "sprite-0-172.json", "sprite-0-173.json", "sprite-0-174.json", "sprite-0-175.json", "sprite-0-176.json", "sprite-0-177.json", "sprite-0-178.json", "sprite-0-179.json", "sprite-0-180.json", "sprite-0-181.json", "sprite-0-182.json", "sprite-0-183.json", "sprite-0-184.json", "sprite-0-185.json", "sprite-0-186.json", "sprite-0-187.json", "sprite-0-188.json", "sprite-0-189.json", "sprite-0-190.json", "sprite-0-191.json", "sprite-0-192.json", "sprite-0-193.json", "sprite-0-194.json", "sprite-0-195.json", "sprite-0-196.json", "sprite-0-197.json", "sprite-0-198.json", "sprite-0-199.json", "sprite-0-200.json", "sprite-0-201.json", "sprite-0-202.json", "sprite-0-203.json", "sprite-0-204.json", "sprite-0-205.json", "sprite-0-206.json", "sprite-0-207.json", "sprite-0-208.json", "sprite-0-209.json", "sprite-0-210.json", "sprite-0-211.json", "sprite-0-212.json", "sprite-0-213.json", "sprite-0-214.json", "sprite-0-215.json", "sprite-0-216.json", "sprite-0-217.json", "sprite-0-218.json", "sprite-0-219.json", "sprite-0-220.json", "sprite-0-221.json", "sprite-0-222.json", "sprite-0-223.json", "sprite-0-224.json", "sprite-0-225.json", "sprite-0-226.json", "sprite-0-227.json" ],
+	"smartupdate": "$TexturePacker:SmartUpdate:1cf5e6130918fd40830d75807a80cb0b:a706bc6068a5a649c7729f8d92b33b87:9cc7c9ef0be58fb80a7e21d7d8d48a8c$"
+}
+}
