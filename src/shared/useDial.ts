@@ -12,7 +12,7 @@ const calculateAngle = (
 const discretizeValue = (angle: number, min: number, max: number) => {
   const range = max - min + 1
   const adjustedAngle = angle < 0 ? 360 + angle : angle
-  const value = Math.round((adjustedAngle * range) / 360) + min
+  const value = Math.ceil((adjustedAngle * range) / 360) + min
 
   if (value > max) {
     return -1
