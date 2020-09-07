@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useMemo } from 'react'
 import Animation from './Animation'
 import useTicker from '../shared/useTicker'
 import useWindowResize from '../shared/useResize'
@@ -6,6 +6,7 @@ import { AnimSequence } from '../shared/types'
 import styles from './App.module.scss'
 import Sequencer from './Sequencer'
 import Loading from './Loading'
+import useMouseIdleTime from '../shared/useMouseIdleTime'
 
 const initialAnimSequence: AnimSequence = [
   [-1, -1, -1, -1, -1, -1],
@@ -19,17 +20,14 @@ const initialAnimSequence: AnimSequence = [
 ]
 
 function App() {
-  const [animSequence, setAnimSequence] = useState(initialAnimSequence)
   const [ready, setReady] = useState(false)
-  const {
-    tickIndex,
-    isPlaying,
-    subscribe,
-    start,
-    pause,
-    reset,
-    goTo,
-  } = useTicker(8)
+  const [animSequence, setAnimSequence] = useState(initialAnimSequence)
+  const [history, setHistory] = useState<any[]>([])
+  const { tickIndex, start } = useTicker(8)
+  const { idle } = useMouseIdleTime({
+    active: ready,
+  })
+  const sequencerVisible = useMemo(() => !idle, [idle])
   const { width: windowWidth, height: windowHeight } = useWindowResize()
   const handleReady = useCallback(() => {
     setReady(true)
@@ -38,7 +36,7 @@ function App() {
   const handleChangeKnobIndex = useCallback(
     (tickIndex, layerIndex, knobIndex) => {
       setAnimSequence((prev) => {
-        return [
+        const nextState = [
           ...prev.slice(0, tickIndex),
           [
             ...prev[tickIndex].slice(0, layerIndex),
@@ -47,10 +45,27 @@ function App() {
           ],
           ...prev.slice(tickIndex + 1),
         ]
+
+        setHistory((prevHistory) => [...prevHistory, nextState])
+
+        return nextState
       })
     },
     []
   )
+  const handleUndo = useCallback(() => {
+    setHistory((prevHistory) => {
+      const nextHistory = prevHistory.slice(0, -1)
+      const snapshot =
+        nextHistory.length === 0
+          ? initialAnimSequence
+          : nextHistory[nextHistory.length - 1]
+
+      setAnimSequence(snapshot)
+
+      return nextHistory
+    })
+  }, [history])
 
   return (
     <div className={styles.App}>
@@ -64,11 +79,13 @@ function App() {
       <div className={styles.layout}>
         {ready ? (
           <Sequencer
+            visible={sequencerVisible}
             rowCount={6}
             colCount={8}
             sequence={animSequence}
             tickIndex={tickIndex}
             onChangeKnobIndex={handleChangeKnobIndex}
+            onUndo={handleUndo}
           />
         ) : (
           <Loading />
