@@ -8,7 +8,6 @@ import {
 
 const useMouseIdleTime = ({ active }: any) => {
   const [idle, setIdle] = useState(false)
-  const [interacting, setInteracting] = useState(false)
   const rafRef = useRef<number>()
   const lastTimeRef = useRef<number>(0)
   const animate = (time: number) => {
@@ -16,7 +15,7 @@ const useMouseIdleTime = ({ active }: any) => {
       return
     }
 
-    if (!lastTimeRef.current || interacting) {
+    if (!lastTimeRef.current) {
       lastTimeRef.current = time
     }
 
@@ -29,15 +28,18 @@ const useMouseIdleTime = ({ active }: any) => {
 
     rafRef.current = requestAnimationFrame(animate)
   }
-  const handleMouseMove = useCallback(() => {
+  const initIdleTime = useCallback(() => {
     setIdle(false)
     lastTimeRef.current = 0
   }, [])
+  const handleMouseMove = useCallback(() => {
+    initIdleTime()
+  }, [])
   const handleMouseDown = useCallback(() => {
-    setInteracting(true)
+    initIdleTime()
   }, [])
   const handleMouseUp = useCallback(() => {
-    setInteracting(false)
+    initIdleTime()
   }, [])
   useLayoutEffect(() => {
     window.addEventListener('mousemove', handleMouseMove)
@@ -48,7 +50,7 @@ const useMouseIdleTime = ({ active }: any) => {
       window.removeEventListener('mousedown', handleMouseDown)
       window.removeEventListener('mouseup', handleMouseUp)
     }
-  }, [handleMouseMove])
+  }, [])
   useEffect(() => {
     if (active) {
       rafRef.current = requestAnimationFrame(animate)
