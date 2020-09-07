@@ -1,9 +1,14 @@
 body {
   overflow: hidden;
-  cursor: url(/assets/hand-cursor-default.svg), auto;
 }
 
 .App {
+  cursor: url(/assets/hand-cursor-default.svg), auto;
+
+  &.idle {
+    cursor: none;
+  }
+
   .layout {
     position: absolute;
     top: 0;

@@ -7,6 +7,7 @@ import styles from './App.module.scss'
 import Sequencer from './Sequencer'
 import Loading from './Loading'
 import useMouseIdleTime from '../shared/useMouseIdleTime'
+import clsx from 'clsx'
 
 const initialAnimSequence: AnimSequence = [
   [-1, -1, -1, -1, -1, -1],
@@ -68,7 +69,7 @@ function App() {
   }, [history])
 
   return (
-    <div className={styles.App}>
+    <div className={clsx([styles.App, { [styles.idle]: idle }])}>
       <Animation
         windowWidth={windowWidth}
         windowHeight={windowHeight}
