@@ -1,12 +1,14 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import Knob from './Knob'
 import styles from './Sequencer.module.scss'
 import { AnimSequence } from '../shared/types'
 import clsx from 'clsx'
 import SequencerTitle from './SequencerTitle'
 import SequencerBolt from './SequencerBolt'
+import ExpandedKnob from './ExpandedKnob'
 
 interface SequencerProp {
+  visible: boolean
   rowCount: number
   colCount: number
   sequence: AnimSequence
@@ -16,14 +18,17 @@ interface SequencerProp {
     layerIndex: number,
     knobIndex: number
   ) => void
+  onUndo: () => void
 }
 
 const Sequencer: React.FC<SequencerProp> = ({
+  visible,
   rowCount,
   colCount,
   sequence,
   tickIndex,
   onChangeKnobIndex,
+  onUndo,
 }) => {
   const renderKnobs = useCallback(() => {
     const knobs = []
@@ -35,19 +40,11 @@ const Sequencer: React.FC<SequencerProp> = ({
 
         row.push(
           <Knob
-            index={selectedKnobIndex}
+            key={`${i}-${j}`}
+            selectedIndex={selectedKnobIndex}
             playing={tickIndex === j}
-            onClick={(value) => {
-              onChangeKnobIndex(j, i, value)
-              // if (
-              //   selectedKnobIndex === null ||
-              //   selectedKnobIndex === animationUnits.length - 1
-              // ) {
-              //   onChangeKnobIndex(j, i, 0)
-              //   return
-              // }
-
-              // onChangeKnobIndex(j, i, selectedKnobIndex + 1)
+            onSelect={(index) => {
+              onChangeKnobIndex(j, i, index)
             }}
           />
         )
@@ -59,10 +56,15 @@ const Sequencer: React.FC<SequencerProp> = ({
   }, [rowCount, colCount, sequence, tickIndex])
 
   return (
-    <div className={styles.Sequencer}>
+    <div className={clsx([styles.Sequencer, { [styles.visible]: visible }])}>
       <div className={styles.background}>
-        <div className={styles.title}>
+        <div className={styles.header}>
+          <div></div>
           <SequencerTitle />
+          <div>
+            <button>redo</button>
+            <button onClick={onUndo}>undo</button>
+          </div>
         </div>
         <div className={clsx([styles.bolt, styles.top, styles.left])}>
           <SequencerBolt />

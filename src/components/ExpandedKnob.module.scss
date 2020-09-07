@@ -1,0 +1,95 @@
+.ExpandedKnob {
+  position: fixed;
+  top: 0;
+  left: 0;
+  cursor: url(/assets/hand-cursor-pointer1.svg), pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity 0.1s ease-in-out;
+
+  .knobWrapper {
+    width: 600px;
+    position: relative;
+    z-index: inherit;
+    transform: scale(0.8);
+    transition: transform 0.1s ease-in-out;
+  }
+
+  g.rotateWrapper {
+    transition: transform 80ms ease-in-out;
+    transform-origin: 49% 50%;
+  }
+
+  .dimmed {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.75);
+    z-index: inherit;
+  }
+
+  &.active {
+    z-index: 1;
+    opacity: 1;
+    pointer-events: auto;
+
+    .knobWrapper {
+      transform: scale(1);
+    }
+  }
+}
+
+.Materials {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  ul {
+    position: absolute;
+    list-style: none;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    li {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      left: 0;
+      top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      @for $i from 0 through 73 {
+        &:nth-child(#{$i + 1}) {
+          transform: rotate(#{$i * 4.86}deg) translateY(-50%);
+
+          &.selected {
+            > div {
+              transform: scale(5) translateY(-55%) rotate(#{$i * -4.86}deg);
+            }
+          }
+        }
+      }
+
+      > div {
+        border-radius: 50%;
+        width: 10px;
+        height: 10px;
+        border: 1px solid #000000;
+        background-color: #000000;
+        transition: transform 0.2s ease-in-out;
+      }
+    }
+  }
+}
