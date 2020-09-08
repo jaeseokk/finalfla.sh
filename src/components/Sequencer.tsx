@@ -1,11 +1,10 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback } from 'react'
 import Knob from './Knob'
 import styles from './Sequencer.module.scss'
 import { AnimSequence } from '../shared/types'
 import clsx from 'clsx'
 import SequencerTitle from './SequencerTitle'
 import SequencerBolt from './SequencerBolt'
-import ExpandedKnob from './ExpandedKnob'
 
 interface SequencerProp {
   visible: boolean

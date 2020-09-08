@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import styles from './Knob.module.scss'
 import { animationUnits } from '../shared/animation-config'
 import ExpandedKnob from './ExpandedKnob'
+import useLongPress from '../shared/useLongPress'
 
 interface KnobProp {
   selectedIndex: number
@@ -16,12 +17,35 @@ const Knob: React.FC<KnobProp> = ({ selectedIndex, playing, onSelect }) => {
   const patternId = id ? `icon-${id}` : undefined
   const fill = patternId ? `url(#${patternId})` : '#fff'
   const [expand, setExpand] = useState(false)
-  const handleMouseDown = useCallback(() => {
+  const handleLongPress = useCallback((e) => {
     setExpand(true)
   }, [])
-  const handleMouseUp = useCallback(() => {}, [])
+  const handleClick = useCallback(() => {
+    if (animationUnits.length - 1 <= selectedIndex) {
+      onSelect(-1)
+      return
+    }
+    onSelect(selectedIndex + 1)
+  }, [onSelect, selectedIndex])
+  const { startInteracting, clearInteracting } = useLongPress(
+    handleLongPress,
+    handleClick
+  )
+  const handleMouseDown = useCallback(
+    (e) => {
+      startInteracting(e)
+    },
+    [startInteracting]
+  )
+  const handleMouseUp = useCallback(
+    (e) => {
+      clearInteracting(e)
+    },
+    [clearInteracting]
+  )
   const handleSelect = useCallback(
     (index: number) => {
+      clearInteracting()
       setExpand(false)
       onSelect(index)
     },
