@@ -40,7 +40,7 @@ const Sequencer: React.FC<SequencerProp> = ({
 
         row.push(
           <Knob
-            key={`${i}-${j}`}
+            key={j}
             selectedIndex={selectedKnobIndex}
             playing={tickIndex === j}
             onSelect={(index) => {
@@ -49,7 +49,11 @@ const Sequencer: React.FC<SequencerProp> = ({
           />
         )
       }
-      knobs.push(<div className={styles.row}>{row}</div>)
+      knobs.push(
+        <div key={i} className={styles.row}>
+          {row}
+        </div>
+      )
     }
 
     return knobs
