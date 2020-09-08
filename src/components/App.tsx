@@ -8,6 +8,7 @@ import Sequencer from './Sequencer'
 import Loading from './Loading'
 import useMouseIdleTime from '../shared/useMouseIdleTime'
 import clsx from 'clsx'
+import Background from './Background'
 
 const initialAnimSequence: AnimSequence = [
   [-1, -1, -1, -1, -1, -1],
@@ -70,6 +71,7 @@ function App() {
 
   return (
     <div className={clsx([styles.App, { [styles.idle]: idle }])}>
+      <Background />
       <Animation
         windowWidth={windowWidth}
         windowHeight={windowHeight}
