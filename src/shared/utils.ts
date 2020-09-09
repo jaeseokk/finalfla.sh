@@ -1,3 +1,5 @@
+import getAgent from '@egjs/agent'
+
 export const calculateAngle = (
   originX: number,
   originY: number,
@@ -6,3 +8,5 @@ export const calculateAngle = (
 ) => {
   return (Math.atan2(y - originY, x - originX) * 180) / Math.PI + 90
 }
+
+export const isMobile = getAgent().isMobile

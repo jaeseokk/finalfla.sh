@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useCallback, useState } from 'react'
 import * as PIXI from 'pixi.js'
 import { AnimSequence } from '../shared/types'
 import { animationUnits } from '../shared/animation-config'
+import { isMobile } from '../shared/utils'
 
 const ANIM_WIDTH = 1920
 const ANIM_HEIGHT = 1080
@@ -31,7 +32,10 @@ const Animation: React.FC<AnimatinoProps> = ({
       return
     }
 
-    const ratio = Math.max(windowWidth / ANIM_WIDTH, windowHeight / ANIM_HEIGHT)
+    const ratio =
+      isMobile && windowWidth < windowHeight
+        ? Math.min(windowWidth / ANIM_WIDTH, windowHeight / ANIM_HEIGHT)
+        : Math.max(windowWidth / ANIM_WIDTH, windowHeight / ANIM_HEIGHT)
 
     pixiContainerRef.current.scale.set(ratio)
     pixiContainerRef.current.x = pixiAppRef.current.screen.width / 2
@@ -96,25 +100,25 @@ const Animation: React.FC<AnimatinoProps> = ({
     })
     pixiAppRef.current.stop()
 
-    console.log(pixiAppRef.current.renderer)
-
     pixiContainerRef.current = new PIXI.Container()
 
     pixiElRef.current.appendChild(pixiAppRef.current.view)
     pixiAppRef.current.stage.addChild(pixiContainerRef.current)
 
-    // for (let i = 0; i < 228; i++) {
-    //   PIXI.Loader.shared.add(`assets/sprites/sprite-0-${i}.json`)
-    // }
-    // for (let i = 0; i < 185; i++) {
-    //   PIXI.Loader.shared.add(`assets/sprites/sprite-1-${i}.json`)
-    // }
-
-    for (let i = 0; i < 38; i++) {
-      PIXI.Loader.shared.add(`assets/sprites/sprite-0-${i}_mobile.json`)
-    }
-    for (let i = 0; i < 33; i++) {
-      PIXI.Loader.shared.add(`assets/sprites/sprite-1-${i}_mobile.json`)
+    if (isMobile) {
+      for (let i = 0; i < 10; i++) {
+        PIXI.Loader.shared.add(`assets/sprites/sprite-0-${i}_mobile.json`)
+      }
+      for (let i = 0; i < 8; i++) {
+        PIXI.Loader.shared.add(`assets/sprites/sprite-1-${i}_mobile.json`)
+      }
+    } else {
+      for (let i = 0; i < 38; i++) {
+        PIXI.Loader.shared.add(`assets/sprites/sprite-0-${i}.json`)
+      }
+      for (let i = 0; i < 33; i++) {
+        PIXI.Loader.shared.add(`assets/sprites/sprite-1-${i}.json`)
+      }
     }
 
     PIXI.Loader.shared.load(setup)
