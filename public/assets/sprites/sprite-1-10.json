@@ -1,40 +1,145 @@
 {"frames": {
 
-"j-3_37.png":
+"l-2_12.png":
 {
-	"frame": {"x":0,"y":1080,"w":1920,"h":814},
-	"rotated": false,
+	"frame": {"x":1620,"y":540,"w":908,"h":404},
+	"rotated": true,
 	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":266,"w":1920,"h":814},
-	"sourceSize": {"w":1920,"h":1080}
+	"spriteSourceSize": {"x":52,"y":136,"w":908,"h":404},
+	"sourceSize": {"w":960,"h":540}
 },
-"j-3_38.png":
+"l-2_13.png":
 {
-	"frame": {"x":0,"y":1080,"w":1920,"h":814},
-	"rotated": false,
+	"frame": {"x":1620,"y":540,"w":908,"h":404},
+	"rotated": true,
 	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":266,"w":1920,"h":814},
-	"sourceSize": {"w":1920,"h":1080}
+	"spriteSourceSize": {"x":52,"y":136,"w":908,"h":404},
+	"sourceSize": {"w":960,"h":540}
 },
-"j-7_08.png":
+"l-9_18.png":
 {
-	"frame": {"x":0,"y":0,"w":1920,"h":1080},
+	"frame": {"x":0,"y":0,"w":960,"h":540},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":1920,"h":1080},
-	"sourceSize": {"w":1920,"h":1080}
+	"spriteSourceSize": {"x":0,"y":0,"w":960,"h":540},
+	"sourceSize": {"w":960,"h":540}
+},
+"l-9_19.png":
+{
+	"frame": {"x":0,"y":0,"w":960,"h":540},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":960,"h":540},
+	"sourceSize": {"w":960,"h":540}
+},
+"l-9_20.png":
+{
+	"frame": {"x":960,"y":0,"w":960,"h":540},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":960,"h":540},
+	"sourceSize": {"w":960,"h":540}
+},
+"l-9_21.png":
+{
+	"frame": {"x":960,"y":0,"w":960,"h":540},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":960,"h":540},
+	"sourceSize": {"w":960,"h":540}
+},
+"l-9_22.png":
+{
+	"frame": {"x":0,"y":540,"w":960,"h":540},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":960,"h":540},
+	"sourceSize": {"w":960,"h":540}
+},
+"l-9_23.png":
+{
+	"frame": {"x":0,"y":540,"w":960,"h":540},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":960,"h":540},
+	"sourceSize": {"w":960,"h":540}
+},
+"l-9_24.png":
+{
+	"frame": {"x":0,"y":1500,"w":960,"h":540},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":960,"h":540},
+	"sourceSize": {"w":960,"h":540}
+},
+"l-9_25.png":
+{
+	"frame": {"x":0,"y":1500,"w":960,"h":540},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":960,"h":540},
+	"sourceSize": {"w":960,"h":540}
+},
+"l-9_40.png":
+{
+	"frame": {"x":540,"y":540,"w":960,"h":540},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":960,"h":540},
+	"sourceSize": {"w":960,"h":540}
+},
+"l-9_41.png":
+{
+	"frame": {"x":540,"y":540,"w":960,"h":540},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":960,"h":540},
+	"sourceSize": {"w":960,"h":540}
+},
+"l-9_42.png":
+{
+	"frame": {"x":960,"y":1500,"w":960,"h":540},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":960,"h":540},
+	"sourceSize": {"w":960,"h":540}
+},
+"l-9_43.png":
+{
+	"frame": {"x":960,"y":1500,"w":960,"h":540},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":960,"h":540},
+	"sourceSize": {"w":960,"h":540}
+},
+"l-9_44.png":
+{
+	"frame": {"x":1080,"y":540,"w":960,"h":540},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":960,"h":540},
+	"sourceSize": {"w":960,"h":540}
+},
+"l-9_45.png":
+{
+	"frame": {"x":1080,"y":540,"w":960,"h":540},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":960,"h":540},
+	"sourceSize": {"w":960,"h":540}
 }},
 "animations": {
-	"j-3": ["j-3_37.png","j-3_38.png"]
+	"l-2": ["l-2_12.png","l-2_13.png"],
+	"l-9": ["l-9_18.png","l-9_19.png","l-9_20.png","l-9_21.png","l-9_22.png","l-9_23.png","l-9_24.png","l-9_25.png","l-9_40.png","l-9_41.png","l-9_42.png","l-9_43.png","l-9_44.png","l-9_45.png"]
 },
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "sprite-1-10.png",
 	"format": "RGBA8888",
-	"size": {"w":1920,"h":1894},
-	"scale": "1",
-	"related_multi_packs": [ "sprite-1-0.json", "sprite-1-1.json", "sprite-1-2.json", "sprite-1-3.json", "sprite-1-4.json", "sprite-1-5.json", "sprite-1-6.json", "sprite-1-7.json", "sprite-1-8.json", "sprite-1-9.json", "sprite-1-11.json", "sprite-1-12.json", "sprite-1-13.json", "sprite-1-14.json", "sprite-1-15.json", "sprite-1-16.json", "sprite-1-17.json", "sprite-1-18.json", "sprite-1-19.json", "sprite-1-20.json", "sprite-1-21.json", "sprite-1-22.json", "sprite-1-23.json", "sprite-1-24.json", "sprite-1-25.json", "sprite-1-26.json", "sprite-1-27.json", "sprite-1-28.json", "sprite-1-29.json", "sprite-1-30.json", "sprite-1-31.json", "sprite-1-32.json", "sprite-1-33.json", "sprite-1-34.json", "sprite-1-35.json", "sprite-1-36.json", "sprite-1-37.json", "sprite-1-38.json", "sprite-1-39.json", "sprite-1-40.json", "sprite-1-41.json", "sprite-1-42.json", "sprite-1-43.json", "sprite-1-44.json", "sprite-1-45.json", "sprite-1-46.json", "sprite-1-47.json", "sprite-1-48.json", "sprite-1-49.json", "sprite-1-50.json", "sprite-1-51.json", "sprite-1-52.json", "sprite-1-53.json", "sprite-1-54.json", "sprite-1-55.json", "sprite-1-56.json", "sprite-1-57.json", "sprite-1-58.json", "sprite-1-59.json", "sprite-1-60.json", "sprite-1-61.json", "sprite-1-62.json", "sprite-1-63.json", "sprite-1-64.json", "sprite-1-65.json", "sprite-1-66.json", "sprite-1-67.json", "sprite-1-68.json", "sprite-1-69.json", "sprite-1-70.json", "sprite-1-71.json", "sprite-1-72.json", "sprite-1-73.json", "sprite-1-74.json", "sprite-1-75.json", "sprite-1-76.json", "sprite-1-77.json", "sprite-1-78.json", "sprite-1-79.json", "sprite-1-80.json", "sprite-1-81.json", "sprite-1-82.json", "sprite-1-83.json", "sprite-1-84.json", "sprite-1-85.json", "sprite-1-86.json", "sprite-1-87.json", "sprite-1-88.json", "sprite-1-89.json", "sprite-1-90.json", "sprite-1-91.json", "sprite-1-92.json", "sprite-1-93.json", "sprite-1-94.json", "sprite-1-95.json", "sprite-1-96.json", "sprite-1-97.json", "sprite-1-98.json", "sprite-1-99.json", "sprite-1-100.json", "sprite-1-101.json", "sprite-1-102.json", "sprite-1-103.json", "sprite-1-104.json", "sprite-1-105.json", "sprite-1-106.json", "sprite-1-107.json", "sprite-1-108.json", "sprite-1-109.json", "sprite-1-110.json", "sprite-1-111.json", "sprite-1-112.json", "sprite-1-113.json", "sprite-1-114.json", "sprite-1-115.json", "sprite-1-116.json", "sprite-1-117.json", "sprite-1-118.json", "sprite-1-119.json", "sprite-1-120.json", "sprite-1-121.json", "sprite-1-122.json", "sprite-1-123.json", "sprite-1-124.json", "sprite-1-125.json", "sprite-1-126.json", "sprite-1-127.json", "sprite-1-128.json", "sprite-1-129.json", "sprite-1-130.json", "sprite-1-131.json", "sprite-1-132.json", "sprite-1-133.json", "sprite-1-134.json", "sprite-1-135.json", "sprite-1-136.json", "sprite-1-137.json", "sprite-1-138.json", "sprite-1-139.json", "sprite-1-140.json", "sprite-1-141.json", "sprite-1-142.json", "sprite-1-143.json", "sprite-1-144.json", "sprite-1-145.json", "sprite-1-146.json", "sprite-1-147.json", "sprite-1-148.json", "sprite-1-149.json", "sprite-1-150.json", "sprite-1-151.json", "sprite-1-152.json", "sprite-1-153.json", "sprite-1-154.json", "sprite-1-155.json", "sprite-1-156.json", "sprite-1-157.json", "sprite-1-158.json", "sprite-1-159.json", "sprite-1-160.json", "sprite-1-161.json", "sprite-1-162.json", "sprite-1-163.json", "sprite-1-164.json", "sprite-1-165.json", "sprite-1-166.json", "sprite-1-167.json", "sprite-1-168.json", "sprite-1-169.json", "sprite-1-170.json", "sprite-1-171.json", "sprite-1-172.json", "sprite-1-173.json", "sprite-1-174.json", "sprite-1-175.json", "sprite-1-176.json", "sprite-1-177.json", "sprite-1-178.json", "sprite-1-179.json", "sprite-1-180.json", "sprite-1-181.json", "sprite-1-182.json", "sprite-1-183.json", "sprite-1-184.json" ],
-	"smartupdate": "$TexturePacker:SmartUpdate:c71a6655a170c95811ca24bbb843ba78:922189a396b4d99f8c1972b256d219a7:fab02cf565fadafc30322f3084cc766f$"
+	"size": {"w":2024,"h":2040},
+	"scale": "0.5",
+	"related_multi_packs": [ "sprite-1-0.json", "sprite-1-1.json", "sprite-1-2.json", "sprite-1-3.json", "sprite-1-4.json", "sprite-1-5.json", "sprite-1-6.json", "sprite-1-7.json", "sprite-1-8.json", "sprite-1-9.json", "sprite-1-11.json", "sprite-1-12.json", "sprite-1-13.json", "sprite-1-14.json", "sprite-1-15.json", "sprite-1-16.json", "sprite-1-17.json", "sprite-1-18.json", "sprite-1-19.json", "sprite-1-20.json", "sprite-1-21.json", "sprite-1-22.json", "sprite-1-23.json", "sprite-1-24.json", "sprite-1-25.json", "sprite-1-26.json", "sprite-1-27.json", "sprite-1-28.json", "sprite-1-29.json", "sprite-1-30.json", "sprite-1-31.json", "sprite-1-32.json" ],
+	"smartupdate": "$TexturePacker:SmartUpdate:d9f85d84522edfbc49d67ede2d34209f:922189a396b4d99f8c1972b256d219a7:35be3c8ec7aafbb916d75097f4e410c3$"
 }
 }
