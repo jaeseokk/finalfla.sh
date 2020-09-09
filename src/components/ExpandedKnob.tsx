@@ -15,33 +15,35 @@ interface MaterialsProp {
   selectedIndex: number
 }
 
-const Materials: React.FC<MaterialsProp> = ({ active, selectedIndex }) => {
-  return (
-    <div className={clsx([styles.Materials, { [styles.active]: active }])}>
-      <ul>
-        <li className={clsx({ [styles.selected]: selectedIndex === -1 })}>
-          <div style={{ background: '#fff' }}></div>
-        </li>
-        {animationUnits.map(({ id }, i) => {
-          const selected = i === selectedIndex
-          return (
-            <li key={id} className={clsx({ [styles.selected]: selected })}>
-              <div
-                style={{
-                  backgroundImage: selected
-                    ? `url('assets/icons/${id}.png')`
-                    : undefined,
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover',
-                }}
-              ></div>
-            </li>
-          )
-        })}
-      </ul>
-    </div>
-  )
-}
+const Materials: React.FC<MaterialsProp> = React.memo(
+  ({ active, selectedIndex }) => {
+    return (
+      <div className={clsx([styles.Materials, { [styles.active]: active }])}>
+        <ul>
+          <li className={clsx({ [styles.selected]: selectedIndex === -1 })}>
+            <div style={{ background: '#fff' }}></div>
+          </li>
+          {animationUnits.map(({ id }, i) => {
+            const selected = i === selectedIndex
+            return (
+              <li key={id} className={clsx({ [styles.selected]: selected })}>
+                <div
+                  style={{
+                    backgroundImage: selected
+                      ? `url('assets/icons/${id}.png')`
+                      : undefined,
+                    backgroundPosition: 'center',
+                    backgroundSize: 'cover',
+                  }}
+                ></div>
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+    )
+  }
+)
 
 const ExpandedKnob: React.FC<ExpandedKnobProp> = ({
   active,
@@ -195,4 +197,4 @@ const ExpandedKnob: React.FC<ExpandedKnobProp> = ({
   )
 }
 
-export default ExpandedKnob
+export default React.memo(ExpandedKnob)

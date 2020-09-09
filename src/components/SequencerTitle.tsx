@@ -434,4 +434,4 @@ const SequencerTitle: React.FC = () => {
   )
 }
 
-export default SequencerTitle
+export default React.memo(SequencerTitle)

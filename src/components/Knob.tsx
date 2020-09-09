@@ -186,4 +186,4 @@ const Knob: React.FC<KnobProp> = ({ selectedIndex, playing, onSelect }) => {
   )
 }
 
-export default Knob
+export default React.memo(Knob)

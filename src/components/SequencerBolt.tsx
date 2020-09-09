@@ -33,4 +33,4 @@ const SequencerBolt: React.FC = () => (
   </svg>
 )
 
-export default SequencerBolt
+export default React.memo(SequencerBolt)
