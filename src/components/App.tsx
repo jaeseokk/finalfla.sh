@@ -9,6 +9,7 @@ import Loading from './Loading'
 import useMouseIdleTime from '../shared/useMouseIdleTime'
 import clsx from 'clsx'
 import Background from './Background'
+import { isMobile } from '../shared/utils'
 
 const initialAnimSequence: AnimSequence = [
   [-1, -1, -1, -1, -1, -1],
@@ -27,9 +28,15 @@ function App() {
   const [history, setHistory] = useState<any[]>([])
   const { tickIndex, start } = useTicker(8)
   const { idle } = useMouseIdleTime({
-    active: ready,
+    active: ready && !isMobile,
   })
-  const sequencerVisible = useMemo(() => !idle, [idle])
+  const sequencerVisible = useMemo(() => {
+    if (isMobile) {
+      return true
+    }
+
+    return !idle
+  }, [idle])
   const { width: windowWidth, height: windowHeight } = useWindowResize()
   const handleReady = useCallback(() => {
     setReady(true)
