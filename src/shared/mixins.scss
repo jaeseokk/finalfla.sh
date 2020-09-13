@@ -1,5 +1,11 @@
-@mixin for-small-screens() {
+@mixin for-small-screens {
   @media only screen and (max-width: 480px) {
+    @content;
+  }
+}
+
+@mixin for-medium-screens {
+  @media only screen and (min-width: 481px) and (max-width: 1000px) {
     @content;
   }
 }

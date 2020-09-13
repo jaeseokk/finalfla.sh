@@ -101,6 +101,7 @@ function App() {
           <Loading />
         )}
       </div>
+      <div id="expanded-knob"></div>
     </div>
   )
 }

@@ -1,15 +1,26 @@
-import React, { useState, useCallback, useRef, useLayoutEffect } from 'react'
+import React, { useState, useCallback } from 'react'
 import clsx from 'clsx'
 
 import styles from './Knob.module.scss'
 import { animationUnits } from '../shared/animation-config'
 import ExpandedKnob from './ExpandedKnob'
 import useLongPress from '../shared/useLongPress'
+import { createPortal } from 'react-dom'
 
 interface KnobProp {
   selectedIndex: number
   playing: boolean
   onSelect: (index: number) => void
+}
+
+const ExpandedKnobPortal = ({ children }: any) => {
+  const expandedContainerEl = document.getElementById('expanded-knob')
+
+  if (expandedContainerEl) {
+    return createPortal(children, expandedContainerEl)
+  }
+
+  return null
 }
 
 const Knob: React.FC<KnobProp> = ({ selectedIndex, playing, onSelect }) => {
@@ -177,11 +188,14 @@ const Knob: React.FC<KnobProp> = ({ selectedIndex, playing, onSelect }) => {
         </svg>
       </div>
       <div className={clsx([styles.led, { [styles.playing]: playing }])}></div>
-      <ExpandedKnob
-        active={expand}
-        selectedIndex={selectedIndex}
-        onSelect={handleSelect}
-      />
+
+      <ExpandedKnobPortal>
+        <ExpandedKnob
+          active={expand}
+          selectedIndex={selectedIndex}
+          onSelect={handleSelect}
+        />
+      </ExpandedKnobPortal>
     </div>
   )
 }

@@ -2,7 +2,11 @@
 
 .SequencerBolt {
   width: 50px;
-  @include for-small-screens() {
-    width: 30px;
+
+  @include for-medium-screens {
+    width: 35px;
+  }
+  @include for-small-screens {
+    width: 35px;
   }
 }

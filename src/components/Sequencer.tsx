@@ -66,18 +66,6 @@ const Sequencer: React.FC<SequencerProp> = ({
   return (
     <div className={clsx([styles.Sequencer, { [styles.visible]: visible }])}>
       <div className={styles.background}>
-        <div className={styles.header}>
-          <div className={styles.left}>
-            <CreditButton />
-            <ReferenceButton />
-            <ShareButton />
-          </div>
-          <SequencerTitle />
-          <div className={styles.right}>
-            <UndoButton />
-            <RedoButton />
-          </div>
-        </div>
         <div className={clsx([styles.bolt, styles.top, styles.left])}>
           <SequencerBolt />
         </div>
@@ -92,8 +80,29 @@ const Sequencer: React.FC<SequencerProp> = ({
         </div>
         <div className={styles.bolt}></div>
       </div>
-      <div className={styles.scrollWrapper}>
-        <div className={clsx([styles.knobs])}>{renderKnobs()}</div>
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <div className={clsx([styles.wrapper, styles.small])}>
+            <SequencerTitle />
+          </div>
+          <div className={styles.wrapper}>
+            <div className={styles.left}>
+              <ShareButton />
+              <ReferenceButton />
+              <CreditButton />
+            </div>
+            <div className={styles.center}>
+              <SequencerTitle />
+            </div>
+            <div className={styles.right}>
+              <UndoButton />
+              <RedoButton />
+            </div>
+          </div>
+        </div>
+        <div className={styles.scrollWrapper}>
+          <div className={clsx([styles.knobs])}>{renderKnobs()}</div>
+        </div>
       </div>
     </div>
   )

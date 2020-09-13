@@ -1,3 +1,5 @@
+@import '../shared/mixins.scss';
+
 .Sequencer {
   position: relative;
   height: 100%;
@@ -21,43 +23,6 @@
     height: 100%;
     width: 100%;
 
-    .header {
-      position: absolute;
-      width: 100%;
-      top: 7px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-
-      > .left,
-      > .right {
-        padding-top: 40px;
-        flex: 1;
-        display: flex;
-        align-items: flex-start;
-        height: 100%;
-      }
-
-      > .left {
-        justify-content: flex-start;
-        padding-left: 100px;
-
-        > * {
-          margin-right: 10px;
-        }
-      }
-      > .right {
-        justify-content: flex-end;
-        padding-right: 100px;
-
-        > * {
-          margin-left: 10px;
-        }
-      }
-    }
-
     .bolt {
       position: absolute;
 
@@ -79,6 +44,150 @@
     }
   }
 
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+
+    .header {
+      width: 100%;
+
+      .wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding-left: 100px;
+        padding-right: 100px;
+        flex-wrap: wrap;
+
+        @include for-medium-screens {
+          padding-left: 50px;
+          padding-right: 50px;
+        }
+
+        @include for-small-screens {
+          padding-left: 50px;
+          padding-right: 50px;
+        }
+
+        &.small {
+          display: none;
+          height: 60px;
+          justify-content: center;
+          padding-top: 20px;
+
+          @include for-medium-screens {
+            display: flex;
+          }
+
+          @include for-small-screens {
+            display: flex;
+          }
+
+          > * {
+            height: 100%;
+          }
+        }
+
+        > .left,
+        > .right {
+          flex: 1;
+          display: flex;
+          align-items: flex-end;
+          height: 100%;
+          min-width: 200px;
+          box-sizing: border-box;
+
+          padding-top: 40px;
+          @include for-medium-screens {
+            padding-top: 10px;
+          }
+
+          @include for-small-screens {
+            padding-top: 10px;
+            height: 70px;
+          }
+        }
+
+        > .left {
+          justify-content: flex-start;
+
+          > * {
+            &:not(:last-child) {
+              margin-right: 15%;
+            }
+
+            min-height: 50px;
+            max-height: 70px;
+            max-width: 70px;
+            width: 33%;
+          }
+
+          @include for-medium-screens {
+            justify-content: center;
+            min-width: 220px;
+          }
+
+          @include for-small-screens {
+            justify-content: center;
+            min-width: 220px;
+
+            > * {
+              height: 40px;
+              width: 40px;
+
+              &:not(:last-child) {
+                margin-right: 25%;
+              }
+            }
+          }
+        }
+        > .right {
+          justify-content: flex-end;
+
+          > * {
+            margin-left: 10px;
+            width: 20%;
+            min-height: 50px;
+            min-width: 50px;
+          }
+
+          @include for-medium-screens {
+            justify-content: center;
+            min-width: 100px;
+            padding-top: 20px;
+          }
+
+          @include for-small-screens {
+            justify-content: center;
+            min-width: 100px;
+            padding-top: 20px;
+
+            > * {
+              height: 30px;
+              width: 30px;
+            }
+          }
+        }
+
+        > .center {
+          padding: 20px 30px 0;
+          flex: 1;
+          min-width: 300px;
+
+          @include for-medium-screens {
+            display: none;
+          }
+
+          @include for-small-screens {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
   .scrollWrapper {
     height: 100%;
     overflow-x: auto;
@@ -86,18 +195,32 @@
 
   .knobs {
     height: 100%;
-    padding: 190px 100px 0;
+    min-width: 100%;
+    padding: 50px 100px 40px;
     box-sizing: border-box;
     display: inline-block;
+
+    @include for-medium-screens {
+      padding: 20px 50px 40px;
+    }
+
+    @include for-small-screens {
+      padding: 20px 50px 40px;
+    }
 
     .row {
       width: 100%;
       height: 12.5%;
-      display: inline-flex;
+      display: flex;
       justify-content: space-between;
+      box-sizing: border-box;
 
       &:not(:last-child) {
         margin-bottom: 15px;
+
+        @include for-small-screens {
+          margin-bottom: 10px;
+        }
       }
     }
   }
