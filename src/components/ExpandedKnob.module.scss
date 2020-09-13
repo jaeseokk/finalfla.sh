@@ -2,7 +2,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  cursor: url(/assets/hand-cursor-pointer1.svg), pointer;
+  cursor: url(/assets/hand-cursor-pointer1.png), pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,6 +12,7 @@
   pointer-events: none;
   z-index: -1;
   transition: opacity 0.1s ease-in-out;
+  user-select: none;
 
   .knobWrapper {
     width: 600px;

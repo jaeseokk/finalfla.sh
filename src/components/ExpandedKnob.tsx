@@ -70,7 +70,6 @@ const ExpandedKnob: React.FC<ExpandedKnobProp> = ({
     >
       <div className={styles.dimmed}></div>
       <div className={styles.knobWrapper}>
-        {value}
         <Materials active={active} selectedIndex={value} />
         <svg
           version="1.1"

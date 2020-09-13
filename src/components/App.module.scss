@@ -4,7 +4,7 @@ body {
 
 .App {
   position: relative;
-  cursor: url(/assets/hand-cursor-default.svg), auto;
+  cursor: url(/assets/hand-cursor-default.png), auto;
 
   &.idle {
     cursor: none;
