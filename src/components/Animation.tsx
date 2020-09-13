@@ -3,6 +3,7 @@ import * as PIXI from 'pixi.js'
 import { AnimSequence } from '../shared/types'
 import { animationUnits } from '../shared/animation-config'
 import { isMobile } from '../shared/utils'
+import { Howl, Howler } from 'howler'
 
 const ANIM_WIDTH = 1920
 const ANIM_HEIGHT = 1080
@@ -14,6 +15,33 @@ interface AnimatinoProps {
   windowHeight: number
   onReady: () => void
 }
+
+const sound = new Howl({
+  src: ['assets/sounds/sprite.mp3'],
+  sprite: {
+    'web_ A_DR 1': [0, 480],
+    'web_ A_DR 2': [2000, 480],
+    'web_ A_DR 3': [4000, 480.00000000000045],
+    'web_ A_DR 4': [6000, 480.00000000000045],
+    'web_ B_BS 1': [8000, 480.00000000000045],
+    'web_ B_BS 2': [10000, 480.00000000000045],
+    'web_ B_BS 3': [12000, 480.00000000000045],
+    'web_ C_MEL 1': [14000, 480.00000000000045],
+    'web_ C_MEL 2': [16000, 480.00000000000045],
+    'web_ C_MEL 3': [18000, 480.00000000000045],
+    'web_ C_MEL 4': [20000, 480.00000000000045],
+    'web_ D_FX 1': [22000, 480.00000000000045],
+    'web_ D_FX 2': [24000, 480.00000000000045],
+    'web_ D_FX 3': [26000, 480.00000000000045],
+    'web_ D_FX 4': [28000, 480.00000000000045],
+    'web_ E_AMBIENT 1': [30000, 984.0136054421755],
+    'web_ E_AMBIENT 2': [32000, 984.0136054421791],
+    'web_ E_AMBIENT 3': [34000, 984.0136054421791],
+    'web_ E_AMBIENT 4': [36000, 984.0136054421791],
+  },
+})
+
+Howler.autoUnlock = false
 
 const Animation: React.FC<AnimatinoProps> = ({
   animSequence,
@@ -134,6 +162,10 @@ const Animation: React.FC<AnimatinoProps> = ({
       return
     }
 
+    if (tickIndex < 0) {
+      return
+    }
+
     if (!animSequence[tickIndex]) {
       return
     }
@@ -145,6 +177,10 @@ const Animation: React.FC<AnimatinoProps> = ({
 
       if (!pixiContainerRef.current) {
         return
+      }
+
+      if (animationUnits[index].sound) {
+        sound.play(animationUnits[index].sound)
       }
 
       const animId = animationUnits[index].id
@@ -161,7 +197,7 @@ const Animation: React.FC<AnimatinoProps> = ({
       pixiContainerRef.current.removeChild(sprite)
       pixiContainerRef.current.addChild(sprite)
     })
-  }, [ready, animSequence, tickIndex])
+  }, [tickIndex])
 
   useEffect(() => {
     resize()

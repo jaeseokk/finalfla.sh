@@ -1,9 +1,20 @@
 type AnimId = string
 
+export enum AnimCategory {
+  A,
+  B,
+  C,
+  D,
+  E,
+  F,
+}
+
 export interface AnimUnit {
+  category?: AnimCategory
   id: AnimId
-  frameLength: Number
-  spriteSheetLength: Number
+  frameLength: number
+  spriteSheetLength: number
+  sound?: string
 }
 
 export type AnimUnits = AnimUnit[]
