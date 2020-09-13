@@ -1,0 +1,5 @@
+@import '../shared/mixins.scss';
+
+.ShareButton {
+  @include button;
+}

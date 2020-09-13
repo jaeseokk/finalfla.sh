@@ -7,6 +7,7 @@
   opacity: 0;
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
   transform: scale(0.9);
+  will-change: opacity, transform;
 
   &.visible {
     opacity: 1;
@@ -28,7 +29,33 @@
       transform: translateX(-50%);
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
+
+      > .left,
+      > .right {
+        padding-top: 40px;
+        flex: 1;
+        display: flex;
+        align-items: flex-start;
+        height: 100%;
+      }
+
+      > .left {
+        justify-content: flex-start;
+        padding-left: 100px;
+
+        > * {
+          margin-right: 10px;
+        }
+      }
+      > .right {
+        justify-content: flex-end;
+        padding-right: 100px;
+
+        > * {
+          margin-left: 10px;
+        }
+      }
     }
 
     .bolt {
@@ -59,7 +86,7 @@
 
   .knobs {
     height: 100%;
-    padding: 190px 50px 0;
+    padding: 190px 100px 0;
     box-sizing: border-box;
     display: inline-block;
 

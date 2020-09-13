@@ -5,6 +5,11 @@ import { AnimSequence } from '../shared/types'
 import clsx from 'clsx'
 import SequencerTitle from './SequencerTitle'
 import SequencerBolt from './SequencerBolt'
+import RedoButton from './RedoButton'
+import UndoButton from './UndoButton'
+import CreditButton from './CreditButton'
+import ReferenceButton from './ReferenceButton'
+import ShareButton from './ShareButton'
 
 interface SequencerProp {
   visible: boolean
@@ -62,11 +67,15 @@ const Sequencer: React.FC<SequencerProp> = ({
     <div className={clsx([styles.Sequencer, { [styles.visible]: visible }])}>
       <div className={styles.background}>
         <div className={styles.header}>
-          <div></div>
+          <div className={styles.left}>
+            <CreditButton />
+            <ReferenceButton />
+            <ShareButton />
+          </div>
           <SequencerTitle />
-          <div>
-            <button>redo</button>
-            <button onClick={onUndo}>undo</button>
+          <div className={styles.right}>
+            <UndoButton />
+            <RedoButton />
           </div>
         </div>
         <div className={clsx([styles.bolt, styles.top, styles.left])}>
