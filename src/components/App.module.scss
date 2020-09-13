@@ -1,5 +1,40 @@
-body {
-  overflow: hidden;
+:global {
+  body {
+    overflow: hidden;
+  }
+
+  .overlayTransition-enter {
+    opacity: 0;
+  }
+  .overlayTransition-enter-active {
+    opacity: 1;
+    transition: opacity 300ms;
+  }
+  .overlayTransition-exit {
+    opacity: 1;
+  }
+  .overlayTransition-exit-active {
+    opacity: 0;
+    transition: opacity 300ms;
+  }
+
+  .expandedKnobTransition-enter {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  .expandedKnobTransition-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 300ms, transform 300ms;
+  }
+  .expandedKnobTransition-exit {
+    opacity: 1;
+  }
+  .expandedKnobTransition-exit-active {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 300ms, transform 300ms;
+  }
 }
 
 .App {

@@ -1,11 +1,12 @@
 import React, { useState, useCallback } from 'react'
 import clsx from 'clsx'
+import { createPortal } from 'react-dom'
+import { CSSTransition } from 'react-transition-group'
 
 import styles from './Knob.module.scss'
 import { animationUnits } from '../shared/animation-config'
-import ExpandedKnob from './ExpandedKnob'
+import ExpandedKnob, { Overlay } from './ExpandedKnob'
 import useLongPress from '../shared/useLongPress'
-import { createPortal } from 'react-dom'
 
 interface KnobProp {
   selectedIndex: number
@@ -190,11 +191,22 @@ const Knob: React.FC<KnobProp> = ({ selectedIndex, playing, onSelect }) => {
       <div className={clsx([styles.led, { [styles.playing]: playing }])}></div>
 
       <ExpandedKnobPortal>
-        <ExpandedKnob
-          active={expand}
-          selectedIndex={selectedIndex}
-          onSelect={handleSelect}
-        />
+        <CSSTransition
+          in={expand}
+          classNames="overlayTransition"
+          timeout={300}
+          unmountOnExit
+        >
+          <Overlay />
+        </CSSTransition>
+        <CSSTransition
+          in={expand}
+          classNames="expandedKnobTransition"
+          timeout={300}
+          unmountOnExit
+        >
+          <ExpandedKnob selectedIndex={selectedIndex} onSelect={handleSelect} />
+        </CSSTransition>
       </ExpandedKnobPortal>
     </div>
   )

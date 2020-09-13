@@ -12,7 +12,6 @@ import ReferenceButton from './ReferenceButton'
 import ShareButton from './ShareButton'
 
 interface SequencerProp {
-  visible: boolean
   rowCount: number
   colCount: number
   sequence: AnimSequence
@@ -26,7 +25,6 @@ interface SequencerProp {
 }
 
 const Sequencer: React.FC<SequencerProp> = ({
-  visible,
   rowCount,
   colCount,
   sequence,
@@ -64,7 +62,7 @@ const Sequencer: React.FC<SequencerProp> = ({
   }, [rowCount, colCount, sequence, tickIndex])
 
   return (
-    <div className={clsx([styles.Sequencer, { [styles.visible]: visible }])}>
+    <div className={clsx([styles.Sequencer])}>
       <div className={styles.background}>
         <div className={clsx([styles.bolt, styles.top, styles.left])}>
           <SequencerBolt />

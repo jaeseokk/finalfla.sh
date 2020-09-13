@@ -1,4 +1,7 @@
 import React, { useState, useCallback, useMemo } from 'react'
+import { CSSTransition } from 'react-transition-group'
+import clsx from 'clsx'
+
 import Animation from './Animation'
 import useTicker from '../shared/useTicker'
 import useWindowResize from '../shared/useResize'
@@ -7,7 +10,6 @@ import styles from './App.module.scss'
 import Sequencer from './Sequencer'
 import Loading from './Loading'
 import useMouseIdleTime from '../shared/useMouseIdleTime'
-import clsx from 'clsx'
 import Background from './Background'
 import { isMobile } from '../shared/utils'
 
@@ -88,15 +90,21 @@ function App() {
       />
       <div className={styles.layout}>
         {ready ? (
-          <Sequencer
-            visible={sequencerVisible}
-            rowCount={6}
-            colCount={8}
-            sequence={animSequence}
-            tickIndex={tickIndex}
-            onChangeKnobIndex={handleChangeKnobIndex}
-            onUndo={handleUndo}
-          />
+          <CSSTransition
+            in={sequencerVisible}
+            classNames="expandedKnobTransition"
+            timeout={300}
+            unmountOnExit
+          >
+            <Sequencer
+              rowCount={6}
+              colCount={8}
+              sequence={animSequence}
+              tickIndex={tickIndex}
+              onChangeKnobIndex={handleChangeKnobIndex}
+              onUndo={handleUndo}
+            />
+          </CSSTransition>
         ) : (
           <Loading />
         )}

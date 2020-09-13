@@ -5,48 +5,47 @@ import styles from './ExpandedKnob.module.scss'
 import { animationUnits } from '../shared/animation-config'
 
 interface ExpandedKnobProp {
-  active: boolean
   selectedIndex: number
   onSelect: (value: number) => void
 }
 
 interface MaterialsProp {
-  active: boolean
   selectedIndex: number
 }
 
-const Materials: React.FC<MaterialsProp> = React.memo(
-  ({ active, selectedIndex }) => {
-    return (
-      <div className={clsx([styles.Materials, { [styles.active]: active }])}>
-        <ul>
-          <li className={clsx({ [styles.selected]: selectedIndex === -1 })}>
-            <div style={{ background: '#fff' }}></div>
-          </li>
-          {animationUnits.map(({ id }, i) => {
-            const selected = i === selectedIndex
-            return (
-              <li key={id} className={clsx({ [styles.selected]: selected })}>
-                <div
-                  style={{
-                    backgroundImage: selected
-                      ? `url('assets/icons/${id}.png')`
-                      : undefined,
-                    backgroundPosition: 'center',
-                    backgroundSize: 'cover',
-                  }}
-                ></div>
-              </li>
-            )
-          })}
-        </ul>
-      </div>
-    )
-  }
-)
+const Materials: React.FC<MaterialsProp> = React.memo(({ selectedIndex }) => {
+  return (
+    <div className={clsx([styles.Materials])}>
+      <ul>
+        <li className={clsx({ [styles.selected]: selectedIndex === -1 })}>
+          <div style={{ background: '#fff' }}></div>
+        </li>
+        {animationUnits.map(({ id }, i) => {
+          const selected = i === selectedIndex
+          return (
+            <li key={id} className={clsx({ [styles.selected]: selected })}>
+              <div
+                style={{
+                  backgroundImage: selected
+                    ? `url('assets/icons/${id}.png')`
+                    : undefined,
+                  backgroundPosition: 'center',
+                  backgroundSize: 'cover',
+                }}
+              ></div>
+            </li>
+          )
+        })}
+      </ul>
+    </div>
+  )
+})
+
+const Overlay: React.FC = () => {
+  return <div className={styles.Overlay}></div>
+}
 
 const ExpandedKnob: React.FC<ExpandedKnobProp> = ({
-  active,
   selectedIndex,
   onSelect,
 }) => {
@@ -54,7 +53,7 @@ const ExpandedKnob: React.FC<ExpandedKnobProp> = ({
     initialValue: selectedIndex,
     min: -1,
     max: 72,
-    active,
+    active: true,
   })
   const handleMouseUp = useCallback(() => {
     onSelect(value)
@@ -62,15 +61,14 @@ const ExpandedKnob: React.FC<ExpandedKnobProp> = ({
 
   return (
     <div
-      className={clsx([styles.ExpandedKnob, { [styles.active]: active }])}
+      className={clsx([styles.ExpandedKnob])}
       onMouseUp={handleMouseUp}
       onTouchEnd={handleMouseUp}
       onTouchEndCapture={handleMouseUp}
       onTouchCancel={handleMouseUp}
     >
-      <div className={styles.dimmed}></div>
       <div className={styles.knobWrapper}>
-        <Materials active={active} selectedIndex={value} />
+        <Materials selectedIndex={value} />
         <svg
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
@@ -195,5 +193,7 @@ const ExpandedKnob: React.FC<ExpandedKnobProp> = ({
     </div>
   )
 }
+
+export { Overlay }
 
 export default React.memo(ExpandedKnob)
