@@ -123,10 +123,12 @@
           @include for-small-screens {
             justify-content: center;
             min-width: 220px;
+            height: 40px;
 
             > * {
-              height: 40px;
-              width: 40px;
+              height: 30px;
+              width: 30px;
+              min-height: 30px;
 
               &:not(:last-child) {
                 margin-right: 25%;
@@ -154,10 +156,12 @@
             justify-content: center;
             min-width: 100px;
             padding-top: 20px;
+            height: 40px;
 
             > * {
               height: 30px;
               width: 30px;
+              min-height: 30px;
             }
           }
         }
