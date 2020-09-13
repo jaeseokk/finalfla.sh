@@ -7,6 +7,7 @@ import React, {
   useMemo,
 } from 'react'
 import styles from './SequencerTitle.module.scss'
+import { isMobile } from '../shared/utils'
 
 const SequencerTitle: React.FC = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -28,6 +29,10 @@ const SequencerTitle: React.FC = () => {
     }
   }, [mousePosition])
   useLayoutEffect(() => {
+    if (isMobile) {
+      return
+    }
+
     window.addEventListener('mousemove', handleMouseMove)
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
