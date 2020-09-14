@@ -1,13 +1,6 @@
-import React, {
-  useCallback,
-  useState,
-  useRef,
-  useLayoutEffect,
-  useEffect,
-  useMemo,
-} from 'react'
+import React, { useCallback, useState, useLayoutEffect } from 'react'
 import styles from './SequencerTitle.module.scss'
-import { isMobile } from '../shared/utils'
+import { isMobile, isWebkit } from '../shared/utils'
 
 const SequencerTitle: React.FC = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -18,18 +11,22 @@ const SequencerTitle: React.FC = () => {
     })
   }, [])
   const getContainerStyle = useCallback(() => {
+    if (isMobile || isWebkit) {
+      return {}
+    }
+
     const { x, y } = mousePosition
     const dx = x - window.innerWidth / 2
     const dy = y - window.innerHeight / 2
 
     return {
-      transform: `perspective(600px) rotateY(${dx / 50}deg) rotateX(${
-        -dy / 50
+      transform: `perspective(600px) rotateY(${dx / 70}deg) rotateX(${
+        -dy / 70
       }deg)`,
     }
   }, [mousePosition])
   useLayoutEffect(() => {
-    if (isMobile) {
+    if (isMobile || isWebkit) {
       return
     }
 

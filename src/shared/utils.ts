@@ -12,3 +12,5 @@ export const calculateAngle = (
 export const agent = getAgent()
 
 export const isMobile = agent.isMobile
+
+export const isWebkit = agent.browser.webkit
