@@ -2,4 +2,5 @@
 
 .UndoButton {
   @include button;
+  position: relative;
 }

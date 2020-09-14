@@ -2,4 +2,5 @@
 
 .RedoButton {
   @include button;
+  position: relative;
 }

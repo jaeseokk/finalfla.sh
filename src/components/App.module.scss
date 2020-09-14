@@ -3,6 +3,13 @@
     overflow: hidden;
   }
 
+  #expanded-knob-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1;
+  }
+
   .overlayTransition-enter {
     opacity: 0;
   }
