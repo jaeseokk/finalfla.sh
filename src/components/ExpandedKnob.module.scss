@@ -62,7 +62,7 @@
 
           &.selected {
             > div {
-              transform: scale(5) translateY(-55%) rotate(#{$i * -4.86}deg);
+              transform: scale(3) translateY(-52%);
             }
           }
         }
