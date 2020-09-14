@@ -26,6 +26,7 @@ const initialAnimSequence: AnimSequence = [
 
 function App() {
   const [ready, setReady] = useState(false)
+  const [loadingExited, setLoadingExited] = useState(false)
   const [animSequence, setAnimSequence] = useState(initialAnimSequence)
   const [history, setHistory] = useState<any[]>([])
   const { tickIndex, start } = useTicker(8)
@@ -80,7 +81,6 @@ function App() {
 
   return (
     <div className={clsx([styles.App, { [styles.idle]: idle }])}>
-      <Background />
       <Animation
         windowWidth={windowWidth}
         windowHeight={windowHeight}
@@ -89,24 +89,36 @@ function App() {
         tickIndex={tickIndex}
       />
       <div className={styles.layout}>
-        {ready ? (
-          <CSSTransition
-            in={sequencerVisible}
-            classNames="expandedKnobTransition"
-            timeout={300}
-            unmountOnExit
-          >
-            <Sequencer
-              rowCount={6}
-              colCount={8}
-              sequence={animSequence}
-              tickIndex={tickIndex}
-              onChangeKnobIndex={handleChangeKnobIndex}
-              onUndo={handleUndo}
-            />
-          </CSSTransition>
-        ) : (
+        <CSSTransition
+          in={!ready}
+          classNames="loadingTransition"
+          timeout={300}
+          onExited={() => {
+            setLoadingExited(true)
+          }}
+          unmountOnExit
+        >
           <Loading />
+        </CSSTransition>
+        {loadingExited && (
+          <>
+            <Background />
+            <CSSTransition
+              in={sequencerVisible}
+              classNames="expandedKnobTransition"
+              timeout={300}
+              unmountOnExit
+            >
+              <Sequencer
+                rowCount={6}
+                colCount={8}
+                sequence={animSequence}
+                tickIndex={tickIndex}
+                onChangeKnobIndex={handleChangeKnobIndex}
+                onUndo={handleUndo}
+              />
+            </CSSTransition>
+          </>
         )}
       </div>
       <div id="expanded-knob"></div>
