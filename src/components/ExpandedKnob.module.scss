@@ -26,10 +26,10 @@
   .knobWrapper {
     position: relative;
     z-index: inherit;
-    width: 600px;
+    width: 500px;
 
     @include for-small-screens {
-      width: 300px;
+      width: 250px;
     }
   }
 
