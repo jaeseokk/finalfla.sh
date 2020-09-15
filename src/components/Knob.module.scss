@@ -1,3 +1,4 @@
+@use 'sass:color';
 @import '../shared/mixins.scss';
 
 .Knob {
@@ -25,10 +26,64 @@
       min-height: 40px;
       display: inline-block;
 
-      g.wrapper {
+      g.rotateWrapper {
         transition: transform 0.2s ease-in-out;
         transform-origin: 50% 50%;
         margin: 0 10px;
+      }
+
+      g.lightWrapper {
+        $dr-color: #8711ff;
+        $bs-color: #ff482a;
+        $mel-color: #ffff00;
+        $fx-color: #1eff00;
+        $ambient-color: #ff7200;
+        $traditional-color: #0072ff;
+
+        path {
+          &.DR {
+            fill: scale-color($dr-color, $lightness: -50%);
+
+            &.selected {
+              fill: $dr-color;
+            }
+          }
+          &.BS {
+            fill: scale-color($bs-color, $lightness: -50%);
+
+            &.selected {
+              fill: $bs-color;
+            }
+          }
+          &.MEL {
+            fill: scale-color($mel-color, $lightness: -50%);
+
+            &.selected {
+              fill: $mel-color;
+            }
+          }
+          &.FX {
+            fill: scale-color($fx-color, $lightness: -50%);
+
+            &.selected {
+              fill: $fx-color;
+            }
+          }
+          &.AMBIENT {
+            fill: scale-color($ambient-color, $lightness: -50%);
+
+            &.selected {
+              fill: $ambient-color;
+            }
+          }
+          &.TRADITIONAL {
+            fill: scale-color($traditional-color, $lightness: -50%);
+
+            &.selected {
+              fill: $traditional-color;
+            }
+          }
+        }
       }
     }
   }

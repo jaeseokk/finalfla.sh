@@ -115,6 +115,9 @@ const Knob: React.FC<KnobProp> = ({
                 ></image>
               )}
             </pattern>
+            <filter id="f1" x="0" y="0" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="10" />
+            </filter>
           </defs>
           <g>
             <path
@@ -129,14 +132,17 @@ const Knob: React.FC<KnobProp> = ({
             />
           </g>
           <g
-            className={styles.wrapper}
+            className={styles.rotateWrapper}
             style={{
               transform: `rotate(${rotateDeg}deg)`,
             }}
           >
-            <g>
+            <g className={styles.lightWrapper}>
               <path
-                fill="#ffffff"
+                className={clsx([
+                  styles[category],
+                  { [styles.selected]: selectedIndex > -1 },
+                ])}
                 d="M66.18,11.38c-1.61-2.76-5.97-3.15-8.79-3.43c-3.78-0.38-7.59,0.02-11.36,0.28c-2.91,0.2-5.13,3.28-3.45,6.02
 		c0.58,0.94,0.74,1.42,0.75,2.52c0,1.02,0.42,1.96,1.08,2.69c-0.71,2.4,0.48,5.27,3.61,4.94c0.44-0.05,0.88-0.09,1.31-0.13
 		c2.06,0.38,4.86,0.61,7-0.13c1.61,0.14,3.26,0.36,4.8,0.09c3.4-0.6,4.34-4.28,3.99-7.32C66.7,15.6,67.47,13.58,66.18,11.38z"
