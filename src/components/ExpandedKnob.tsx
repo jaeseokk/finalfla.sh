@@ -152,7 +152,9 @@ const ExpandedKnob: React.FC<ExpandedKnobProp> = ({
           <g
             className={styles.rotateWrapper}
             style={{
-              transform: `rotate(${(value + 1) * 4.86}deg)`,
+              transform: `rotate(${
+                (360 / (materials.length + 1)) * (value + 1)
+              }deg)`,
             }}
           >
             <path
