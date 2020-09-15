@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useMemo } from 'react'
 import clsx from 'clsx'
 import { createPortal } from 'react-dom'
 import { CSSTransition } from 'react-transition-group'
@@ -7,8 +7,10 @@ import styles from './Knob.module.scss'
 import { animationUnits } from '../shared/animation-config'
 import ExpandedKnob, { Overlay } from './ExpandedKnob'
 import useLongPress from '../shared/useLongPress'
+import { AnimCategory, MATERIALS_OFFSET } from '../shared/constants'
 
 interface KnobProp {
+  category: AnimCategory
   selectedIndex: number
   playing: boolean
   onSelect: (index: number) => void
@@ -24,7 +26,22 @@ const ExpandedKnobPortal = ({ children }: any) => {
   return null
 }
 
-const Knob: React.FC<KnobProp> = ({ selectedIndex, playing, onSelect }) => {
+const Knob: React.FC<KnobProp> = ({
+  category,
+  selectedIndex,
+  playing,
+  onSelect,
+}) => {
+  const offset = MATERIALS_OFFSET[category]
+  const materials = useMemo(
+    () => animationUnits.filter((unit) => unit.category === category),
+    [category]
+  )
+  const rotateDeg = useMemo(() => {
+    return selectedIndex < 0
+      ? 0
+      : (360 / (materials.length + 1)) * (selectedIndex - offset + 1)
+  }, [selectedIndex, materials])
   const id = selectedIndex < 0 ? null : animationUnits[selectedIndex].id
   const patternId = id ? `icon-${id}` : undefined
   const fill = patternId ? `url(#${patternId})` : '#fff'
@@ -33,11 +50,14 @@ const Knob: React.FC<KnobProp> = ({ selectedIndex, playing, onSelect }) => {
     setExpand(true)
   }, [])
   const handleClick = useCallback(() => {
-    if (animationUnits.length - 1 <= selectedIndex) {
+    const nextSelectedIndex = selectedIndex === -1 ? offset : selectedIndex + 1
+
+    if (materials.length <= nextSelectedIndex - offset) {
       onSelect(-1)
       return
     }
-    onSelect(selectedIndex + 1)
+
+    onSelect(nextSelectedIndex)
   }, [onSelect, selectedIndex])
   const { startInteracting, clearInteracting } = useLongPress(
     handleLongPress,
@@ -111,7 +131,7 @@ const Knob: React.FC<KnobProp> = ({ selectedIndex, playing, onSelect }) => {
           <g
             className={styles.wrapper}
             style={{
-              transform: `rotate(${(selectedIndex + 1) * 4.86}deg)`,
+              transform: `rotate(${rotateDeg}deg)`,
             }}
           >
             <g>
@@ -187,7 +207,12 @@ const Knob: React.FC<KnobProp> = ({ selectedIndex, playing, onSelect }) => {
           timeout={300}
           unmountOnExit
         >
-          <ExpandedKnob selectedIndex={selectedIndex} onSelect={handleSelect} />
+          <ExpandedKnob
+            materials={materials}
+            offset={offset}
+            selectedIndex={selectedIndex}
+            onSelect={handleSelect}
+          />
         </CSSTransition>
       </ExpandedKnobPortal>
     </div>

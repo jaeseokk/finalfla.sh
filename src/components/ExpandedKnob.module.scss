@@ -1,3 +1,5 @@
+@import '../shared/mixins.scss';
+
 .Overlay {
   position: fixed;
   left: 0;
@@ -22,9 +24,13 @@
   user-select: none;
 
   .knobWrapper {
-    width: 600px;
     position: relative;
     z-index: inherit;
+    width: 600px;
+
+    @include for-small-screens {
+      width: 300px;
+    }
   }
 
   g.rotateWrapper {
@@ -58,11 +64,9 @@
 
       @for $i from 0 through 73 {
         &:nth-child(#{$i + 1}) {
-          transform: rotate(#{$i * 4.86}deg) translateY(-50%);
-
           &.selected {
             > div {
-              transform: scale(3) translateY(-52%);
+              transform: scale(3);
             }
           }
         }

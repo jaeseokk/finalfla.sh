@@ -1,20 +1,13 @@
+import { AnimCategory, Sound } from './constants'
+
 type AnimId = string
 
-export enum AnimCategory {
-  A,
-  B,
-  C,
-  D,
-  E,
-  F,
-}
-
 export interface AnimUnit {
-  category?: AnimCategory
+  category: AnimCategory
   id: AnimId
   frameLength: number
   spriteSheetLength: number
-  sound?: string
+  sound: Sound
 }
 
 export type AnimUnits = AnimUnit[]

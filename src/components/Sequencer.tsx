@@ -10,9 +10,9 @@ import UndoButton from './UndoButton'
 import CreditButton from './CreditButton'
 import ReferenceButton from './ReferenceButton'
 import ShareButton from './ShareButton'
+import { AnimCategory } from '../shared/constants'
 
 interface SequencerProp {
-  rowCount: number
   colCount: number
   sequence: AnimSequence
   tickIndex: number
@@ -25,42 +25,12 @@ interface SequencerProp {
 }
 
 const Sequencer: React.FC<SequencerProp> = ({
-  rowCount,
   colCount,
   sequence,
   tickIndex,
   onChangeKnobIndex,
   onUndo,
 }) => {
-  const renderKnobs = useCallback(() => {
-    const knobs = []
-
-    for (let i = 0; i < rowCount; i++) {
-      const row = []
-      for (let j = 0; j < colCount; j++) {
-        const selectedKnobIndex = sequence[j]?.[i]
-
-        row.push(
-          <Knob
-            key={j}
-            selectedIndex={selectedKnobIndex}
-            playing={tickIndex === j}
-            onSelect={(index) => {
-              onChangeKnobIndex(j, i, index)
-            }}
-          />
-        )
-      }
-      knobs.push(
-        <div key={i} className={styles.row}>
-          {row}
-        </div>
-      )
-    }
-
-    return knobs
-  }, [rowCount, colCount, sequence, tickIndex])
-
   return (
     <div className={clsx([styles.Sequencer])}>
       <div className={styles.background}>
@@ -99,7 +69,30 @@ const Sequencer: React.FC<SequencerProp> = ({
           </div>
         </div>
         <div className={styles.scrollWrapper}>
-          <div className={clsx([styles.knobs])}>{renderKnobs()}</div>
+          <div className={clsx([styles.knobs])}>
+            {[
+              AnimCategory.DR,
+              AnimCategory.BS,
+              AnimCategory.MEL,
+              AnimCategory.FX,
+              AnimCategory.AMBIENT,
+              AnimCategory.TRADITIONAL,
+            ].map((category, i) => (
+              <div key={category} className={styles.row}>
+                {Array.from(Array(colCount), (v, j) => (
+                  <Knob
+                    key={`${category}-${j}`}
+                    category={category}
+                    selectedIndex={sequence[j][i]}
+                    playing={tickIndex === j}
+                    onSelect={(index) => {
+                      onChangeKnobIndex(j, i, index)
+                    }}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

@@ -1,56 +1,81 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import clsx from 'clsx'
 import useDial from '../shared/useDial'
 import styles from './ExpandedKnob.module.scss'
 import { animationUnits } from '../shared/animation-config'
+import { AnimCategory, MATERIALS_OFFSET } from '../shared/constants'
+import { AnimUnit } from '../shared/types'
 
 interface ExpandedKnobProp {
+  materials: AnimUnit[]
+  offset: number
   selectedIndex: number
   onSelect: (value: number) => void
 }
 
 interface MaterialsProp {
+  materials: AnimUnit[]
+  offset: number
   selectedIndex: number
 }
 
-const Materials: React.FC<MaterialsProp> = React.memo(({ selectedIndex }) => {
-  return (
-    <div className={clsx([styles.Materials])}>
-      <ul>
-        <li className={clsx({ [styles.selected]: selectedIndex === -1 })}>
-          <div style={{ background: '#fff' }}></div>
-        </li>
-        {animationUnits.map(({ id }, i) => {
-          const selected = i === selectedIndex
-          return (
-            <li key={id} className={clsx({ [styles.selected]: selected })}>
-              <div></div>
-            </li>
-          )
-        })}
-      </ul>
-    </div>
-  )
-})
+const Materials: React.FC<MaterialsProp> = React.memo(
+  ({ materials, selectedIndex }) => {
+    return (
+      <div className={clsx([styles.Materials])}>
+        <ul>
+          <li
+            className={clsx({ [styles.selected]: selectedIndex === -1 })}
+            style={{
+              transform: `translateY(-50%)`,
+            }}
+          >
+            <div style={{ background: '#fff' }}></div>
+          </li>
+          {materials.map(({ id }, i) => {
+            const selected = i === selectedIndex
+
+            return (
+              <li
+                key={id}
+                className={clsx({ [styles.selected]: selected })}
+                style={{
+                  transform: `rotate(${
+                    (360 / (materials.length + 1)) * (i + 1)
+                  }deg) translateY(-50%)`,
+                }}
+              >
+                <div></div>
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+    )
+  }
+)
 
 const Overlay: React.FC = () => {
   return <div className={styles.Overlay}></div>
 }
 
 const ExpandedKnob: React.FC<ExpandedKnobProp> = ({
+  materials,
+  offset,
   selectedIndex,
   onSelect,
 }) => {
   const { value } = useDial({
-    initialValue: selectedIndex,
+    initialValue: selectedIndex - offset,
     min: -1,
-    max: 72,
+    max: materials.length - 1,
     active: true,
   })
   const handleMouseUp = useCallback(() => {
-    onSelect(value)
+    const nextSelectedIndex = value === -1 ? value : value + offset
+    onSelect(nextSelectedIndex)
   }, [value, onSelect])
-  const id = value < 0 ? null : animationUnits[value].id
+  const id = value < 0 ? null : materials[value].id
   const patternId = id ? `icon-${id}` : undefined
   const fill = patternId ? `url(#${patternId})` : '#fff'
 
@@ -63,7 +88,11 @@ const ExpandedKnob: React.FC<ExpandedKnobProp> = ({
       onTouchCancel={handleMouseUp}
     >
       <div className={styles.knobWrapper}>
-        <Materials selectedIndex={value} />
+        <Materials
+          materials={materials}
+          offset={offset}
+          selectedIndex={value}
+        />
         <svg
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"

@@ -110,7 +110,6 @@ function App() {
               unmountOnExit
             >
               <Sequencer
-                rowCount={6}
                 colCount={8}
                 sequence={animSequence}
                 tickIndex={tickIndex}
