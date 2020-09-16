@@ -10,34 +10,34 @@
     z-index: 1;
   }
 
-  .overlayTransition-enter {
+  .popupOverlayTransition-enter {
     opacity: 0;
   }
-  .overlayTransition-enter-active {
+  .popupOverlayTransition-enter-active {
     opacity: 1;
     transition: opacity 300ms;
   }
-  .overlayTransition-exit {
+  .popupOverlayTransition-exit {
     opacity: 1;
   }
-  .overlayTransition-exit-active {
+  .popupOverlayTransition-exit-active {
     opacity: 0;
     transition: opacity 300ms;
   }
 
-  .expandedKnobTransition-enter {
+  .popupTransition-enter {
     opacity: 0;
     transform: scale(0.8);
   }
-  .expandedKnobTransition-enter-active {
+  .popupTransition-enter-active {
     opacity: 1;
     transform: scale(1);
     transition: opacity 300ms, transform 300ms;
   }
-  .expandedKnobTransition-exit {
+  .popupTransition-exit {
     opacity: 1;
   }
-  .expandedKnobTransition-exit-active {
+  .popupTransition-exit-active {
     opacity: 0;
     transform: scale(0.8);
     transition: opacity 300ms, transform 300ms;

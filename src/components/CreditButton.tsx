@@ -2,9 +2,13 @@ import React from 'react'
 
 import styles from './CreditButton.module.scss'
 
-const CreditButton = () => {
+interface CreditButtonProps {
+  onClick: () => void
+}
+
+const CreditButton: React.FC<CreditButtonProps> = ({ onClick }) => {
   return (
-    <div className={styles.CreditButton}>
+    <div className={styles.CreditButton} onClick={onClick}>
       <div>
         <svg
           version="1.1"

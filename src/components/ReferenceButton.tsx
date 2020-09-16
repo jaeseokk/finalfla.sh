@@ -2,9 +2,13 @@ import React from 'react'
 
 import styles from './ReferenceButton.module.scss'
 
-const ReferenceButton = () => {
+interface ReferenceButtonProps {
+  onClick: () => void
+}
+
+const ReferenceButton: React.FC<ReferenceButtonProps> = ({ onClick }) => {
   return (
-    <div className={styles.ReferenceButton}>
+    <div className={styles.ReferenceButton} onClick={onClick}>
       <div>
         <svg
           version="1.1"

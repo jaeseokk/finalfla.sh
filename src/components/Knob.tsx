@@ -198,7 +198,7 @@ const Knob: React.FC<KnobProp> = ({
       <ExpandedKnobPortal>
         <CSSTransition
           in={expand}
-          classNames="overlayTransition"
+          classNames="popupOverlayTransition"
           timeout={300}
           unmountOnExit
         >
@@ -206,7 +206,7 @@ const Knob: React.FC<KnobProp> = ({
         </CSSTransition>
         <CSSTransition
           in={expand}
-          classNames="expandedKnobTransition"
+          classNames="popupTransition"
           timeout={300}
           unmountOnExit
         >

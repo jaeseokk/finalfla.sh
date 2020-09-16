@@ -47,8 +47,20 @@ const useTicker = (tickLength: number) => {
   }, [reset])
 
   const pause = useCallback(() => {
+    if (!isPlaying) {
+      return
+    }
+
     setIsPlaying(false)
-  }, [])
+  }, [isPlaying])
+
+  const resume = useCallback(() => {
+    if (isPlaying) {
+      return
+    }
+
+    setIsPlaying(true)
+  }, [isPlaying])
 
   const goTo = useCallback((indexToGo) => {
     setTickIndex(indexToGo)
@@ -77,6 +89,7 @@ const useTicker = (tickLength: number) => {
     subscribe,
     start,
     pause,
+    resume,
     reset,
     goTo,
   }

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react'
+import React, { useState, useCallback, useMemo, useEffect } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import clsx from 'clsx'
 
@@ -12,6 +12,8 @@ import Loading from './Loading'
 import useMouseIdleTime from '../shared/useMouseIdleTime'
 import Background from './Background'
 import { isMobile } from '../shared/utils'
+import Credit from './Credit'
+import Reference from './Reference'
 
 const initialAnimSequence: AnimSequence = [
   [-1, -1, -1, -1, -1, -1],
@@ -29,9 +31,12 @@ function App() {
   const [loadingExited, setLoadingExited] = useState(false)
   const [animSequence, setAnimSequence] = useState(initialAnimSequence)
   const [history, setHistory] = useState<any[]>([])
-  const { tickIndex, start } = useTicker(8)
+  const [showCredit, setShowCredit] = useState(false)
+  const [showReference, setShowReference] = useState(false)
+  const { tickIndex, start, pause, resume } = useTicker(8)
+  const showPopup = showCredit || showReference
   const { idle } = useMouseIdleTime({
-    active: ready && !isMobile,
+    active: ready && !isMobile && !showPopup,
   })
   const sequencerVisible = useMemo(() => {
     if (isMobile) {
@@ -105,7 +110,7 @@ function App() {
             <Background />
             <CSSTransition
               in={sequencerVisible}
-              classNames="expandedKnobTransition"
+              classNames="popupTransition"
               timeout={300}
               unmountOnExit
             >
@@ -114,12 +119,34 @@ function App() {
                 sequence={animSequence}
                 tickIndex={tickIndex}
                 onChangeKnobIndex={handleChangeKnobIndex}
+                onClickCreditButton={() => {
+                  pause()
+                  setShowCredit(true)
+                }}
+                onClickReferenceButton={() => {
+                  pause()
+                  setShowReference(true)
+                }}
                 onUndo={handleUndo}
               />
             </CSSTransition>
           </>
         )}
       </div>
+      <Credit
+        show={showCredit}
+        onClose={() => {
+          resume()
+          setShowCredit(false)
+        }}
+      />
+      <Reference
+        show={showReference}
+        onClose={() => {
+          resume()
+          setShowReference(false)
+        }}
+      />
       <div id="expanded-knob"></div>
     </div>
   )

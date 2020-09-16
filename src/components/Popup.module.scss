@@ -1,0 +1,60 @@
+@keyframes squiggly-anim {
+  0% {
+    -webkit-filter: url('#squiggly-0');
+    filter: url('#squiggly-0');
+  }
+  25% {
+    -webkit-filter: url('#squiggly-1');
+    filter: url('#squiggly-1');
+  }
+  50% {
+    -webkit-filter: url('#squiggly-2');
+    filter: url('#squiggly-2');
+  }
+  75% {
+    -webkit-filter: url('#squiggly-3');
+    filter: url('#squiggly-3');
+  }
+  100% {
+    -webkit-filter: url('#squiggly-4');
+    filter: url('#squiggly-4');
+  }
+}
+
+.PopupOverlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+.Popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  .outer,
+  .inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    svg {
+      width: 100%;
+    }
+  }
+
+  .inner {
+    svg.anim {
+      animation: squiggly-anim 0.34s linear infinite;
+    }
+  }
+}
