@@ -21,6 +21,8 @@ import { isMobile } from '../shared/utils'
 import Credit from './Credit'
 import Reference from './Reference'
 import Share from './Share'
+import createSoundSource from '../shared/createSoundSource'
+import { Howl } from 'howler'
 
 const history = createBrowserHistory()
 
@@ -38,7 +40,10 @@ const initialAnimSequence: AnimSequence = [
 ]
 
 function App() {
-  const [ready, setReady] = useState(false)
+  const [readyAnim, setReadyAnim] = useState(false)
+  const [readySound, setReadySound] = useState(false)
+  const readyAll = readyAnim && readySound
+  const [soundSource, setSoundSource] = useState<Howl | null>(null)
   const [loadingExited, setLoadingExited] = useState(false)
   const [animSequence, setAnimSequence] = useState(initialAnimSequence)
   const [showCredit, setShowCredit] = useState(false)
@@ -48,7 +53,7 @@ function App() {
   const { tickIndex, start, pause, resume } = useTicker(8)
   const showPopup = showCredit || showReference || showShare
   const { idle } = useMouseIdleTime({
-    active: ready && !isMobile && !showPopup,
+    active: readyAll && !isMobile && !showPopup,
   })
   const sequencerVisible = useMemo(() => {
     if (isMobile) {
@@ -58,6 +63,11 @@ function App() {
     return !idle
   }, [idle])
   const { width: windowWidth, height: windowHeight } = useWindowResize()
+  const loadSoundSource = useCallback(async () => {
+    const soundSource = await createSoundSource()
+    setSoundSource(soundSource)
+    setReadySound(true)
+  }, [])
   const checkProvidedAnimSequence = useCallback(async () => {
     const search = history.location.search
     const matches = search.match(/s=([^&]*)/)
@@ -74,9 +84,8 @@ function App() {
       console.log(e)
     }
   }, [])
-  const handleReady = useCallback(() => {
-    setReady(true)
-    start()
+  const handleReadyAnim = useCallback(() => {
+    setReadyAnim(true)
   }, [])
   const handleChangeKnobIndex = useCallback(
     (tickIndex, layerIndex, knobIndex) => {
@@ -110,8 +119,16 @@ function App() {
     // })
   }, [history])
   useEffect(() => {
+    loadSoundSource()
+  }, [])
+  useEffect(() => {
     checkProvidedAnimSequence()
   }, [])
+  useEffect(() => {
+    if (readyAll) {
+      start()
+    }
+  }, [readyAll])
 
   return (
     <div className={clsx([styles.App, { [styles.idle]: idle }])}>
@@ -119,12 +136,13 @@ function App() {
         windowWidth={windowWidth}
         windowHeight={windowHeight}
         animSequence={animSequence}
-        onReady={handleReady}
+        soundSource={soundSource}
+        onReady={handleReadyAnim}
         tickIndex={tickIndex}
       />
       <div className={styles.layout}>
         <CSSTransition
-          in={!ready}
+          in={!readyAll}
           classNames="loadingTransition"
           timeout={300}
           onExited={() => {

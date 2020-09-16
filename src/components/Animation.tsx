@@ -3,13 +3,14 @@ import * as PIXI from 'pixi.js'
 import { AnimSequence } from '../shared/types'
 import { animationUnits } from '../shared/animation-config'
 import { isMobile } from '../shared/utils'
-import sounds from '../shared/sounds'
+import { Howl } from 'howler'
 
 const ANIM_WIDTH = 1920
 const ANIM_HEIGHT = 1080
 
 interface AnimatinoProps {
   animSequence: AnimSequence
+  soundSource: Howl | null
   tickIndex: number
   windowWidth: number
   windowHeight: number
@@ -18,6 +19,7 @@ interface AnimatinoProps {
 
 const Animation: React.FC<AnimatinoProps> = ({
   animSequence,
+  soundSource,
   tickIndex,
   windowWidth,
   windowHeight,
@@ -152,8 +154,8 @@ const Animation: React.FC<AnimatinoProps> = ({
         return
       }
 
-      if (animationUnits[index].sound) {
-        sounds.play(animationUnits[index].sound)
+      if (animationUnits[index].sound && soundSource) {
+        soundSource.play(animationUnits[index].sound)
       }
 
       const animId = animationUnits[index].id
