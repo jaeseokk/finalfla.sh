@@ -33,51 +33,51 @@
       }
 
       g.lightWrapper {
-        $dr-color: #8711ff;
-        $bs-color: #ff482a;
-        $mel-color: #ffff00;
-        $fx-color: #1eff00;
+        $dr-color: #ff48ea;
+        $bs-color: #ffff00;
+        $mel-color: #1eff00;
+        $fx-color: #0072ff;
         $ambient-color: #ff7200;
-        $traditional-color: #0072ff;
+        $traditional-color: #8711ff;
 
         path {
           &.DR {
-            fill: scale-color($dr-color, $lightness: -50%);
+            fill: scale-color($dr-color, $lightness: -40%);
 
             &.selected {
               fill: $dr-color;
             }
           }
           &.BS {
-            fill: scale-color($bs-color, $lightness: -50%);
+            fill: scale-color($bs-color, $lightness: -40%);
 
             &.selected {
               fill: $bs-color;
             }
           }
           &.MEL {
-            fill: scale-color($mel-color, $lightness: -50%);
+            fill: scale-color($mel-color, $lightness: -40%);
 
             &.selected {
               fill: $mel-color;
             }
           }
           &.FX {
-            fill: scale-color($fx-color, $lightness: -50%);
+            fill: scale-color($fx-color, $lightness: -40%);
 
             &.selected {
               fill: $fx-color;
             }
           }
           &.AMBIENT {
-            fill: scale-color($ambient-color, $lightness: -50%);
+            fill: scale-color($ambient-color, $lightness: -40%);
 
             &.selected {
               fill: $ambient-color;
             }
           }
           &.TRADITIONAL {
-            fill: scale-color($traditional-color, $lightness: -50%);
+            fill: scale-color($traditional-color, $lightness: -40%);
 
             &.selected {
               fill: $traditional-color;
