@@ -47,7 +47,7 @@
     display: flex;
     align-items: center;
 
-    svg {
+    > * {
       width: 100%;
     }
   }
@@ -55,6 +55,32 @@
   .inner {
     svg.anim {
       animation: squiggly-anim 0.34s linear infinite;
+    }
+
+    &.shareForm {
+      > div {
+        width: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        input {
+          display: block;
+          height: 50px;
+          border: 1px solid #fff;
+          background-color: #000;
+          font-size: 40px;
+          color: #fff;
+          margin-bottom: 40px;
+        }
+
+        button {
+          font-size: 35px;
+          padding: 10px 30px;
+        }
+      }
     }
   }
 }

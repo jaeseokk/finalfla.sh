@@ -23,6 +23,7 @@ interface SequencerProp {
   ) => void
   onClickCreditButton: () => void
   onClickReferenceButton: () => void
+  onClickShareButton: () => void
   onUndo: () => void
 }
 
@@ -33,6 +34,7 @@ const Sequencer: React.FC<SequencerProp> = ({
   onChangeKnobIndex,
   onClickCreditButton,
   onClickReferenceButton,
+  onClickShareButton,
   onUndo,
 }) => {
   return (
@@ -61,7 +63,7 @@ const Sequencer: React.FC<SequencerProp> = ({
             <div className={styles.left}>
               <CreditButton onClick={onClickCreditButton} />
               <ReferenceButton onClick={onClickReferenceButton} />
-              <ShareButton />
+              <ShareButton onClick={onClickShareButton} />
             </div>
             <div className={styles.center}>
               <SequencerTitle />

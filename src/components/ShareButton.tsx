@@ -2,9 +2,13 @@ import React from 'react'
 
 import styles from './ShareButton.module.scss'
 
-const ShareButton = () => {
+interface ShareButtonProps {
+  onClick: () => void
+}
+
+const ShareButton: React.FC<ShareButtonProps> = ({ onClick }) => {
   return (
-    <div className={styles.ShareButton}>
+    <div className={styles.ShareButton} onClick={onClick}>
       <div>
         <svg
           version="1.1"

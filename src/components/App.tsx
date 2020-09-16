@@ -1,6 +1,12 @@
 import React, { useState, useCallback, useMemo, useEffect } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import clsx from 'clsx'
+import { createBrowserHistory } from 'history'
+import jsonUrl from 'json-url/dist/browser/json-url'
+import 'json-url/dist/browser/json-url-vendors~lzma'
+import 'json-url/dist/browser/json-url-msgpack'
+import 'json-url/dist/browser/json-url-vendors~msgpack'
+import 'json-url/dist/browser/json-url-safe64'
 
 import Animation from './Animation'
 import useTicker from '../shared/useTicker'
@@ -14,6 +20,11 @@ import Background from './Background'
 import { isMobile } from '../shared/utils'
 import Credit from './Credit'
 import Reference from './Reference'
+import Share from './Share'
+
+const history = createBrowserHistory()
+
+const jsonUrlCompressor = jsonUrl('lzma')
 
 const initialAnimSequence: AnimSequence = [
   [-1, -1, -1, -1, -1, -1],
@@ -30,11 +41,12 @@ function App() {
   const [ready, setReady] = useState(false)
   const [loadingExited, setLoadingExited] = useState(false)
   const [animSequence, setAnimSequence] = useState(initialAnimSequence)
-  const [history, setHistory] = useState<any[]>([])
   const [showCredit, setShowCredit] = useState(false)
   const [showReference, setShowReference] = useState(false)
+  const [showShare, setShowShare] = useState(false)
+  const [shareUrl, setShareUrl] = useState('')
   const { tickIndex, start, pause, resume } = useTicker(8)
-  const showPopup = showCredit || showReference
+  const showPopup = showCredit || showReference || showShare
   const { idle } = useMouseIdleTime({
     active: ready && !isMobile && !showPopup,
   })
@@ -46,6 +58,22 @@ function App() {
     return !idle
   }, [idle])
   const { width: windowWidth, height: windowHeight } = useWindowResize()
+  const checkProvidedAnimSequence = useCallback(async () => {
+    const search = history.location.search
+    const matches = search.match(/s=([^&]*)/)
+    const compressedSequence = matches?.[1]
+
+    if (!compressedSequence) {
+      return
+    }
+
+    try {
+      const sequence = await jsonUrlCompressor.decompress(compressedSequence)
+      setAnimSequence(sequence as AnimSequence)
+    } catch (e) {
+      console.log(e)
+    }
+  }, [])
   const handleReady = useCallback(() => {
     setReady(true)
     start()
@@ -63,7 +91,7 @@ function App() {
           ...prev.slice(tickIndex + 1),
         ]
 
-        setHistory((prevHistory) => [...prevHistory, nextState])
+        // setHistory((prevHistory) => [...prevHistory, nextState])
 
         return nextState
       })
@@ -71,18 +99,19 @@ function App() {
     []
   )
   const handleUndo = useCallback(() => {
-    setHistory((prevHistory) => {
-      const nextHistory = prevHistory.slice(0, -1)
-      const snapshot =
-        nextHistory.length === 0
-          ? initialAnimSequence
-          : nextHistory[nextHistory.length - 1]
-
-      setAnimSequence(snapshot)
-
-      return nextHistory
-    })
+    // setHistory((prevHistory) => {
+    //   const nextHistory = prevHistory.slice(0, -1)
+    //   const snapshot =
+    //     nextHistory.length === 0
+    //       ? initialAnimSequence
+    //       : nextHistory[nextHistory.length - 1]
+    //   setAnimSequence(snapshot)
+    //   return nextHistory
+    // })
   }, [history])
+  useEffect(() => {
+    checkProvidedAnimSequence()
+  }, [])
 
   return (
     <div className={clsx([styles.App, { [styles.idle]: idle }])}>
@@ -127,6 +156,16 @@ function App() {
                   pause()
                   setShowReference(true)
                 }}
+                onClickShareButton={async () => {
+                  pause()
+                  const compressedSequence = await jsonUrlCompressor.compress(
+                    animSequence
+                  )
+                  setShareUrl(
+                    `${window.location.origin}?s=${compressedSequence}`
+                  )
+                  setShowShare(true)
+                }}
                 onUndo={handleUndo}
               />
             </CSSTransition>
@@ -145,6 +184,14 @@ function App() {
         onClose={() => {
           resume()
           setShowReference(false)
+        }}
+      />
+      <Share
+        show={showShare}
+        shareUrl={shareUrl}
+        onClose={() => {
+          resume()
+          setShowShare(false)
         }}
       />
       <div id="expanded-knob"></div>
