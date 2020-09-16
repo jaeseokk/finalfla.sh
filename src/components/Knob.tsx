@@ -115,9 +115,6 @@ const Knob: React.FC<KnobProp> = ({
                 ></image>
               )}
             </pattern>
-            <filter id="f1" x="0" y="0" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="10" />
-            </filter>
           </defs>
           <g>
             <path
@@ -216,6 +213,7 @@ const Knob: React.FC<KnobProp> = ({
           <ExpandedKnob
             materials={materials}
             offset={offset}
+            category={category}
             selectedIndex={selectedIndex}
             onSelect={handleSelect}
           />

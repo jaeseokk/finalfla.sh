@@ -1,4 +1,5 @@
 @import '../shared/mixins.scss';
+@import '../shared/variables.scss';
 
 .Overlay {
   position: fixed;
@@ -36,6 +37,53 @@
   g.rotateWrapper {
     transition: transform 80ms ease-in-out;
     transform-origin: 49% 50%;
+  }
+
+  g.lightWrapper {
+    path {
+      &.DR {
+        fill: scale-color($dr-color, $lightness: -40%);
+
+        &.selected {
+          fill: $dr-color;
+        }
+      }
+      &.BS {
+        fill: scale-color($bs-color, $lightness: -40%);
+
+        &.selected {
+          fill: $bs-color;
+        }
+      }
+      &.MEL {
+        fill: scale-color($mel-color, $lightness: -40%);
+
+        &.selected {
+          fill: $mel-color;
+        }
+      }
+      &.FX {
+        fill: scale-color($fx-color, $lightness: -40%);
+
+        &.selected {
+          fill: $fx-color;
+        }
+      }
+      &.AMBIENT {
+        fill: scale-color($ambient-color, $lightness: -40%);
+
+        &.selected {
+          fill: $ambient-color;
+        }
+      }
+      &.TRADITIONAL {
+        fill: scale-color($traditional-color, $lightness: -40%);
+
+        &.selected {
+          fill: $traditional-color;
+        }
+      }
+    }
   }
 }
 

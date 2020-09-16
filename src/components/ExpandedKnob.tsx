@@ -1,14 +1,14 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback } from 'react'
 import clsx from 'clsx'
 import useDial from '../shared/useDial'
 import styles from './ExpandedKnob.module.scss'
-import { animationUnits } from '../shared/animation-config'
-import { AnimCategory, MATERIALS_OFFSET } from '../shared/constants'
+import { AnimCategory } from '../shared/constants'
 import { AnimUnit } from '../shared/types'
 
 interface ExpandedKnobProp {
   materials: AnimUnit[]
   offset: number
+  category: AnimCategory
   selectedIndex: number
   onSelect: (value: number) => void
 }
@@ -62,6 +62,7 @@ const Overlay: React.FC = () => {
 const ExpandedKnob: React.FC<ExpandedKnobProp> = ({
   materials,
   offset,
+  category,
   selectedIndex,
   onSelect,
 }) => {
@@ -157,12 +158,18 @@ const ExpandedKnob: React.FC<ExpandedKnobProp> = ({
               }deg)`,
             }}
           >
-            <path
-              fill="#FFFFFF"
-              d="M65.55,24.35c0.01-0.41-0.07-0.83-0.22-1.22c-0.31-1.16-1.7-2.04-2.84-2.02c-0.17,0-0.33,0.01-0.5,0.01
-			c-1.07,0.03-1.83,0.47-2.31,1.09c-0.87,0.42-1.48,1.26-1.35,2.56c0.22,2.31,0.26,4.6,0.3,6.92c0.04,2.27,0.37,5.3,2.76,5.38
-			C63.36,37.16,65.2,37.71,66,36C67.47,32.84,66.12,27.85,65.55,24.35z"
-            />
+            <g className={styles.lightWrapper}>
+              <path
+                className={clsx([
+                  styles[category],
+                  { [styles.selected]: value > -1 },
+                ])}
+                fill="#FFFFFF"
+                d="M65.55,24.35c0.01-0.41-0.07-0.83-0.22-1.22c-0.31-1.16-1.7-2.04-2.84-2.02c-0.17,0-0.33,0.01-0.5,0.01
+        c-1.07,0.03-1.83,0.47-2.31,1.09c-0.87,0.42-1.48,1.26-1.35,2.56c0.22,2.31,0.26,4.6,0.3,6.92c0.04,2.27,0.37,5.3,2.76,5.38
+        C63.36,37.16,65.2,37.71,66,36C67.47,32.84,66.12,27.85,65.55,24.35z"
+              />
+            </g>
             <path
               fill="#5B5B5B"
               d="M104.23,56.32c-1.2-6.19-4.71-12.52-8.55-17.45c-3.65-4.69-8.31-8.51-13.34-11.65
