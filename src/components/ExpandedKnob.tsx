@@ -2,19 +2,19 @@ import React, { useCallback } from 'react'
 import clsx from 'clsx'
 import useDial from '../shared/useDial'
 import styles from './ExpandedKnob.module.scss'
-import { AnimCategory } from '../shared/constants'
-import { AnimUnit } from '../shared/types'
+import { Category } from '../shared/constants'
+import { SequenceUnit } from '../shared/types'
 
 interface ExpandedKnobProp {
-  materials: AnimUnit[]
+  materials: SequenceUnit[]
   offset: number
-  category: AnimCategory
+  category: Category
   selectedIndex: number
   onSelect: (value: number) => void
 }
 
 interface MaterialsProp {
-  materials: AnimUnit[]
+  materials: SequenceUnit[]
   offset: number
   selectedIndex: number
 }

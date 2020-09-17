@@ -10,7 +10,7 @@ import 'json-url/dist/browser/json-url-safe64'
 import Animation from './Animation'
 import useTicker from '../shared/useTicker'
 import useWindowResize from '../shared/useResize'
-import { AnimSequence } from '../shared/types'
+import { Sequence } from '../shared/types'
 import styles from './App.module.scss'
 import Sequencer from './Sequencer'
 import Loading from './Loading'
@@ -26,7 +26,7 @@ import useHistory from '../shared/useHistory'
 
 const jsonUrlCompressor = jsonUrl('lzma')
 
-const initialAnimSequence: AnimSequence = [
+const INITIAL_SEQUENCE: Sequence = [
   [-1, -1, -1, -1, -1, -1],
   [-1, -1, -1, -1, -1, -1],
   [-1, -1, -1, -1, -1, -1],
@@ -48,10 +48,10 @@ function App() {
   const [showReference, setShowReference] = useState(false)
   const [showShare, setShowShare] = useState(false)
   const [shareUrl, setShareUrl] = useState('')
-  const { redo, undo, set: setAnimSequence, reset, history } = useHistory<
-    AnimSequence
-  >(initialAnimSequence)
-  const { current: animSequence } = history
+  const { redo, undo, set: setSequence, reset, history } = useHistory<Sequence>(
+    INITIAL_SEQUENCE
+  )
+  const { current: sequence } = history
   const { tickIndex, start, pause, resume } = useTicker(8)
   const showPopup = showCredit || showReference || showShare
   const { idle } = useMouseIdleTime({
@@ -70,7 +70,7 @@ function App() {
     setSoundSource(soundSource)
     setReadySound(true)
   }, [])
-  const checkProvidedAnimSequence = useCallback(async () => {
+  const checkProvidedSequence = useCallback(async () => {
     const search = window.location.search
     const matches = search.match(/s=([^&]*)/)
     const compressedSequence = matches?.[1]
@@ -81,27 +81,27 @@ function App() {
 
     try {
       const sequence = await jsonUrlCompressor.decompress(compressedSequence)
-      setAnimSequence(sequence as AnimSequence)
+      setSequence(sequence as Sequence)
     } catch (e) {
       console.log(e)
     }
-  }, [setAnimSequence])
+  }, [setSequence])
   const handleReadyAnim = useCallback(() => {
     setReadyAnim(true)
   }, [])
   const handleChangeKnobIndex = useCallback(
     (tickIndex, layerIndex, knobIndex) => {
-      setAnimSequence([
-        ...animSequence.slice(0, tickIndex),
+      setSequence([
+        ...sequence.slice(0, tickIndex),
         [
-          ...animSequence[tickIndex].slice(0, layerIndex),
+          ...sequence[tickIndex].slice(0, layerIndex),
           knobIndex,
-          ...animSequence[tickIndex].slice(layerIndex + 1),
+          ...sequence[tickIndex].slice(layerIndex + 1),
         ],
-        ...animSequence.slice(tickIndex + 1),
+        ...sequence.slice(tickIndex + 1),
       ])
     },
-    [setAnimSequence]
+    [setSequence]
   )
   const handleReset = useCallback(() => {
     reset()
@@ -116,7 +116,7 @@ function App() {
     loadSoundSource()
   }, [])
   useEffect(() => {
-    checkProvidedAnimSequence()
+    checkProvidedSequence()
   }, [])
   useEffect(() => {
     if (startSequencer) {
@@ -129,7 +129,7 @@ function App() {
       <Animation
         windowWidth={windowWidth}
         windowHeight={windowHeight}
-        animSequence={animSequence}
+        sequence={sequence}
         soundSource={soundSource}
         onReady={handleReadyAnim}
         tickIndex={tickIndex}
@@ -162,7 +162,7 @@ function App() {
             >
               <Sequencer
                 colCount={8}
-                sequence={animSequence}
+                sequence={sequence}
                 tickIndex={tickIndex}
                 onChangeKnobIndex={handleChangeKnobIndex}
                 onClickCreditButton={() => {
@@ -176,7 +176,7 @@ function App() {
                 onClickShareButton={async () => {
                   pause()
                   const compressedSequence = await jsonUrlCompressor.compress(
-                    animSequence
+                    sequence
                   )
                   setShareUrl(
                     `${window.location.origin}?s=${compressedSequence}`

@@ -4,13 +4,13 @@ import { createPortal } from 'react-dom'
 import { CSSTransition } from 'react-transition-group'
 
 import styles from './Knob.module.scss'
-import { animationUnits } from '../shared/animation-config'
+import { sequenceUnits } from '../shared/config'
 import ExpandedKnob, { Overlay } from './ExpandedKnob'
 import useLongPress from '../shared/useLongPress'
-import { AnimCategory, MATERIALS_OFFSET } from '../shared/constants'
+import { Category, MATERIALS_OFFSET } from '../shared/constants'
 
 interface KnobProp {
-  category: AnimCategory
+  category: Category
   selectedIndex: number
   playing: boolean
   onSelect: (index: number) => void
@@ -34,7 +34,7 @@ const Knob: React.FC<KnobProp> = ({
 }) => {
   const offset = MATERIALS_OFFSET[category]
   const materials = useMemo(
-    () => animationUnits.filter((unit) => unit.category === category),
+    () => sequenceUnits.filter((unit) => unit.category === category),
     [category]
   )
   const rotateDeg = useMemo(() => {
@@ -42,7 +42,7 @@ const Knob: React.FC<KnobProp> = ({
       ? 0
       : (360 / (materials.length + 1)) * (selectedIndex - offset + 1)
   }, [selectedIndex, materials])
-  const id = selectedIndex < 0 ? null : animationUnits[selectedIndex].id
+  const id = selectedIndex < 0 ? null : sequenceUnits[selectedIndex].id
   const patternId = id ? `icon-${id}` : undefined
   const fill = patternId ? `url(#${patternId})` : '#fff'
   const [expand, setExpand] = useState(false)

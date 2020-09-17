@@ -1,17 +1,15 @@
-import { AnimCategory, Sound } from './constants'
+import { Category, Sound } from './constants'
 
-type AnimId = string
+type SequenceUnitId = string
 
-export interface AnimUnit {
-  category: AnimCategory
-  id: AnimId
+export interface SequenceUnit {
+  category: Category
+  id: SequenceUnitId
   frameLength: number
   spriteSheetLength: number
   sound: Sound
 }
 
-export type AnimUnits = AnimUnit[]
+export type Layers = number[]
 
-export type AnimLayers = number[]
-
-export type AnimSequence = AnimLayers[]
+export type Sequence = Layers[]

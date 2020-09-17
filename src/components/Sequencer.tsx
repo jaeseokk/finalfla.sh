@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import Knob from './Knob'
 import styles from './Sequencer.module.scss'
-import { AnimSequence } from '../shared/types'
+import { Sequence } from '../shared/types'
 import clsx from 'clsx'
 import SequencerTitle from './SequencerTitle'
 import SequencerBolt from './SequencerBolt'
@@ -10,12 +10,12 @@ import UndoButton from './UndoButton'
 import CreditButton from './CreditButton'
 import ReferenceButton from './ReferenceButton'
 import ShareButton from './ShareButton'
-import { AnimCategory } from '../shared/constants'
+import { Category } from '../shared/constants'
 import ClearButton from './ClearButton'
 
 interface SequencerProp {
   colCount: number
-  sequence: AnimSequence
+  sequence: Sequence
   tickIndex: number
   onChangeKnobIndex: (
     tickIndex: number,
@@ -83,12 +83,12 @@ const Sequencer: React.FC<SequencerProp> = ({
         <div className={styles.scrollWrapper}>
           <div className={clsx([styles.knobs])}>
             {[
-              AnimCategory.DR,
-              AnimCategory.BS,
-              AnimCategory.MEL,
-              AnimCategory.FX,
-              AnimCategory.AMBIENT,
-              AnimCategory.TRADITIONAL,
+              Category.DR,
+              Category.BS,
+              Category.MEL,
+              Category.FX,
+              Category.AMBIENT,
+              Category.TRADITIONAL,
             ].map((category, i) => (
               <div key={category} className={styles.row}>
                 {Array.from(Array(colCount), (v, j) => (

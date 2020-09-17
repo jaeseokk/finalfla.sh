@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useCallback, useState } from 'react'
 import * as PIXI from 'pixi.js'
-import { AnimSequence } from '../shared/types'
-import { animationUnits } from '../shared/animation-config'
+import { Sequence } from '../shared/types'
+import { sequenceUnits } from '../shared/config'
 import { isMobile } from '../shared/utils'
 import { Howl } from 'howler'
 
@@ -9,7 +9,7 @@ const ANIM_WIDTH = 1920
 const ANIM_HEIGHT = 1080
 
 interface AnimatinoProps {
-  animSequence: AnimSequence
+  sequence: Sequence
   soundSource: Howl | null
   tickIndex: number
   windowWidth: number
@@ -18,7 +18,7 @@ interface AnimatinoProps {
 }
 
 const Animation: React.FC<AnimatinoProps> = ({
-  animSequence,
+  sequence,
   soundSource,
   tickIndex,
   windowWidth,
@@ -51,16 +51,16 @@ const Animation: React.FC<AnimatinoProps> = ({
 
     pixiContainerRef.current.removeChildren()
 
-    animationUnits.forEach((animUnit, i) => {
+    sequenceUnits.forEach((sequenceUnit, i) => {
       if (!pixiContainerRef.current || !pixiAppRef.current) {
         return
       }
 
       const frames = []
 
-      for (let i = 0; i < animUnit.frameLength; i++) {
+      for (let i = 0; i < sequenceUnit.frameLength; i++) {
         const index = i < 10 ? `0${i}` : `${i}`
-        frames.push(PIXI.Texture.from(`${animUnit.id}_${index}.png`))
+        frames.push(PIXI.Texture.from(`${sequenceUnit.id}_${index}.png`))
       }
 
       for (let i = 0; i < 8; i++) {
@@ -70,7 +70,7 @@ const Animation: React.FC<AnimatinoProps> = ({
         sprite.anchor.set(0.5)
         sprite.visible = false
 
-        spritesRef.current[`${animUnit.id}-${i}`] = sprite
+        spritesRef.current[`${sequenceUnit.id}-${i}`] = sprite
 
         pixiContainerRef.current.addChild(sprite)
       }
@@ -141,11 +141,11 @@ const Animation: React.FC<AnimatinoProps> = ({
       return
     }
 
-    if (!animSequence[tickIndex]) {
+    if (!sequence[tickIndex]) {
       return
     }
 
-    animSequence[tickIndex].forEach((index) => {
+    sequence[tickIndex].forEach((index) => {
       if (index < 0) {
         return
       }
@@ -154,13 +154,13 @@ const Animation: React.FC<AnimatinoProps> = ({
         return
       }
 
-      if (animationUnits[index].sound && soundSource) {
-        soundSource.play(animationUnits[index].sound)
+      if (sequenceUnits[index].sound && soundSource) {
+        soundSource.play(sequenceUnits[index].sound)
       }
 
-      const animId = animationUnits[index].id
+      const sequenceUnitId = sequenceUnits[index].id
 
-      const sprite = spritesRef.current[`${animId}-${tickIndex}`]
+      const sprite = spritesRef.current[`${sequenceUnitId}-${tickIndex}`]
 
       sprite.visible = true
       sprite.play()

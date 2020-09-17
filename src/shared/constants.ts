@@ -1,4 +1,4 @@
-export enum AnimCategory {
+export enum Category {
   DR = 'DR',
   BS = 'BS',
   MEL = 'MEL',
@@ -84,10 +84,10 @@ export enum Sound {
 }
 
 export const MATERIALS_OFFSET = {
-  [AnimCategory.DR]: 0,
-  [AnimCategory.BS]: 12,
-  [AnimCategory.MEL]: 24,
-  [AnimCategory.FX]: 36,
-  [AnimCategory.AMBIENT]: 48,
-  [AnimCategory.TRADITIONAL]: 60,
+  [Category.DR]: 0,
+  [Category.BS]: 12,
+  [Category.MEL]: 24,
+  [Category.FX]: 36,
+  [Category.AMBIENT]: 48,
+  [Category.TRADITIONAL]: 60,
 }
