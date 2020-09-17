@@ -16,7 +16,7 @@ import Sequencer from './Sequencer'
 import Loading from './Loading'
 import useMouseIdleTime from '../shared/useMouseIdleTime'
 import Background from './Background'
-import { isMobile } from '../shared/utils'
+import { isMobile, validateSequence } from '../shared/utils'
 import Credit from './Credit'
 import Reference from './Reference'
 import Share from './Share'
@@ -77,7 +77,14 @@ function App() {
     }
 
     try {
-      const sequence = await jsonUrlCompressor.decompress(compressedSequence)
+      const sequence = (await jsonUrlCompressor.decompress(
+        compressedSequence
+      )) as Sequence
+
+      if (!validateSequence(sequence, 8, 6)) {
+        return
+      }
+
       setSequence(sequence as Sequence)
     } catch (e) {
       console.log(e)
