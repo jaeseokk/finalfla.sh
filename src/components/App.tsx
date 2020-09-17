@@ -45,6 +45,7 @@ function App() {
   const readyAll = readyAnim && readySound
   const [soundSource, setSoundSource] = useState<Howl | null>(null)
   const [loadingExited, setLoadingExited] = useState(false)
+  const [startSequencer, setStartSequencer] = useState(false)
   const [animSequence, setAnimSequence] = useState(initialAnimSequence)
   const [showCredit, setShowCredit] = useState(false)
   const [showReference, setShowReference] = useState(false)
@@ -125,10 +126,10 @@ function App() {
     checkProvidedAnimSequence()
   }, [])
   useEffect(() => {
-    if (readyAll) {
+    if (startSequencer) {
       start()
     }
-  }, [readyAll])
+  }, [startSequencer])
 
   return (
     <div className={clsx([styles.App, { [styles.idle]: idle }])}>
@@ -142,7 +143,7 @@ function App() {
       />
       <div className={styles.layout}>
         <CSSTransition
-          in={!readyAll}
+          in={!startSequencer}
           classNames="loadingTransition"
           timeout={300}
           onExited={() => {
@@ -150,7 +151,12 @@ function App() {
           }}
           unmountOnExit
         >
-          <Loading />
+          <Loading
+            ready={readyAll}
+            onClick={() => {
+              setStartSequencer(true)
+            }}
+          />
         </CSSTransition>
         {loadingExited && (
           <>

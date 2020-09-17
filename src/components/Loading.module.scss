@@ -1,20 +1,40 @@
+@keyframes font-color-anim {
+  0% {
+    color: #ffffff;
+  }
+  50% {
+    color: #feff5f;
+  }
+  100% {
+    color: #ffffff;
+  }
+}
+
 .Loading {
   position: relative;
   width: 100%;
   height: 100%;
   background-color: #121212;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   .content {
-    position: absolute;
     width: 100%;
-    height: 100%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    height: 60vh;
     background-image: url('/assets/loading.gif');
     background-size: contain;
     background-repeat: no-repeat;
     box-sizing: border-box;
     background-position: center center;
+    margin-bottom: 40px;
+  }
+
+  .text {
+    height: 40px;
+    font-size: 30px;
+    color: #ffffff;
+    animation: font-color-anim 0.5s ease-in-out infinite;
   }
 }
