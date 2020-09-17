@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useMemo, useEffect } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import clsx from 'clsx'
-import { createBrowserHistory } from 'history'
 import jsonUrl from 'json-url/dist/browser/json-url'
 import 'json-url/dist/browser/json-url-vendors~lzma'
 import 'json-url/dist/browser/json-url-msgpack'
@@ -23,8 +22,7 @@ import Reference from './Reference'
 import Share from './Share'
 import createSoundSource from '../shared/createSoundSource'
 import { Howl } from 'howler'
-
-const history = createBrowserHistory()
+import useHistory from '../shared/useHistory'
 
 const jsonUrlCompressor = jsonUrl('lzma')
 
@@ -46,11 +44,14 @@ function App() {
   const [soundSource, setSoundSource] = useState<Howl | null>(null)
   const [loadingExited, setLoadingExited] = useState(false)
   const [startSequencer, setStartSequencer] = useState(false)
-  const [animSequence, setAnimSequence] = useState(initialAnimSequence)
   const [showCredit, setShowCredit] = useState(false)
   const [showReference, setShowReference] = useState(false)
   const [showShare, setShowShare] = useState(false)
   const [shareUrl, setShareUrl] = useState('')
+  const { redo, undo, set: setAnimSequence, history } = useHistory<
+    AnimSequence
+  >(initialAnimSequence)
+  const { current: animSequence } = history
   const { tickIndex, start, pause, resume } = useTicker(8)
   const showPopup = showCredit || showReference || showShare
   const { idle } = useMouseIdleTime({
@@ -70,7 +71,7 @@ function App() {
     setReadySound(true)
   }, [])
   const checkProvidedAnimSequence = useCallback(async () => {
-    const search = history.location.search
+    const search = window.location.search
     const matches = search.match(/s=([^&]*)/)
     const compressedSequence = matches?.[1]
 
@@ -84,41 +85,30 @@ function App() {
     } catch (e) {
       console.log(e)
     }
-  }, [])
+  }, [setAnimSequence])
   const handleReadyAnim = useCallback(() => {
     setReadyAnim(true)
   }, [])
   const handleChangeKnobIndex = useCallback(
     (tickIndex, layerIndex, knobIndex) => {
-      setAnimSequence((prev) => {
-        const nextState = [
-          ...prev.slice(0, tickIndex),
-          [
-            ...prev[tickIndex].slice(0, layerIndex),
-            knobIndex,
-            ...prev[tickIndex].slice(layerIndex + 1),
-          ],
-          ...prev.slice(tickIndex + 1),
-        ]
-
-        // setHistory((prevHistory) => [...prevHistory, nextState])
-
-        return nextState
-      })
+      setAnimSequence([
+        ...animSequence.slice(0, tickIndex),
+        [
+          ...animSequence[tickIndex].slice(0, layerIndex),
+          knobIndex,
+          ...animSequence[tickIndex].slice(layerIndex + 1),
+        ],
+        ...animSequence.slice(tickIndex + 1),
+      ])
     },
-    []
+    [setAnimSequence]
   )
   const handleUndo = useCallback(() => {
-    // setHistory((prevHistory) => {
-    //   const nextHistory = prevHistory.slice(0, -1)
-    //   const snapshot =
-    //     nextHistory.length === 0
-    //       ? initialAnimSequence
-    //       : nextHistory[nextHistory.length - 1]
-    //   setAnimSequence(snapshot)
-    //   return nextHistory
-    // })
-  }, [history])
+    undo()
+  }, [undo])
+  const handleRedo = useCallback(() => {
+    redo()
+  }, [redo])
   useEffect(() => {
     loadSoundSource()
   }, [])
@@ -191,6 +181,7 @@ function App() {
                   setShowShare(true)
                 }}
                 onUndo={handleUndo}
+                onRedo={handleRedo}
               />
             </CSSTransition>
           </>

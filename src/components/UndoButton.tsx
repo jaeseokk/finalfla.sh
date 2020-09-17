@@ -2,13 +2,18 @@ import React from 'react'
 
 import styles from './UndoButton.module.scss'
 
-const UndoButton = () => {
+interface UndoButtonProps {
+  onClick: () => void
+}
+
+const UndoButton: React.FC<UndoButtonProps> = ({ onClick }) => {
   return (
     <svg
       className={styles.UndoButton}
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 78.14 75.91"
+      onClick={onClick}
     >
       <g>
         <path

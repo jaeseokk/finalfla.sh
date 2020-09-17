@@ -2,13 +2,18 @@ import React from 'react'
 
 import styles from './RedoButton.module.scss'
 
-const RedoButton = () => {
+interface RedoButtonProps {
+  onClick: () => void
+}
+
+const RedoButton: React.FC<RedoButtonProps> = ({ onClick }) => {
   return (
     <svg
       className={styles.RedoButton}
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 78.14 75.91"
+      onClick={onClick}
     >
       <g>
         <path

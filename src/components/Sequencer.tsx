@@ -25,6 +25,7 @@ interface SequencerProp {
   onClickReferenceButton: () => void
   onClickShareButton: () => void
   onUndo: () => void
+  onRedo: () => void
 }
 
 const Sequencer: React.FC<SequencerProp> = ({
@@ -36,6 +37,7 @@ const Sequencer: React.FC<SequencerProp> = ({
   onClickReferenceButton,
   onClickShareButton,
   onUndo,
+  onRedo,
 }) => {
   return (
     <div className={clsx([styles.Sequencer])}>
@@ -69,8 +71,8 @@ const Sequencer: React.FC<SequencerProp> = ({
               <SequencerTitle />
             </div>
             <div className={styles.right}>
-              <UndoButton />
-              <RedoButton />
+              <UndoButton onClick={onUndo} />
+              <RedoButton onClick={onRedo} />
             </div>
           </div>
         </div>
@@ -92,6 +94,10 @@ const Sequencer: React.FC<SequencerProp> = ({
                     selectedIndex={sequence[j][i]}
                     playing={tickIndex === j}
                     onSelect={(index) => {
+                      if (sequence[j][i] === index) {
+                        return
+                      }
+
                       onChangeKnobIndex(j, i, index)
                     }}
                   />

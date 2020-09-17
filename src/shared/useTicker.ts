@@ -77,7 +77,6 @@ const useTicker = (tickLength: number) => {
   }, [isPlaying, subscribers])
 
   useEffect(() => {
-    console.log(`tickIndex: ${tickIndex}`)
     subscribers.forEach((subscriber) => {
       subscriber(tickIndex)
     })
