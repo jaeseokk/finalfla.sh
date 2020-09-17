@@ -1,3 +1,5 @@
+import { Sequence } from './types'
+
 export enum Category {
   DR = 'DR',
   BS = 'BS',
@@ -91,3 +93,18 @@ export const MATERIALS_OFFSET = {
   [Category.AMBIENT]: 48,
   [Category.TRADITIONAL]: 60,
 }
+
+export const STEPS = 8
+
+export const LAYERS = 6
+
+export const INITIAL_SEQUENCE: Sequence = [
+  [-1, -1, -1, -1, -1, -1],
+  [-1, -1, -1, -1, -1, -1],
+  [-1, -1, -1, -1, -1, -1],
+  [-1, -1, -1, -1, -1, -1],
+  [-1, -1, -1, -1, -1, -1],
+  [-1, -1, -1, -1, -1, -1],
+  [-1, -1, -1, -1, -1, -1],
+  [-1, -1, -1, -1, -1, -1],
+]

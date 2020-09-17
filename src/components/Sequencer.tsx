@@ -14,7 +14,7 @@ import { Category } from '../shared/constants'
 import ClearButton from './ClearButton'
 
 interface SequencerProp {
-  colCount: number
+  stepCount: number
   sequence: Sequence
   tickIndex: number
   onChangeKnobIndex: (
@@ -31,7 +31,7 @@ interface SequencerProp {
 }
 
 const Sequencer: React.FC<SequencerProp> = ({
-  colCount,
+  stepCount,
   sequence,
   tickIndex,
   onChangeKnobIndex,
@@ -91,7 +91,7 @@ const Sequencer: React.FC<SequencerProp> = ({
               Category.TRADITIONAL,
             ].map((category, i) => (
               <div key={category} className={styles.row}>
-                {Array.from(Array(colCount), (v, j) => (
+                {Array.from(Array(stepCount), (v, j) => (
                   <Knob
                     key={`${category}-${j}`}
                     category={category}

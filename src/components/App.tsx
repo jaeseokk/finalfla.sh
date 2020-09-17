@@ -23,19 +23,9 @@ import Share from './Share'
 import createSoundSource from '../shared/createSoundSource'
 import { Howl } from 'howler'
 import useHistory from '../shared/useHistory'
+import { INITIAL_SEQUENCE, STEPS, LAYERS } from '../shared/constants'
 
 const jsonUrlCompressor = jsonUrl('lzma')
-
-const INITIAL_SEQUENCE: Sequence = [
-  [-1, -1, -1, -1, -1, -1],
-  [-1, -1, -1, -1, -1, -1],
-  [-1, -1, -1, -1, -1, -1],
-  [-1, -1, -1, -1, -1, -1],
-  [-1, -1, -1, -1, -1, -1],
-  [-1, -1, -1, -1, -1, -1],
-  [-1, -1, -1, -1, -1, -1],
-  [-1, -1, -1, -1, -1, -1],
-]
 
 function App() {
   const [readyAnim, setReadyAnim] = useState(false)
@@ -52,7 +42,7 @@ function App() {
     INITIAL_SEQUENCE
   )
   const { current: sequence } = history
-  const { tickIndex, start, pause, resume } = useTicker(8)
+  const { tickIndex, start, pause, resume } = useTicker(STEPS)
   const showPopup = showCredit || showReference || showShare
   const { idle } = useMouseIdleTime({
     active: readyAll && !showPopup,
@@ -81,7 +71,7 @@ function App() {
         compressedSequence
       )) as Sequence
 
-      if (!validateSequence(sequence, 8, 6)) {
+      if (!validateSequence(sequence, STEPS, LAYERS)) {
         return
       }
 
@@ -165,7 +155,7 @@ function App() {
               unmountOnExit
             >
               <Sequencer
-                colCount={8}
+                stepCount={STEPS}
                 sequence={sequence}
                 tickIndex={tickIndex}
                 onChangeKnobIndex={handleChangeKnobIndex}
