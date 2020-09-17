@@ -108,7 +108,9 @@
 
         button {
           font-size: 35px;
-          padding: 10px 30px;
+          padding: 0 30px;
+          background-color: #ffffff;
+          border-radius: 2px;
 
           &:hover {
             cursor: url(/assets/hand-cursor-pointer2.png), pointer;

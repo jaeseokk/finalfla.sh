@@ -25,6 +25,10 @@
     font-family: 'Amatic SC', cursive;
   }
 
+  button {
+    -webkit-appearance: none;
+  }
+
   #expanded-knob-container {
     position: fixed;
     left: 0;
