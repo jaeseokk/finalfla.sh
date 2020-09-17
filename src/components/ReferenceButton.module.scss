@@ -3,34 +3,7 @@
 .ReferenceButton {
   @include button;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: 5px;
 
-  @include for-medium-screens {
-    padding-bottom: 0;
-  }
-  @include for-small-screens {
-    padding-bottom: 0;
-  }
-
-  > div {
-    flex: 1;
-  }
-
-  .label {
-    position: absolute;
-    height: 25%;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%) translateY(100%);
-
-    @include for-medium-screens {
-      height: 20%;
-    }
-    @include for-small-screens {
-      height: 20%;
-    }
-  }
+  padding-top: 1%;
+  padding-bottom: 2%;
 }

@@ -49,28 +49,33 @@
       .wrapper {
         display: flex;
         justify-content: space-between;
-        align-items: flex-start;
+        align-items: center;
         padding-left: 100px;
         padding-right: 100px;
+        padding-top: 20px;
         flex-wrap: wrap;
 
         @include for-medium-screens {
-          padding-left: 50px;
-          padding-right: 50px;
+          padding-left: 10px;
+          padding-right: 10px;
+        }
+
+        @include for-medium-portrait-screens {
+          padding-top: 40px;
         }
 
         @include for-small-screens {
-          padding-left: 50px;
-          padding-right: 50px;
+          padding-left: 10px;
+          padding-right: 10px;
         }
 
         &.small {
           display: none;
-          height: 60px;
+          height: 80px;
           justify-content: center;
           padding-top: 20px;
 
-          @include for-medium-screens {
+          @include for-medium-portrait-screens {
             display: flex;
           }
 
@@ -87,93 +92,34 @@
         > .right {
           flex: 1;
           display: flex;
-          align-items: flex-end;
+          align-items: center;
+          justify-content: space-around;
           height: 100%;
-          min-width: 200px;
           box-sizing: border-box;
 
-          padding-top: 40px;
-          @include for-medium-screens {
-            padding-top: 10px;
-          }
-
-          @include for-small-screens {
-            padding-top: 10px;
-            height: 70px;
-          }
-        }
-
-        > .left {
-          justify-content: flex-start;
-
           > * {
-            &:not(:last-child) {
-              margin-right: 15%;
-            }
-
-            min-height: 50px;
-            max-height: 70px;
-            max-width: 70px;
+            max-width: 60px;
             width: 33%;
-          }
+            padding-left: 20px;
+            padding-right: 20px;
 
-          @include for-medium-screens {
-            justify-content: center;
-            min-width: 220px;
-          }
-
-          @include for-small-screens {
-            justify-content: center;
-            min-width: 220px;
-            height: 40px;
-
-            > * {
-              height: 30px;
-              width: 30px;
-              min-height: 30px;
-
-              &:not(:last-child) {
-                margin-right: 25%;
-              }
+            @include for-medium-screens {
+              padding-left: 10px;
+              padding-right: 10px;
             }
-          }
-        }
-        > .right {
-          justify-content: flex-end;
 
-          > * {
-            margin-left: 10px;
-            width: 18%;
-            min-height: 50px;
-            min-width: 50px;
-          }
-
-          @include for-medium-screens {
-            justify-content: center;
-            min-width: 100px;
-            padding-top: 20px;
-          }
-
-          @include for-small-screens {
-            justify-content: center;
-            min-width: 100px;
-            padding-top: 20px;
-            height: 40px;
-
-            > * {
-              height: 30px;
-              width: 30px;
-              min-height: 30px;
+            @include for-small-screens {
+              padding-left: 10px;
+              padding-right: 10px;
             }
           }
         }
 
         > .center {
-          padding: 20px 30px 0;
           flex: 1;
-          min-width: 300px;
+          min-width: 200px;
 
-          @include for-medium-screens {
+          @include for-medium-portrait-screens {
             display: none;
           }
 
@@ -193,16 +139,18 @@
   .knobs {
     height: 100%;
     min-width: 100%;
-    padding: 50px 100px 40px;
+    padding: 30px 100px 50px;
     box-sizing: border-box;
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     @include for-medium-screens {
-      padding: 40px 50px 40px;
+      padding: 20px 20px 40px;
     }
 
     @include for-small-screens {
-      padding: 20px 50px 40px;
+      padding: 10px 20px 40px;
     }
 
     .row {

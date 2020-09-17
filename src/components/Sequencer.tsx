@@ -72,6 +72,7 @@ const Sequencer: React.FC<SequencerProp> = ({
             </div>
             <div className={styles.right}>
               <UndoButton onClick={onUndo} />
+              <UndoButton onClick={onUndo} />
               <RedoButton onClick={onRedo} />
             </div>
           </div>
