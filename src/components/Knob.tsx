@@ -75,6 +75,19 @@ const Knob: React.FC<KnobProp> = ({
     },
     [clearInteracting]
   )
+  const handleTouchStart = useCallback(
+    (e) => {
+      startInteracting(e)
+    },
+    [startInteracting]
+  )
+  const handleTouchEnd = useCallback(
+    (e) => {
+      e.preventDefault()
+      clearInteracting(e)
+    },
+    [clearInteracting]
+  )
   const handleSelect = useCallback(
     (index: number) => {
       clearInteracting()
@@ -90,6 +103,8 @@ const Knob: React.FC<KnobProp> = ({
         className={styles.normalKnob}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
       >
         <svg
           version="1.1"

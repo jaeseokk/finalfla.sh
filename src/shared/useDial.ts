@@ -49,7 +49,7 @@ const useDial = ({
 
       updateValue(pageX, pageY)
     },
-    [active]
+    [active, updateValue]
   )
   const handleTouchMove = useCallback(
     (e: TouchEvent) => {
@@ -65,7 +65,7 @@ const useDial = ({
 
       updateValue(pageX, pageY)
     },
-    [active]
+    [active, updateValue]
   )
 
   useLayoutEffect(() => {

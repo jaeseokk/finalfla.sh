@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import clsx from 'clsx'
 import useDial from '../shared/useDial'
 import styles from './ExpandedKnob.module.scss'
@@ -75,19 +75,19 @@ const ExpandedKnob: React.FC<ExpandedKnobProp> = ({
   const handleMouseUp = useCallback(() => {
     const nextSelectedIndex = value === -1 ? value : value + offset
     onSelect(nextSelectedIndex)
-  }, [value, onSelect])
+  }, [onSelect, value, offset])
   const id = value < 0 ? null : materials[value].id
   const patternId = id ? `icon-${id}` : undefined
   const fill = patternId ? `url(#${patternId})` : '#fff'
+  useEffect(() => {
+    window.addEventListener('touchend', handleMouseUp)
+    return () => {
+      window.removeEventListener('touchend', handleMouseUp)
+    }
+  }, [handleMouseUp])
 
   return (
-    <div
-      className={clsx([styles.ExpandedKnob])}
-      onMouseUp={handleMouseUp}
-      onTouchEnd={handleMouseUp}
-      onTouchEndCapture={handleMouseUp}
-      onTouchCancel={handleMouseUp}
-    >
+    <div className={clsx([styles.ExpandedKnob])} onMouseUp={handleMouseUp}>
       <div className={styles.knobWrapper}>
         <Materials
           materials={materials}
