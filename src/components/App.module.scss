@@ -1,6 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap');
+
 :global {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
   body {
     overflow: hidden;
+  }
+
+  body,
+  input,
+  textarea,
+  select,
+  button,
+  table,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: 'Amatic SC', cursive;
   }
 
   #expanded-knob-container {
