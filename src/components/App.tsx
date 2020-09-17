@@ -55,13 +55,10 @@ function App() {
   const { tickIndex, start, pause, resume } = useTicker(8)
   const showPopup = showCredit || showReference || showShare
   const { idle } = useMouseIdleTime({
-    active: readyAll && !isMobile && !showPopup,
+    active: readyAll && !showPopup,
+    mobile: isMobile,
   })
   const sequencerVisible = useMemo(() => {
-    if (isMobile) {
-      return true
-    }
-
     return !idle
   }, [idle])
   const { width: windowWidth, height: windowHeight } = useWindowResize()

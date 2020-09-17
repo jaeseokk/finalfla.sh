@@ -6,7 +6,13 @@ import {
   useState,
 } from 'react'
 
-const useMouseIdleTime = ({ active }: any) => {
+const useMouseIdleTime = ({
+  active,
+  mobile,
+}: {
+  active: boolean
+  mobile?: boolean
+}) => {
   const [idle, setIdle] = useState(false)
   const rafRef = useRef<number>()
   const lastTimeRef = useRef<number>(0)
@@ -44,21 +50,48 @@ const useMouseIdleTime = ({ active }: any) => {
   const handleMouseUp = useCallback(() => {
     initIdleTime()
   }, [])
+  const handleTouchMove = useCallback(() => {
+    initIdleTime()
+  }, [])
+  const handleTouchStart = useCallback(() => {
+    initIdleTime()
+  }, [])
+  const handleTouchEnd = useCallback(() => {
+    initIdleTime()
+  }, [])
   useLayoutEffect(() => {
     if (active) {
-      window.addEventListener('mousemove', handleMouseMove)
-      window.addEventListener('mousedown', handleMouseDown)
-      window.addEventListener('mouseup', handleMouseUp)
+      if (mobile) {
+        window.addEventListener('touchstart', handleTouchStart)
+        window.addEventListener('touchmove', handleTouchMove)
+        window.addEventListener('touchend', handleTouchEnd)
+      } else {
+        window.addEventListener('mousemove', handleMouseMove)
+        window.addEventListener('mousedown', handleMouseDown)
+        window.addEventListener('mouseup', handleMouseUp)
+      }
     } else {
-      window.removeEventListener('mousemove', handleMouseMove)
-      window.removeEventListener('mousedown', handleMouseDown)
-      window.removeEventListener('mouseup', handleMouseUp)
+      if (mobile) {
+        window.removeEventListener('touchstart', handleTouchStart)
+        window.removeEventListener('touchmove', handleTouchMove)
+        window.removeEventListener('touchend', handleTouchEnd)
+      } else {
+        window.removeEventListener('mousemove', handleMouseMove)
+        window.removeEventListener('mousedown', handleMouseDown)
+        window.removeEventListener('mouseup', handleMouseUp)
+      }
     }
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove)
-      window.removeEventListener('mousedown', handleMouseDown)
-      window.removeEventListener('mouseup', handleMouseUp)
+      if (mobile) {
+        window.removeEventListener('touchstart', handleTouchStart)
+        window.removeEventListener('touchmove', handleTouchMove)
+        window.removeEventListener('touchend', handleTouchEnd)
+      } else {
+        window.removeEventListener('mousemove', handleMouseMove)
+        window.removeEventListener('mousedown', handleMouseDown)
+        window.removeEventListener('mouseup', handleMouseUp)
+      }
     }
   }, [active])
   useEffect(() => {
