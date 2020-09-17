@@ -23,6 +23,7 @@ const useHistory = <T>(initialState: T) => {
     },
     [history]
   )
+
   const undo = useCallback(() => {
     if (history.past.length === 0) {
       return
@@ -56,11 +57,26 @@ const useHistory = <T>(initialState: T) => {
     })
   }, [history])
 
+  const reset = useCallback(() => {
+    if (history.current === initialState) {
+      return
+    }
+
+    setHistory((prev) => {
+      return {
+        past: [...prev.past, prev.current],
+        current: initialState,
+        future: [],
+      }
+    })
+  }, [history])
+
   return {
     history,
     set,
     undo,
     redo,
+    reset,
   }
 }
 

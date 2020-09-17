@@ -100,17 +100,17 @@
           > * {
             max-width: 60px;
             width: 33%;
-            padding-left: 20px;
-            padding-right: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
 
             @include for-medium-screens {
-              padding-left: 10px;
-              padding-right: 10px;
+              margin-left: 10px;
+              margin-right: 10px;
             }
 
             @include for-small-screens {
-              padding-left: 10px;
-              padding-right: 10px;
+              margin-left: 10px;
+              margin-right: 10px;
             }
           }
         }

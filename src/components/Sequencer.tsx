@@ -11,6 +11,7 @@ import CreditButton from './CreditButton'
 import ReferenceButton from './ReferenceButton'
 import ShareButton from './ShareButton'
 import { AnimCategory } from '../shared/constants'
+import ClearButton from './ClearButton'
 
 interface SequencerProp {
   colCount: number
@@ -24,6 +25,7 @@ interface SequencerProp {
   onClickCreditButton: () => void
   onClickReferenceButton: () => void
   onClickShareButton: () => void
+  onReset: () => void
   onUndo: () => void
   onRedo: () => void
 }
@@ -36,6 +38,7 @@ const Sequencer: React.FC<SequencerProp> = ({
   onClickCreditButton,
   onClickReferenceButton,
   onClickShareButton,
+  onReset,
   onUndo,
   onRedo,
 }) => {
@@ -71,7 +74,7 @@ const Sequencer: React.FC<SequencerProp> = ({
               <SequencerTitle />
             </div>
             <div className={styles.right}>
-              <UndoButton onClick={onUndo} />
+              <ClearButton onClick={onReset} />
               <UndoButton onClick={onUndo} />
               <RedoButton onClick={onRedo} />
             </div>

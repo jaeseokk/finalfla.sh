@@ -1,0 +1,11 @@
+@import '../shared/mixins.scss';
+
+.ClearButton.test {
+  @include button;
+  position: relative;
+
+  width: 26% !important;
+  max-width: 45px !important;
+  padding-top: 2%;
+  padding-bottom: 1%;
+}

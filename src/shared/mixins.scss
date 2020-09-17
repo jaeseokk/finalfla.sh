@@ -25,6 +25,7 @@
 @mixin button {
   position: relative;
   transition: transform 0.2s ease-in-out;
+  box-sizing: border-box;
 
   &:hover {
     transform: scale(1.1);

@@ -13,7 +13,6 @@ const UndoButton: React.FC<UndoButtonProps> = ({ onClick }) => {
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 78.14 75.91"
-        onClick={onClick}
       >
         <g>
           <path

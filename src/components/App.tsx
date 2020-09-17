@@ -48,7 +48,7 @@ function App() {
   const [showReference, setShowReference] = useState(false)
   const [showShare, setShowShare] = useState(false)
   const [shareUrl, setShareUrl] = useState('')
-  const { redo, undo, set: setAnimSequence, history } = useHistory<
+  const { redo, undo, set: setAnimSequence, reset, history } = useHistory<
     AnimSequence
   >(initialAnimSequence)
   const { current: animSequence } = history
@@ -103,6 +103,9 @@ function App() {
     },
     [setAnimSequence]
   )
+  const handleReset = useCallback(() => {
+    reset()
+  }, [reset])
   const handleUndo = useCallback(() => {
     undo()
   }, [undo])
@@ -180,6 +183,7 @@ function App() {
                   )
                   setShowShare(true)
                 }}
+                onReset={handleReset}
                 onUndo={handleUndo}
                 onRedo={handleRedo}
               />
