@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 
 import styles from './Popup.module.scss'
 import { CSSTransition } from 'react-transition-group'
@@ -11,6 +11,17 @@ interface ReferenceProps {
 
 const Reference: React.FC<ReferenceProps> = ({ show, onClose }) => {
   const [applyAnim, setApplyAnim] = useState(false)
+  const [page, setPage] = useState(0)
+  const handlePaging = useCallback(
+    (nextPage: number) => {
+      if (page === nextPage) {
+        return
+      }
+
+      setPage(nextPage)
+    },
+    [page]
+  )
 
   return (
     <>
@@ -87,7 +98,7 @@ const Reference: React.FC<ReferenceProps> = ({ show, onClose }) => {
             >
               <defs>
                 <pattern
-                  id="reference"
+                  id="reference1"
                   x="0"
                   y="0"
                   patternUnits="objectBoundingBox"
@@ -99,7 +110,23 @@ const Reference: React.FC<ReferenceProps> = ({ show, onClose }) => {
                     x="-8"
                     y="5"
                     height="42"
-                    xlinkHref={`assets/reference.png`}
+                    xlinkHref={`assets/reference1.png`}
+                  ></image>
+                </pattern>
+                <pattern
+                  id="reference2"
+                  x="0"
+                  y="0"
+                  patternUnits="objectBoundingBox"
+                  preserveAspectRatio="xMidYMid meet"
+                  height="1"
+                  width="1"
+                >
+                  <image
+                    x="-8"
+                    y="5"
+                    height="42"
+                    xlinkHref={`assets/reference2.png`}
                   ></image>
                 </pattern>
                 <filter id="squiggly-0">
@@ -174,10 +201,44 @@ const Reference: React.FC<ReferenceProps> = ({ show, onClose }) => {
 			C115.13,31.14,129.89,45.31,129.89,58.85z"
                 />
                 <path
-                  fill="url(#reference)"
+                  fill={`url(#reference${page + 1})`}
                   d="M129.89,58.85c0,14.13-12.32,25.18-27.98,25.09c-12.18-0.07-25.59-13.06-25.67-24.88c-0.1-13.89,12.47-28.24,24.59-28.1
 			C115.13,31.14,129.89,45.31,129.89,58.85z"
                 />
+              </g>
+              <g
+                className={styles.pagingButton}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  handlePaging(0)
+                }}
+              >
+                <circle cx="100" cy="79" r="0.7"></circle>
+                <circle
+                  className={styles.indicator}
+                  cx="101"
+                  cy="80"
+                  r="0.7"
+                ></circle>
+              </g>
+              <g
+                className={styles.pagingButton}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  handlePaging(1)
+                }}
+              >
+                <circle cx="104" cy="79" r="0.7"></circle>
+                <circle
+                  className={styles.indicator}
+                  cx="105"
+                  cy="80"
+                  r="0.7"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    handlePaging(1)
+                  }}
+                ></circle>
               </g>
             </svg>
           </div>

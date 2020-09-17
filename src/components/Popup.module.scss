@@ -57,6 +57,22 @@
       animation: squiggly-anim 0.34s linear infinite;
     }
 
+    .pagingButton {
+      transition: transform 0.2s ease-in-out;
+
+      .indicator {
+        fill: #fff;
+      }
+
+      &:hover {
+        cursor: url(/assets/hand-cursor-pointer2.png), pointer;
+
+        .indicator {
+          fill: #656565;
+        }
+      }
+    }
+
     &.shareForm {
       > div {
         width: 100%;
