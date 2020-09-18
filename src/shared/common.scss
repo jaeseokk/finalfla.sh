@@ -1,3 +1,10 @@
+$dr-color: #ff48ea;
+$bs-color: #ffff00;
+$mel-color: #1eff00;
+$fx-color: #0072ff;
+$ambient-color: #ff7200;
+$traditional-color: #8711ff;
+
 @mixin for-small-screens {
   @media only screen and (max-width: 480px) {
     @content;
@@ -44,4 +51,16 @@
       bottom: -15%;
     }
   }
+}
+
+%hand-cursor-default {
+  cursor: url(/assets/hand-cursor-default.png), auto;
+}
+
+%hand-cursor-pointer1 {
+  cursor: url(/assets/hand-cursor-pointer1.png), pointer;
+}
+
+%hand-cursor-pointer2 {
+  cursor: url(/assets/hand-cursor-pointer2.png), pointer;
 }

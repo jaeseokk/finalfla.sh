@@ -1,5 +1,6 @@
-@import '../shared/mixins.scss';
+@import '../shared/common.scss';
 
 .SequencerTitle {
+  @extend %hand-cursor-pointer2;
   max-height: 150px;
 }

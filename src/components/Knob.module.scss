@@ -1,6 +1,5 @@
 @use 'sass:color';
-@import '../shared/mixins.scss';
-@import '../shared/variables.scss';
+@import '../shared/common.scss';
 
 .Knob {
   position: relative;
@@ -12,12 +11,12 @@
   align-items: flex-end;
 
   .normalKnob {
+    @extend %hand-cursor-pointer1;
     height: 100%;
     transition: transform 0.2s ease-in-out;
 
     &:hover {
       transform: scale(1.1);
-      cursor: url(/assets/hand-cursor-pointer1.png), pointer;
     }
 
     svg {

@@ -1,4 +1,4 @@
-@import '../shared/mixins.scss';
+@import '../shared/common.scss';
 
 @keyframes squiggly-anim {
   0% {
@@ -64,6 +64,7 @@
     }
 
     .pagingButton {
+      @extend %hand-cursor-pointer2;
       transition: transform 0.2s ease-in-out;
 
       .indicator {
@@ -78,8 +79,6 @@
       }
 
       &:hover {
-        cursor: url(/assets/hand-cursor-pointer2.png), pointer;
-
         .indicator {
           fill: #ffffff;
         }
@@ -114,14 +113,11 @@
         }
 
         button {
+          @extend %hand-cursor-pointer2;
           font-size: 35px;
           padding: 0 30px;
           background-color: #ffffff;
           border-radius: 2px;
-
-          &:hover {
-            cursor: url(/assets/hand-cursor-pointer2.png), pointer;
-          }
 
           @include for-small-screens {
             font-size: 1rem;

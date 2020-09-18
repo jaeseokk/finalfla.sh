@@ -1,5 +1,4 @@
-@import '../shared/mixins.scss';
-@import '../shared/variables.scss';
+@import '../shared/common.scss';
 
 .Overlay {
   position: fixed;
@@ -12,10 +11,10 @@
 }
 
 .ExpandedKnob {
+  @extend %hand-cursor-pointer1;
   position: fixed;
   top: 0;
   left: 0;
-  cursor: url(/assets/hand-cursor-pointer1.png), pointer;
   display: flex;
   justify-content: center;
   align-items: center;
