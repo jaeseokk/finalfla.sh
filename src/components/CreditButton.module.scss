@@ -1,0 +1,6 @@
+@import '../shared/common.scss';
+
+.CreditButton {
+  @include button;
+  position: relative;
+}

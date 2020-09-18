@@ -1,0 +1,136 @@
+@import '../shared/common.scss';
+
+.Overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.75);
+  z-index: 1;
+}
+
+.ExpandedKnob {
+  @extend %hand-cursor-pointer1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  user-select: none;
+
+  .knobWrapper {
+    position: relative;
+    z-index: inherit;
+    width: 500px;
+
+    @include for-small-screens {
+      width: 250px;
+    }
+
+    @include for-medium-landscape-screens {
+      width: 250px;
+    }
+  }
+
+  g.rotateWrapper {
+    transition: transform 80ms ease-in-out;
+    transform-origin: 49% 50%;
+  }
+
+  g.lightWrapper {
+    path {
+      &.DR {
+        fill: scale-color($dr-color, $lightness: -40%);
+
+        &.selected {
+          fill: $dr-color;
+        }
+      }
+      &.BS {
+        fill: scale-color($bs-color, $lightness: -40%);
+
+        &.selected {
+          fill: $bs-color;
+        }
+      }
+      &.MEL {
+        fill: scale-color($mel-color, $lightness: -40%);
+
+        &.selected {
+          fill: $mel-color;
+        }
+      }
+      &.FX {
+        fill: scale-color($fx-color, $lightness: -40%);
+
+        &.selected {
+          fill: $fx-color;
+        }
+      }
+      &.AMBIENT {
+        fill: scale-color($ambient-color, $lightness: -40%);
+
+        &.selected {
+          fill: $ambient-color;
+        }
+      }
+      &.TRADITIONAL {
+        fill: scale-color($traditional-color, $lightness: -40%);
+
+        &.selected {
+          fill: $traditional-color;
+        }
+      }
+    }
+  }
+}
+
+.Materials {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  ul {
+    position: absolute;
+    list-style: none;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    li {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      left: 0;
+      top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      @for $i from 0 through 73 {
+        &:nth-child(#{$i + 1}) {
+          &.selected {
+            > div {
+              transform: scale(3);
+            }
+          }
+        }
+      }
+
+      > div {
+        border-radius: 50%;
+        width: 10px;
+        height: 10px;
+        border: 1px solid #000000;
+        background-color: #000000;
+        transition: transform 0.2s ease-in-out;
+      }
+    }
+  }
+}

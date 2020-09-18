@@ -1,0 +1,6 @@
+@import '../shared/common.scss';
+
+.RedoButton {
+  @include button;
+  position: relative;
+}

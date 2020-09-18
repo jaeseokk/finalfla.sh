@@ -1,0 +1,6 @@
+@import '../shared/common.scss';
+
+.ShareButton {
+  @include button;
+  position: relative;
+}

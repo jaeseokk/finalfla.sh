@@ -1,0 +1,81 @@
+@use "sass:selector";
+
+$dr-color: #ff48ea;
+$bs-color: #ffff00;
+$mel-color: #1eff00;
+$fx-color: #0072ff;
+$ambient-color: #ff7200;
+$traditional-color: #8711ff;
+
+@mixin for-small-screens {
+  @media only screen and (max-width: 480px) {
+    @content;
+  }
+}
+
+@mixin for-medium-landscape-screens {
+  @media only screen and (min-width: 481px) and (max-width: 1000px) and (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin for-medium-portrait-screens {
+  @media only screen and (min-width: 481px) and (max-width: 1000px) and (orientation: portrait) {
+    @content;
+  }
+}
+
+@mixin for-medium-screens {
+  @media only screen and (min-width: 481px) and (max-width: 1000px) {
+    @content;
+  }
+}
+
+@mixin button {
+  @extend %hand-cursor-pointer2;
+
+  position: relative;
+  transition: transform 0.2s ease-in-out;
+  box-sizing: border-box;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  .label {
+    position: absolute;
+    height: 20%;
+    bottom: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    @include for-small-screens {
+      height: 15%;
+      bottom: -15%;
+    }
+  }
+}
+
+%hand-cursor-default {
+  cursor: url(/assets/hand-cursor-default.png), auto;
+
+  @at-root #{selector-unify(':global(#app):global(.glove)', &)} {
+    cursor: url(/assets/glove-cursor-default.png), auto;
+  }
+}
+
+%hand-cursor-pointer1 {
+  cursor: url(/assets/hand-cursor-pointer1.png), pointer;
+
+  @at-root :global(#app):global(.glove) & {
+    cursor: url(/assets/glove-cursor-pointer1.png), auto;
+  }
+}
+
+%hand-cursor-pointer2 {
+  cursor: url(/assets/hand-cursor-pointer2.png), pointer;
+
+  @at-root :global(#app):global(.glove) & {
+    cursor: url(/assets/glove-cursor-pointer2.png), auto;
+  }
+}

@@ -1,0 +1,6 @@
+@import '../shared/common.scss';
+
+.UndoButton {
+  @include button;
+  position: relative;
+}
