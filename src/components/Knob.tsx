@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react'
+import React, { useState, useCallback, useMemo, useRef } from 'react'
 import clsx from 'clsx'
 import { createPortal } from 'react-dom'
 import { CSSTransition } from 'react-transition-group'
@@ -32,6 +32,7 @@ const Knob: React.FC<KnobProp> = ({
   playing,
   onSelect,
 }) => {
+  const touchMoving = useRef(false)
   const offset = MATERIALS_OFFSET[category]
   const materials = useMemo(
     () => sequenceUnits.filter((unit) => unit.category === category),
@@ -77,17 +78,25 @@ const Knob: React.FC<KnobProp> = ({
   )
   const handleTouchStart = useCallback(
     (e) => {
+      touchMoving.current = false
       startInteracting(e)
     },
     [startInteracting]
   )
   const handleTouchEnd = useCallback(
     (e) => {
-      e.preventDefault()
-      clearInteracting(e)
+      e.cancelable && e.preventDefault()
+      if (touchMoving.current) {
+        clearInteracting()
+      } else {
+        clearInteracting(e)
+      }
     },
     [clearInteracting]
   )
+  const handleTouchMove = useCallback((e) => {
+    touchMoving.current = true
+  }, [])
   const handleSelect = useCallback(
     (index: number) => {
       clearInteracting()
@@ -105,6 +114,7 @@ const Knob: React.FC<KnobProp> = ({
         onMouseUp={handleMouseUp}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
+        onTouchMove={handleTouchMove}
       >
         <svg
           version="1.1"
