@@ -69,6 +69,8 @@ const useTicker = (tickLength: number) => {
   useEffect(() => {
     if (isPlaying) {
       rafRef.current = requestAnimationFrame(animate)
+    } else {
+      rafRef.current && cancelAnimationFrame(rafRef.current)
     }
 
     return () => {
