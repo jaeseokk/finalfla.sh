@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 
 import styles from './Popup.module.scss'
 import { CSSTransition } from 'react-transition-group'
@@ -22,6 +22,11 @@ const Reference: React.FC<ReferenceProps> = ({ show, onClose }) => {
     },
     [page]
   )
+  useEffect(() => {
+    if (!show) {
+      setPage(0)
+    }
+  }, [show])
 
   return (
     <>
@@ -207,13 +212,18 @@ const Reference: React.FC<ReferenceProps> = ({ show, onClose }) => {
                 />
               </g>
               <g
-                className={styles.pagingButton}
+                className={clsx([
+                  styles.pagingButton,
+                  {
+                    [styles.selected]: page === 0,
+                  },
+                ])}
                 onClick={(e) => {
                   e.stopPropagation()
                   handlePaging(0)
                 }}
               >
-                <circle cx="100" cy="79" r="0.7"></circle>
+                <circle cx="101" cy="80" r="3"></circle>
                 <circle
                   className={styles.indicator}
                   cx="101"
@@ -222,22 +232,23 @@ const Reference: React.FC<ReferenceProps> = ({ show, onClose }) => {
                 ></circle>
               </g>
               <g
-                className={styles.pagingButton}
+                className={clsx([
+                  styles.pagingButton,
+                  {
+                    [styles.selected]: page === 1,
+                  },
+                ])}
                 onClick={(e) => {
                   e.stopPropagation()
                   handlePaging(1)
                 }}
               >
-                <circle cx="104" cy="79" r="0.7"></circle>
+                <circle cx="105" cy="80" r="3"></circle>
                 <circle
                   className={styles.indicator}
                   cx="105"
                   cy="80"
                   r="0.7"
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    handlePaging(1)
-                  }}
                 ></circle>
               </g>
             </svg>

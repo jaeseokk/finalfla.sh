@@ -67,14 +67,21 @@
       transition: transform 0.2s ease-in-out;
 
       .indicator {
-        fill: #fff;
+        fill: #676767;
+        transition: fill 0.1s ease-in-out;
+      }
+
+      &.selected {
+        .indicator {
+          fill: #ffffff;
+        }
       }
 
       &:hover {
         cursor: url(/assets/hand-cursor-pointer2.png), pointer;
 
         .indicator {
-          fill: #656565;
+          fill: #ffffff;
         }
       }
     }
