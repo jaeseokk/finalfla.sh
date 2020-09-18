@@ -6,13 +6,7 @@ import {
   useState,
 } from 'react'
 
-const useMouseIdleTime = ({
-  active,
-  mobile,
-}: {
-  active: boolean
-  mobile?: boolean
-}) => {
+const useMouseIdleTime = ({ active }: { active: boolean }) => {
   const [idle, setIdle] = useState(false)
   const rafRef = useRef<number>()
   const lastTimeRef = useRef<number>(0)
@@ -61,7 +55,7 @@ const useMouseIdleTime = ({
   }, [])
   useLayoutEffect(() => {
     if (active) {
-      if (mobile) {
+      if ('ontouchstart' in window) {
         window.addEventListener('touchstart', handleTouchStart)
         window.addEventListener('touchmove', handleTouchMove)
         window.addEventListener('touchend', handleTouchEnd)
@@ -71,7 +65,7 @@ const useMouseIdleTime = ({
         window.addEventListener('mouseup', handleMouseUp)
       }
     } else {
-      if (mobile) {
+      if ('ontouchstart' in window) {
         window.removeEventListener('touchstart', handleTouchStart)
         window.removeEventListener('touchmove', handleTouchMove)
         window.removeEventListener('touchend', handleTouchEnd)
@@ -83,7 +77,7 @@ const useMouseIdleTime = ({
     }
 
     return () => {
-      if (mobile) {
+      if ('ontouchstart' in window) {
         window.removeEventListener('touchstart', handleTouchStart)
         window.removeEventListener('touchmove', handleTouchMove)
         window.removeEventListener('touchend', handleTouchEnd)

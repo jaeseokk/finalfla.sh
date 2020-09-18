@@ -16,7 +16,7 @@ import Sequencer from './Sequencer'
 import Loading from './Loading'
 import useMouseIdleTime from '../shared/useMouseIdleTime'
 import Background from './Background'
-import { isMobile, validateSequence } from '../shared/utils'
+import { validateSequence } from '../shared/utils'
 import Credit from './Credit'
 import Reference from './Reference'
 import Share from './Share'
@@ -47,7 +47,6 @@ function App() {
   const showPopup = showCredit || showReference || showShare
   const { idle } = useMouseIdleTime({
     active: readyAll && !showPopup,
-    mobile: isMobile,
   })
   const sequencerVisible = useMemo(() => {
     return !idle
