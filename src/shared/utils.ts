@@ -1,5 +1,7 @@
 import getAgent from '@egjs/agent'
 import { Sequence } from './types'
+import { setgroups } from 'process'
+import { STRINGIFIED_EMPTY_SEQUENCE } from './constants'
 
 export const calculateAngle = (
   originX: number,
@@ -29,6 +31,13 @@ export const validateSequence = (
   }
 
   return isValidLayerCount
+}
+
+export const isEmptySequence = (sequence: Sequence) => {
+  return (
+    sequence.flatMap((steps) => steps.join('')).join('') ===
+    STRINGIFIED_EMPTY_SEQUENCE
+  )
 }
 
 export const agent = getAgent()

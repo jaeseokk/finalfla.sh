@@ -16,7 +16,7 @@ import Sequencer from './Sequencer'
 import Loading from './Loading'
 import useMouseIdleTime from '../shared/useMouseIdleTime'
 import Background from './Background'
-import { validateSequence } from '../shared/utils'
+import { validateSequence, isEmptySequence } from '../shared/utils'
 import Credit from './Credit'
 import Reference from './Reference'
 import Share from './Share'
@@ -49,8 +49,8 @@ function App() {
     active: readyAll && !showPopup,
   })
   const sequencerVisible = useMemo(() => {
-    return !idle
-  }, [idle])
+    return !idle || isEmptySequence(sequence)
+  }, [idle, sequence])
   const { width: windowWidth, height: windowHeight } = useWindowResize()
   const loadSoundSource = useCallback(async () => {
     const soundSource = await createSoundSource()
