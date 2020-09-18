@@ -22,6 +22,7 @@ interface SequencerProp {
     layerIndex: number,
     knobIndex: number
   ) => void
+  onClickTitle: () => void
   onClickCreditButton: () => void
   onClickReferenceButton: () => void
   onClickShareButton: () => void
@@ -35,6 +36,7 @@ const Sequencer: React.FC<SequencerProp> = ({
   sequence,
   tickIndex,
   onChangeKnobIndex,
+  onClickTitle,
   onClickCreditButton,
   onClickReferenceButton,
   onClickShareButton,
@@ -62,7 +64,7 @@ const Sequencer: React.FC<SequencerProp> = ({
       <div className={styles.container}>
         <div className={styles.header}>
           <div className={clsx([styles.wrapper, styles.small])}>
-            <SequencerTitle />
+            <SequencerTitle onClick={onClickTitle} />
           </div>
           <div className={styles.wrapper}>
             <div className={styles.left}>
@@ -71,7 +73,7 @@ const Sequencer: React.FC<SequencerProp> = ({
               <ShareButton onClick={onClickShareButton} />
             </div>
             <div className={styles.center}>
-              <SequencerTitle />
+              <SequencerTitle onClick={onClickTitle} />
             </div>
             <div className={styles.right}>
               <ClearButton onClick={onReset} />

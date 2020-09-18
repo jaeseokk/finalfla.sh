@@ -2,7 +2,11 @@ import React, { useCallback, useState, useLayoutEffect } from 'react'
 import styles from './SequencerTitle.module.scss'
 import { isMobile, isWebkit } from '../shared/utils'
 
-const SequencerTitle: React.FC = () => {
+interface SequencerTitleProps {
+  onClick: () => void
+}
+
+const SequencerTitle: React.FC<SequencerTitleProps> = ({ onClick }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const handleMouseMove = useCallback(({ clientX, clientY }: MouseEvent) => {
     setMousePosition({
@@ -45,6 +49,7 @@ const SequencerTitle: React.FC = () => {
       style={{
         ...getContainerStyle(),
       }}
+      onClick={onClick}
     >
       <g>
         <path

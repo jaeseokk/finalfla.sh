@@ -1,3 +1,5 @@
+@use "sass:selector";
+
 $dr-color: #ff48ea;
 $bs-color: #ffff00;
 $mel-color: #1eff00;
@@ -30,13 +32,14 @@ $traditional-color: #8711ff;
 }
 
 @mixin button {
+  @extend %hand-cursor-pointer2;
+
   position: relative;
   transition: transform 0.2s ease-in-out;
   box-sizing: border-box;
 
   &:hover {
     transform: scale(1.1);
-    cursor: url(/assets/hand-cursor-pointer2.png), pointer;
   }
 
   .label {
@@ -55,12 +58,24 @@ $traditional-color: #8711ff;
 
 %hand-cursor-default {
   cursor: url(/assets/hand-cursor-default.png), auto;
+
+  @at-root #{selector-unify(':global(#app):global(.glove)', &)} {
+    cursor: url(/assets/glove-cursor-default.png), auto;
+  }
 }
 
 %hand-cursor-pointer1 {
   cursor: url(/assets/hand-cursor-pointer1.png), pointer;
+
+  @at-root :global(#app):global(.glove) & {
+    cursor: url(/assets/glove-cursor-pointer1.png), auto;
+  }
 }
 
 %hand-cursor-pointer2 {
   cursor: url(/assets/hand-cursor-pointer2.png), pointer;
+
+  @at-root :global(#app):global(.glove) & {
+    cursor: url(/assets/glove-cursor-pointer2.png), auto;
+  }
 }

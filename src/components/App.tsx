@@ -38,6 +38,7 @@ function App() {
   const [showReference, setShowReference] = useState(false)
   const [showShare, setShowShare] = useState(false)
   const [shareUrl, setShareUrl] = useState('')
+  const [glove, setGlove] = useState(false)
   const { redo, undo, set: setSequence, reset, history } = useHistory<Sequence>(
     INITIAL_SEQUENCE
   )
@@ -119,7 +120,10 @@ function App() {
   }, [startSequencer])
 
   return (
-    <div className={clsx([styles.App, { [styles.idle]: idle }])}>
+    <div
+      id="app"
+      className={clsx([styles.App, { [styles.idle]: idle, glove }])}
+    >
       <Animation
         windowWidth={windowWidth}
         windowHeight={windowHeight}
@@ -159,6 +163,9 @@ function App() {
                 sequence={sequence}
                 tickIndex={tickIndex}
                 onChangeKnobIndex={handleChangeKnobIndex}
+                onClickTitle={() => {
+                  setGlove(true)
+                }}
                 onClickCreditButton={() => {
                   pause()
                   setShowCredit(true)
