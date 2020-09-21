@@ -255,7 +255,7 @@ export const sequenceUnits: readonly SequenceUnit[] = [
     sound: Sound.MEL_12,
   },
   {
-    category: Category.MEL,
+    category: Category.FX,
     id: 'g-1',
     frameLength: 10,
     spriteSheetLength: 3,
