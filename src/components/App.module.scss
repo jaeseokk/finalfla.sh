@@ -2,6 +2,12 @@
 
 @import '../shared/common.scss';
 
+@font-face {
+  font-family: 'Hail';
+  src: url('../assets/fonts/hail.woff2') format('woff2'),
+    url('../assets/fonts/hail.woff') format('woff');
+}
+
 :global {
   html,
   body {
@@ -24,7 +30,7 @@
   h3,
   h4,
   h5 {
-    font-family: 'Amatic SC', cursive;
+    font-family: Hail, 'Amatic SC', cursive;
   }
 
   button {
