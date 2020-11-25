@@ -1,8 +1,7 @@
 @import '../shared/common.scss';
 
-.ClearButton.test {
+.ClearButton {
   @include button;
-  position: relative;
 
   width: 26% !important;
   max-width: 45px !important;

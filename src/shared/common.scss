@@ -37,22 +37,18 @@ $traditional-color: #8711ff;
   position: relative;
   transition: transform 0.2s ease-in-out;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   &:hover {
     transform: scale(1.1);
   }
 
   .label {
-    position: absolute;
-    height: 20%;
-    bottom: -20%;
-    left: 50%;
-    transform: translateX(-50%);
-
-    @include for-small-screens {
-      height: 15%;
-      bottom: -15%;
-    }
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-top: 3px;
   }
 }
 

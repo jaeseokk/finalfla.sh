@@ -2,8 +2,8 @@
 
 .ReferenceButton {
   @include button;
-  position: relative;
 
-  padding-top: 1%;
-  padding-bottom: 2%;
+  .label {
+    margin-top: 7px;
+  }
 }

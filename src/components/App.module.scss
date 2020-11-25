@@ -9,6 +9,14 @@
 }
 
 :global {
+  html {
+    font-size: 10px;
+
+    @include for-small-screens {
+      font-size: 8px;
+    }
+  }
+
   html,
   body {
     margin: 0;
@@ -16,25 +24,25 @@
   }
 
   body {
+    font-family: Hail, 'Amatic SC', cursive;
     overflow: hidden;
   }
 
-  body,
-  input,
-  textarea,
-  select,
-  button,
-  table,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5 {
-    font-family: Hail, 'Amatic SC', cursive;
+  button {
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+    background: transparent;
+    -webkit-appearance: none;
+    outline: none;
+    font: inherit;
+    color: inherit;
   }
 
-  button {
-    -webkit-appearance: none;
+  input {
+    font: inherit;
   }
 
   #expanded-knob-container {
