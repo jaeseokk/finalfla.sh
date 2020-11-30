@@ -97,20 +97,46 @@
           height: 100%;
           box-sizing: border-box;
 
-          > * {
-            max-width: 60px;
-            width: 33%;
+          > button {
+            width: 60px;
+            height: 70px;
             margin-left: 20px;
             margin-right: 20px;
 
             @include for-medium-screens {
+              width: 50px;
+              height: 60px;
               margin-left: 10px;
               margin-right: 10px;
             }
 
             @include for-small-screens {
+              width: 40px;
+              height: 50px;
               margin-left: 10px;
               margin-right: 10px;
+            }
+
+            @include for-medium-landscape-screens {
+              width: 30px;
+              margin-left: 10px;
+              margin-right: 10px;
+            }
+
+            > svg {
+              height: 51px;
+
+              @include for-medium-screens {
+                height: 41px;
+              }
+
+              @include for-small-screens {
+                height: 35px;
+              }
+
+              @include for-medium-landscape-screens {
+                height: 35px;
+              }
             }
           }
         }
@@ -155,9 +181,23 @@
 
     .row {
       width: 100%;
-      height: 12.5%;
+      height: 70px;
+
+      @include for-medium-screens {
+        height: 65px;
+      }
+
+      @include for-small-screens {
+        height: 50px;
+      }
+
+      @include for-medium-landscape-screens {
+        height: 40px;
+      }
+
       display: flex;
       justify-content: space-between;
+      align-items: center;
       box-sizing: border-box;
 
       &:not(:last-child) {
@@ -165,6 +205,10 @@
 
         @include for-small-screens {
           margin-bottom: 10px;
+        }
+
+        @include for-medium-landscape-screens {
+          margin-bottom: 0;
         }
       }
     }
@@ -177,6 +221,14 @@
 
       > :not(:last-child) {
         margin-bottom: 3px;
+      }
+
+      @include for-medium-screens {
+        margin-right: 10px;
+      }
+
+      @include for-small-screens {
+        margin-right: 10px;
       }
     }
   }

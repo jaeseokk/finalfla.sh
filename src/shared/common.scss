@@ -49,6 +49,7 @@ $traditional-color: #8711ff;
     font-size: 1.6rem;
     font-weight: bold;
     margin-top: 3px;
+    z-index: 0;
   }
 }
 
@@ -57,19 +58,31 @@ $traditional-color: #8711ff;
 
   $controller-button-width: 50px;
   $controller-button-width-for-small: 40px;
-  $controller-button-height: 23px;
+  $controller-button-width-for-smaller: 30px;
+  $controller-button-height: 24px;
   $controller-button-height-for-small: 20px;
+  $controller-button-height-for-smaller: 15px;
   $controller-button-padding: 3px;
+  $controller-button-padding-for-small: 2px;
 
   position: relative;
   width: $controller-button-width + $controller-button-padding;
-  @include for-small-screens {
-    width: $controller-button-width-for-small + $controller-button-padding;
-  }
   height: $controller-button-height + $controller-button-padding;
+
   @include for-small-screens {
-    height: $controller-button-height-for-small + $controller-button-padding;
+    width: $controller-button-width-for-small +
+      $controller-button-padding-for-small;
+    height: $controller-button-height-for-small +
+      $controller-button-padding-for-small;
   }
+
+  @include for-medium-landscape-screens {
+    width: $controller-button-width-for-smaller +
+      $controller-button-padding-for-small;
+    height: $controller-button-height-for-smaller +
+      $controller-button-padding-for-small;
+  }
+
   padding-right: $controller-button-padding;
   padding-bottom: $controller-button-padding;
 
@@ -78,18 +91,38 @@ $traditional-color: #8711ff;
     position: absolute;
     top: 0;
     left: 0;
-    height: $controller-button-height;
 
     &.bg {
-      transform: translate(3px, 3px);
+      transform: translate(
+        $controller-button-padding,
+        $controller-button-padding
+      );
+
+      @include for-small-screens {
+        transform: translate(
+          $controller-button-padding-for-small,
+          $controller-button-padding-for-small
+        );
+      }
+      @include for-medium-landscape-screens {
+        transform: translate(
+          $controller-button-padding-for-small,
+          $controller-button-padding-for-small
+        );
+      }
     }
 
     &.label {
       font-size: 1rem;
       font-weight: bold;
       line-height: $controller-button-height;
+
       @include for-small-screens {
         line-height: $controller-button-height-for-small;
+      }
+
+      @include for-medium-landscape-screens {
+        line-height: $controller-button-height-for-smaller;
       }
     }
 
@@ -107,6 +140,19 @@ $traditional-color: #8711ff;
           $controller-button-padding / 3,
           $controller-button-padding / 3
         );
+
+        @include for-small-screens {
+          transform: translate(
+            $controller-button-padding-for-small / 3,
+            $controller-button-padding-for-small / 3
+          );
+        }
+        @include for-medium-landscape-screens {
+          transform: translate(
+            $controller-button-padding-for-small / 3,
+            $controller-button-padding-for-small / 3
+          );
+        }
       }
     }
   }
@@ -119,6 +165,19 @@ $traditional-color: #8711ff;
           $controller-button-padding,
           $controller-button-padding
         );
+
+        @include for-small-screens {
+          transform: translate(
+            $controller-button-padding-for-small,
+            $controller-button-padding-for-small
+          );
+        }
+        @include for-medium-landscape-screens {
+          transform: translate(
+            $controller-button-padding-for-small,
+            $controller-button-padding-for-small
+          );
+        }
       }
     }
   }
@@ -137,6 +196,19 @@ $traditional-color: #8711ff;
           $controller-button-padding,
           $controller-button-padding
         );
+
+        @include for-small-screens {
+          transform: translate(
+            $controller-button-padding-for-small,
+            $controller-button-padding-for-small
+          );
+        }
+        @include for-medium-landscape-screens {
+          transform: translate(
+            $controller-button-padding-for-small,
+            $controller-button-padding-for-small
+          );
+        }
       }
     }
   }

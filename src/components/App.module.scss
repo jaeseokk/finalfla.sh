@@ -13,7 +13,11 @@
     font-size: 10px;
 
     @include for-small-screens {
-      font-size: 8px;
+      font-size: 7px;
+    }
+
+    @include for-medium-landscape-screens {
+      font-size: 7px;
     }
   }
 
