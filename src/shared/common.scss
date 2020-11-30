@@ -52,6 +52,96 @@ $traditional-color: #8711ff;
   }
 }
 
+@mixin controller-button {
+  @extend %hand-cursor-pointer2;
+
+  $controller-button-width: 50px;
+  $controller-button-width-for-small: 40px;
+  $controller-button-height: 23px;
+  $controller-button-height-for-small: 20px;
+  $controller-button-padding: 3px;
+
+  position: relative;
+  width: $controller-button-width + $controller-button-padding;
+  @include for-small-screens {
+    width: $controller-button-width-for-small + $controller-button-padding;
+  }
+  height: $controller-button-height + $controller-button-padding;
+  @include for-small-screens {
+    height: $controller-button-height-for-small + $controller-button-padding;
+  }
+  padding-right: $controller-button-padding;
+  padding-bottom: $controller-button-padding;
+
+  > div {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: $controller-button-height;
+
+    &.bg {
+      transform: translate(3px, 3px);
+    }
+
+    &.label {
+      font-size: 1rem;
+      font-weight: bold;
+      line-height: $controller-button-height;
+      @include for-small-screens {
+        line-height: $controller-button-height-for-small;
+      }
+    }
+
+    &.fore,
+    &.label {
+      transition: transform 0.1s ease-out;
+    }
+  }
+
+  &:hover {
+    > div {
+      &.fore,
+      &.label {
+        transform: translate(
+          $controller-button-padding / 3,
+          $controller-button-padding / 3
+        );
+      }
+    }
+  }
+
+  &:active {
+    > div {
+      &.fore,
+      &.label {
+        transform: translate(
+          $controller-button-padding,
+          $controller-button-padding
+        );
+      }
+    }
+  }
+
+  &.active {
+    > div {
+      &.fore {
+        svg {
+          filter: blur($controller-button-padding / 3);
+        }
+      }
+
+      &.fore,
+      &.label {
+        transform: translate(
+          $controller-button-padding,
+          $controller-button-padding
+        );
+      }
+    }
+  }
+}
+
 %hand-cursor-default {
   cursor: url(/assets/hand-cursor-default.png), auto;
 
