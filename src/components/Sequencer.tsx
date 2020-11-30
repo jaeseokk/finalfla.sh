@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import Knob from './Knob'
 import styles from './Sequencer.module.scss'
 import { Sequence } from '../shared/types'
@@ -12,16 +12,22 @@ import ReferenceButton from './ReferenceButton'
 import ShareButton from './ShareButton'
 import { Category } from '../shared/constants'
 import ClearButton from './ClearButton'
+import MuteButton from './MuteButton'
+import SoloButton from './SoloButton'
 
 interface SequencerProp {
   stepCount: number
   sequence: Sequence
   tickIndex: number
+  muteStatus: boolean[]
+  soloStatus: boolean[]
   onChangeKnobIndex: (
     tickIndex: number,
     layerIndex: number,
     knobIndex: number
   ) => void
+  onChangeMuteStatus: (layerIndex: number, state: boolean) => void
+  onChangeSoloStatus: (layerIndex: number, state: boolean) => void
   onClickTitle: () => void
   onClickCreditButton: () => void
   onClickReferenceButton: () => void
@@ -35,7 +41,11 @@ const Sequencer: React.FC<SequencerProp> = ({
   stepCount,
   sequence,
   tickIndex,
+  muteStatus,
+  soloStatus,
   onChangeKnobIndex,
+  onChangeMuteStatus,
+  onChangeSoloStatus,
   onClickTitle,
   onClickCreditButton,
   onClickReferenceButton,
@@ -44,6 +54,8 @@ const Sequencer: React.FC<SequencerProp> = ({
   onUndo,
   onRedo,
 }) => {
+  const isSoloing = useMemo(() => soloStatus.includes(true), [soloStatus])
+
   return (
     <div className={clsx([styles.Sequencer])}>
       <div className={styles.background}>
@@ -93,12 +105,27 @@ const Sequencer: React.FC<SequencerProp> = ({
               Category.TRADITIONAL,
             ].map((category, i) => (
               <div key={category} className={styles.row}>
+                <div className={styles.controller}>
+                  <MuteButton
+                    active={muteStatus[i]}
+                    onClick={() => {
+                      onChangeMuteStatus(i, !muteStatus[i])
+                    }}
+                  />
+                  <SoloButton
+                    active={soloStatus[i]}
+                    onClick={() => {
+                      onChangeSoloStatus(i, !soloStatus[i])
+                    }}
+                  />
+                </div>
                 {Array.from(Array(stepCount), (v, j) => (
                   <Knob
                     key={`${category}-${j}`}
                     category={category}
                     selectedIndex={sequence[j][i]}
                     playing={tickIndex === j}
+                    muted={muteStatus[i] || (isSoloing && !soloStatus[i])}
                     onSelect={(index) => {
                       if (sequence[j][i] === index) {
                         return

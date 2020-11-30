@@ -1,6 +1,5 @@
 import getAgent from '@egjs/agent'
 import { Sequence } from './types'
-import { setgroups } from 'process'
 import { STRINGIFIED_EMPTY_SEQUENCE } from './constants'
 
 export const calculateAngle = (
@@ -45,3 +44,7 @@ export const agent = getAgent()
 export const isMobile = agent.isMobile
 
 export const isWebkit = agent.browser.webkit
+
+export const range = (n: number, initialValue: any = null) => {
+  return Array.from(Array(n), () => initialValue)
+}

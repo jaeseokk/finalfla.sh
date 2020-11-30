@@ -14,6 +14,8 @@ interface AnimatinoProps {
   tickIndex: number
   windowWidth: number
   windowHeight: number
+  muteStatus: boolean[]
+  soloStatus: boolean[]
   onReady: () => void
 }
 
@@ -23,6 +25,8 @@ const Animation: React.FC<AnimatinoProps> = ({
   tickIndex,
   windowWidth,
   windowHeight,
+  muteStatus,
+  soloStatus,
   onReady,
 }) => {
   const [ready, setReady] = useState(false)
@@ -145,12 +149,20 @@ const Animation: React.FC<AnimatinoProps> = ({
       return
     }
 
-    sequence[tickIndex].forEach((index) => {
+    sequence[tickIndex].forEach((index, layerIndex) => {
       if (index < 0) {
         return
       }
 
       if (!pixiContainerRef.current) {
+        return
+      }
+
+      if (muteStatus[layerIndex]) {
+        return
+      }
+
+      if (soloStatus.includes(true) && !soloStatus[layerIndex]) {
         return
       }
 

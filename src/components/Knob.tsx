@@ -13,6 +13,7 @@ interface KnobProp {
   category: Category
   selectedIndex: number
   playing: boolean
+  muted: boolean
   onSelect: (index: number) => void
 }
 
@@ -30,6 +31,7 @@ const Knob: React.FC<KnobProp> = ({
   category,
   selectedIndex,
   playing,
+  muted,
   onSelect,
 }) => {
   const touchMoving = useRef(false)
@@ -163,7 +165,7 @@ const Knob: React.FC<KnobProp> = ({
               <path
                 className={clsx([
                   styles[category],
-                  { [styles.selected]: selectedIndex > -1 },
+                  { [styles.selected]: selectedIndex > -1 && !muted },
                 ])}
                 d="M66.18,11.38c-1.61-2.76-5.97-3.15-8.79-3.43c-3.78-0.38-7.59,0.02-11.36,0.28c-2.91,0.2-5.13,3.28-3.45,6.02
 		c0.58,0.94,0.74,1.42,0.75,2.52c0,1.02,0.42,1.96,1.08,2.69c-0.71,2.4,0.48,5.27,3.61,4.94c0.44-0.05,0.88-0.09,1.31-0.13

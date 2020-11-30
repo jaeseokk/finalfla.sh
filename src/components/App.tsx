@@ -16,7 +16,7 @@ import Sequencer from './Sequencer'
 import Loading from './Loading'
 import useMouseIdleTime from '../shared/useMouseIdleTime'
 import Background from './Background'
-import { validateSequence, isEmptySequence } from '../shared/utils'
+import { validateSequence, isEmptySequence, range } from '../shared/utils'
 import Credit from './Credit'
 import Reference from './Reference'
 import Share from './Share'
@@ -43,6 +43,8 @@ function App() {
     INITIAL_SEQUENCE
   )
   const { current: sequence } = history
+  const [muteStatus, setMuteStatus] = useState(range(LAYERS, false))
+  const [soloStatus, setSoloStatus] = useState(range(LAYERS, false))
   const { tickIndex, start, pause, resume } = useTicker(STEPS)
   const showPopup = showCredit || showReference || showShare
   const { idle } = useMouseIdleTime({
@@ -97,6 +99,23 @@ function App() {
     },
     [setSequence]
   )
+  const handleChangeMuteStatus = useCallback((layerIndex, state) => {
+    setSoloStatus(range(LAYERS, false))
+
+    setMuteStatus((prev) => [
+      ...prev.slice(0, layerIndex),
+      state,
+      ...prev.slice(layerIndex + 1),
+    ])
+  }, [])
+  const handleChangeSoloStatus = useCallback((layerIndex, state) => {
+    setMuteStatus(range(LAYERS, false))
+
+    const nextSoloStatus = range(LAYERS, false)
+    nextSoloStatus[layerIndex] = state
+
+    setSoloStatus(nextSoloStatus)
+  }, [])
   const handleReset = useCallback(() => {
     reset()
   }, [reset])
@@ -128,6 +147,8 @@ function App() {
         windowHeight={windowHeight}
         sequence={sequence}
         soundSource={soundSource}
+        muteStatus={muteStatus}
+        soloStatus={soloStatus}
         onReady={handleReadyAnim}
         tickIndex={tickIndex}
       />
@@ -161,7 +182,11 @@ function App() {
                 stepCount={STEPS}
                 sequence={sequence}
                 tickIndex={tickIndex}
+                muteStatus={muteStatus}
+                soloStatus={soloStatus}
                 onChangeKnobIndex={handleChangeKnobIndex}
+                onChangeMuteStatus={handleChangeMuteStatus}
+                onChangeSoloStatus={handleChangeSoloStatus}
                 onClickTitle={() => {
                   setGlove(true)
                 }}
