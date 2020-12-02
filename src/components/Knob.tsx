@@ -98,6 +98,7 @@ const Knob: React.FC<KnobProp> = ({
   )
   const handleTouchMove = useCallback((e) => {
     touchMoving.current = true
+    clearInteracting()
   }, [])
   const handleSelect = useCallback(
     (index: number) => {
