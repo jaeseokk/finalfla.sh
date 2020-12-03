@@ -18,7 +18,7 @@ import useMouseIdleTime from '../shared/useMouseIdleTime'
 import Background from './Background'
 import { validateSequence, isEmptySequence, range } from '../shared/utils'
 import Credit from './Credit'
-import Reference from './Reference'
+import About from './About'
 import Share from './Share'
 import createSoundSource from '../shared/createSoundSource'
 import { Howl } from 'howler'
@@ -35,7 +35,7 @@ function App() {
   const [loadingExited, setLoadingExited] = useState(false)
   const [startSequencer, setStartSequencer] = useState(false)
   const [showCredit, setShowCredit] = useState(false)
-  const [showReference, setShowReference] = useState(false)
+  const [showAbout, setShowAbout] = useState(false)
   const [showShare, setShowShare] = useState(false)
   const [shareUrl, setShareUrl] = useState('')
   const [glove, setGlove] = useState(false)
@@ -46,7 +46,7 @@ function App() {
   const [muteStatus, setMuteStatus] = useState(range(LAYERS, false))
   const [soloStatus, setSoloStatus] = useState(range(LAYERS, false))
   const { tickIndex, start, pause, resume } = useTicker(STEPS)
-  const showPopup = showCredit || showReference || showShare
+  const showPopup = showCredit || showAbout || showShare
   const { idle } = useMouseIdleTime({
     active: readyAll && !showPopup,
   })
@@ -190,13 +190,13 @@ function App() {
                 onClickTitle={() => {
                   setGlove(true)
                 }}
-                onClickCreditButton={() => {
+                onClickAboutButton={() => {
                   pause()
-                  setShowCredit(true)
+                  setShowAbout(true)
                 }}
-                onClickReferenceButton={() => {
+                onClickHowtoButton={() => {
                   pause()
-                  setShowReference(true)
+                  window.open('http://finalfla.sh', '_blank')
                 }}
                 onClickShareButton={async () => {
                   pause()
@@ -216,18 +216,18 @@ function App() {
           </>
         )}
       </div>
+      <About
+        show={showAbout}
+        onClose={() => {
+          resume()
+          setShowAbout(false)
+        }}
+      />
       <Credit
         show={showCredit}
         onClose={() => {
           resume()
           setShowCredit(false)
-        }}
-      />
-      <Reference
-        show={showReference}
-        onClose={() => {
-          resume()
-          setShowReference(false)
         }}
       />
       <Share

@@ -1,14 +1,14 @@
 import React from 'react'
 
-import styles from './ReferenceButton.module.scss'
+import styles from './AboutButton.module.scss'
 
-interface ReferenceButtonProps {
+interface AboutButtonProps {
   onClick: () => void
 }
 
-const ReferenceButton: React.FC<ReferenceButtonProps> = ({ onClick }) => {
+const AboutButton: React.FC<AboutButtonProps> = ({ onClick }) => {
   return (
-    <button className={styles.ReferenceButton} onClick={onClick}>
+    <button className={styles.AboutButton} onClick={onClick}>
       <svg
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
@@ -54,9 +54,9 @@ const ReferenceButton: React.FC<ReferenceButtonProps> = ({ onClick }) => {
           />
         </g>
       </svg>
-      <div className={styles.label}>REFERENCE</div>
+      <div className={styles.label}>ABOUT</div>
     </button>
   )
 }
 
-export default ReferenceButton
+export default AboutButton

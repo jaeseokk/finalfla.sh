@@ -42,6 +42,10 @@ $traditional-color: #8711ff;
   align-items: center;
   touch-action: manipulation;
 
+  > svg {
+    flex: none;
+  }
+
   &:hover {
     transform: scale(1.1);
   }
@@ -51,6 +55,7 @@ $traditional-color: #8711ff;
     font-weight: bold;
     margin-top: 3px;
     z-index: 0;
+    width: 150%;
   }
 }
 

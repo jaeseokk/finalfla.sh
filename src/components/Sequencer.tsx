@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import Knob from './Knob'
 import styles from './Sequencer.module.scss'
 import { Sequence } from '../shared/types'
@@ -7,8 +7,8 @@ import SequencerTitle from './SequencerTitle'
 import SequencerBolt from './SequencerBolt'
 import RedoButton from './RedoButton'
 import UndoButton from './UndoButton'
-import CreditButton from './CreditButton'
-import ReferenceButton from './ReferenceButton'
+import AboutButton from './AboutButton'
+import HowtoButton from './HowtoButton'
 import ShareButton from './ShareButton'
 import { Category } from '../shared/constants'
 import ClearButton from './ClearButton'
@@ -29,8 +29,8 @@ interface SequencerProp {
   onChangeMuteStatus: (layerIndex: number, state: boolean) => void
   onChangeSoloStatus: (layerIndex: number, state: boolean) => void
   onClickTitle: () => void
-  onClickCreditButton: () => void
-  onClickReferenceButton: () => void
+  onClickAboutButton: () => void
+  onClickHowtoButton: () => void
   onClickShareButton: () => void
   onReset: () => void
   onUndo: () => void
@@ -47,8 +47,8 @@ const Sequencer: React.FC<SequencerProp> = ({
   onChangeMuteStatus,
   onChangeSoloStatus,
   onClickTitle,
-  onClickCreditButton,
-  onClickReferenceButton,
+  onClickAboutButton,
+  onClickHowtoButton,
   onClickShareButton,
   onReset,
   onUndo,
@@ -80,8 +80,8 @@ const Sequencer: React.FC<SequencerProp> = ({
           </div>
           <div className={styles.wrapper}>
             <div className={styles.left}>
-              <CreditButton onClick={onClickCreditButton} />
-              <ReferenceButton onClick={onClickReferenceButton} />
+              <AboutButton onClick={onClickAboutButton} />
+              <HowtoButton onClick={onClickHowtoButton} />
               <ShareButton onClick={onClickShareButton} />
             </div>
             <div className={styles.center}>
