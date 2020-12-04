@@ -195,7 +195,6 @@ function App() {
                   setShowAbout(true)
                 }}
                 onClickHowtoButton={() => {
-                  pause()
                   window.open('http://finalfla.sh', '_blank')
                 }}
                 onClickShareButton={async () => {
