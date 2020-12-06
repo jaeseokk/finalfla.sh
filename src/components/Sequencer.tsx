@@ -59,6 +59,7 @@ const Sequencer: React.FC<SequencerProp> = ({
 
   return (
     <div className={clsx([styles.Sequencer])}>
+      <IconPatterns />
       <div className={styles.background}>
         <div className={clsx([styles.bolt, styles.top, styles.left])}>
           <SequencerBolt />
@@ -96,7 +97,6 @@ const Sequencer: React.FC<SequencerProp> = ({
           </div>
         </div>
         <div className={styles.scrollWrapper}>
-          <IconPatterns />
           <div className={clsx([styles.knobs])}>
             {[
               Category.DR,
