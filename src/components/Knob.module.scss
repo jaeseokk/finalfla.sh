@@ -33,44 +33,49 @@
       }
 
       g.lightWrapper {
+        $light-off-ratio: 50%;
+
         path {
           &.DR {
-            fill: scale-color($dr-color, $lightness: -40%);
+            fill: scale-color($dr-color, $lightness: -$light-off-ratio);
 
             &.selected {
               fill: $dr-color;
             }
           }
           &.BS {
-            fill: scale-color($bs-color, $lightness: -40%);
+            fill: scale-color($bs-color, $lightness: -$light-off-ratio);
 
             &.selected {
               fill: $bs-color;
             }
           }
           &.MEL {
-            fill: scale-color($mel-color, $lightness: -40%);
+            fill: scale-color($mel-color, $lightness: -$light-off-ratio);
 
             &.selected {
               fill: $mel-color;
             }
           }
           &.FX {
-            fill: scale-color($fx-color, $lightness: -40%);
+            fill: scale-color($fx-color, $lightness: -$light-off-ratio);
 
             &.selected {
               fill: $fx-color;
             }
           }
           &.AMBIENT {
-            fill: scale-color($ambient-color, $lightness: -40%);
+            fill: scale-color($ambient-color, $lightness: -$light-off-ratio);
 
             &.selected {
               fill: $ambient-color;
             }
           }
           &.TRADITIONAL {
-            fill: scale-color($traditional-color, $lightness: -40%);
+            fill: scale-color(
+              $traditional-color,
+              $lightness: -$light-off-ratio
+            );
 
             &.selected {
               fill: $traditional-color;
