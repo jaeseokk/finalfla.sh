@@ -14,6 +14,7 @@ import { Category } from '../shared/constants'
 import ClearButton from './ClearButton'
 import MuteButton from './MuteButton'
 import SoloButton from './SoloButton'
+import IconPatterns from './IconPatterns'
 
 interface SequencerProp {
   stepCount: number
@@ -95,6 +96,7 @@ const Sequencer: React.FC<SequencerProp> = ({
           </div>
         </div>
         <div className={styles.scrollWrapper}>
+          <IconPatterns />
           <div className={clsx([styles.knobs])}>
             {[
               Category.DR,

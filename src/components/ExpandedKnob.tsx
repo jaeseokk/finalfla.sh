@@ -77,7 +77,7 @@ const ExpandedKnob: React.FC<ExpandedKnobProp> = ({
     onSelect(nextSelectedIndex)
   }, [onSelect, value, offset])
   const id = value < 0 ? null : materials[value].id
-  const patternId = id ? `icon-${id}` : undefined
+  const patternId = id ? `icon-${id}-for-expanded` : undefined
   const fill = patternId ? `url(#${patternId})` : '#fff'
   useEffect(() => {
     window.addEventListener('touchend', handleMouseUp)
@@ -99,26 +99,6 @@ const ExpandedKnob: React.FC<ExpandedKnobProp> = ({
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 127 129"
         >
-          <defs>
-            <pattern
-              id={patternId}
-              x="0"
-              y="0"
-              patternUnits="objectBoundingBox"
-              preserveAspectRatio="xMidYMid meet"
-              height="1"
-              width="1"
-            >
-              {id && (
-                <image
-                  x="0"
-                  y="0"
-                  height="60"
-                  xlinkHref={`assets/icons/${id}.png`}
-                ></image>
-              )}
-            </pattern>
-          </defs>
           <g>
             <path
               fill="#B7B7B7"

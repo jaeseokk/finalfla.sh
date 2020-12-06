@@ -120,26 +120,6 @@ const Knob: React.FC<KnobProp> = ({
         onTouchMove={handleTouchMove}
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108.65 109.4">
-          <defs>
-            <pattern
-              id={patternId}
-              x="0"
-              y="0"
-              patternUnits="objectBoundingBox"
-              preserveAspectRatio="xMidYMid meet"
-              height="1"
-              width="1"
-            >
-              {id && (
-                <image
-                  x="0"
-                  y="0"
-                  height="80"
-                  xlinkHref={`assets/icons/${id}.png`}
-                ></image>
-              )}
-            </pattern>
-          </defs>
           <path
             d="M88.62,34.47A41.9,41.9,0,0,0,71.11,18a38.14,38.14,0,0,0-11.79-3.62,54.82,54.82,0,0,0-14.7-.09,17.8,17.8,0,0,0-6.17,1.95,2,2,0,0,0-.54.43A37.28,37.28,0,0,0,22.79,29.43a50.12,50.12,0,0,0-9.37,24.21,39.86,39.86,0,0,0,5.76,24.11A40.41,40.41,0,0,0,38,93.75,43.34,43.34,0,0,0,64.12,96a57.86,57.86,0,0,0,13.35-4.75,29.65,29.65,0,0,0,10.19-7.92c5.28-6.62,7.21-15.25,7.35-23.5A49.12,49.12,0,0,0,88.62,34.47Z"
             fill={fill}
