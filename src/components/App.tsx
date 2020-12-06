@@ -111,10 +111,11 @@ function App() {
   const handleChangeSoloStatus = useCallback((layerIndex, state) => {
     setMuteStatus(range(LAYERS, false))
 
-    const nextSoloStatus = range(LAYERS, false)
-    nextSoloStatus[layerIndex] = state
-
-    setSoloStatus(nextSoloStatus)
+    setSoloStatus((prev) => [
+      ...prev.slice(0, layerIndex),
+      state,
+      ...prev.slice(layerIndex + 1),
+    ])
   }, [])
   const handleReset = useCallback(() => {
     reset()

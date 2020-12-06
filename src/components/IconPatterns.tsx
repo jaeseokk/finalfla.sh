@@ -7,7 +7,7 @@ const IconPatterns = () => {
     <svg xmlns="http://www.w3.org/2000/svg" style={{ height: 0, width: 0 }}>
       <defs>
         {sequenceUnits.map(({ id }) => (
-          <>
+          <React.Fragment key={id}>
             <pattern
               id={`icon-${id}`}
               x="0"
@@ -42,7 +42,7 @@ const IconPatterns = () => {
                 xlinkHref={`assets/icons/${id}.png`}
               ></image>
             </pattern>
-          </>
+          </React.Fragment>
         ))}
       </defs>
     </svg>
