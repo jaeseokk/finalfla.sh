@@ -17,7 +17,6 @@ import Loading from './Loading'
 import useMouseIdleTime from '../shared/useMouseIdleTime'
 import Background from './Background'
 import { validateSequence, isEmptySequence, range } from '../shared/utils'
-import Credit from './Credit'
 import About from './About'
 import Share from './Share'
 import createSoundSource from '../shared/createSoundSource'
@@ -34,7 +33,6 @@ function App() {
   const [soundSource, setSoundSource] = useState<Howl | null>(null)
   const [loadingExited, setLoadingExited] = useState(false)
   const [startSequencer, setStartSequencer] = useState(false)
-  const [showCredit, setShowCredit] = useState(false)
   const [showAbout, setShowAbout] = useState(false)
   const [showShare, setShowShare] = useState(false)
   const [shareUrl, setShareUrl] = useState('')
@@ -46,7 +44,7 @@ function App() {
   const [muteStatus, setMuteStatus] = useState(range(LAYERS, false))
   const [soloStatus, setSoloStatus] = useState(range(LAYERS, false))
   const { tickIndex, start, pause, resume } = useTicker(STEPS)
-  const showPopup = showCredit || showAbout || showShare
+  const showPopup = showAbout || showShare
   const { idle } = useMouseIdleTime({
     active: readyAll && !showPopup,
   })
@@ -221,13 +219,6 @@ function App() {
         onClose={() => {
           resume()
           setShowAbout(false)
-        }}
-      />
-      <Credit
-        show={showCredit}
-        onClose={() => {
-          resume()
-          setShowCredit(false)
         }}
       />
       <Share

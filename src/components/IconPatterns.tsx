@@ -22,7 +22,7 @@ const IconPatterns = () => {
                 y="0"
                 height="80"
                 width="80"
-                xlinkHref={`assets/icons/${id}.png`}
+                xlinkHref={require(`../assets/icons/${id}.png`)}
               ></image>
             </pattern>
             <pattern
@@ -39,7 +39,7 @@ const IconPatterns = () => {
                 y="0"
                 height="60"
                 width="60"
-                xlinkHref={`assets/icons/${id}.png`}
+                xlinkHref={require(`../assets/icons/${id}.png`)}
               ></image>
             </pattern>
           </React.Fragment>

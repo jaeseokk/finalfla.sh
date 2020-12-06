@@ -204,7 +204,7 @@ const About: React.FC<AboutProps> = ({ show, onClose }) => {
                     x="-9"
                     y="4"
                     height="44"
-                    xlinkHref={`assets/credit.png`}
+                    xlinkHref={require(`../assets/credit.png`)}
                   ></image>
                 </pattern>
                 <pattern
@@ -220,7 +220,7 @@ const About: React.FC<AboutProps> = ({ show, onClose }) => {
                     x="-8"
                     y="5"
                     height="42"
-                    xlinkHref={`assets/reference1.png`}
+                    xlinkHref={require(`../assets/reference1.png`)}
                   ></image>
                 </pattern>
                 <pattern
@@ -236,7 +236,7 @@ const About: React.FC<AboutProps> = ({ show, onClose }) => {
                     x="-8"
                     y="5"
                     height="42"
-                    xlinkHref={`assets/reference2.png`}
+                    xlinkHref={require(`../assets/reference2.png`)}
                   ></image>
                 </pattern>
                 <filter id="squiggly-0">

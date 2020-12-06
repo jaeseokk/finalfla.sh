@@ -223,25 +223,25 @@ $traditional-color: #8711ff;
 }
 
 %hand-cursor-default {
-  cursor: url(/assets/hand-cursor-default.png), auto;
+  cursor: url(../assets/hand-cursor-default.png), auto;
 
   @at-root #{selector-unify(':global(#app):global(.glove)', &)} {
-    cursor: url(/assets/glove-cursor-default.png), auto;
+    cursor: url(../assets/glove-cursor-default.png), auto;
   }
 }
 
 %hand-cursor-pointer1 {
-  cursor: url(/assets/hand-cursor-pointer1.png), pointer;
+  cursor: url(../assets/hand-cursor-pointer1.png), pointer;
 
   @at-root :global(#app):global(.glove) & {
-    cursor: url(/assets/glove-cursor-pointer1.png), auto;
+    cursor: url(../assets/glove-cursor-pointer1.png), auto;
   }
 }
 
 %hand-cursor-pointer2 {
-  cursor: url(/assets/hand-cursor-pointer2.png), pointer;
+  cursor: url(../assets/hand-cursor-pointer2.png), pointer;
 
   @at-root :global(#app):global(.glove) & {
-    cursor: url(/assets/glove-cursor-pointer2.png), auto;
+    cursor: url(../assets/glove-cursor-pointer2.png), auto;
   }
 }
