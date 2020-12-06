@@ -182,20 +182,6 @@
 
     .row {
       width: 100%;
-      height: 70px;
-
-      @include for-medium-screens {
-        height: 65px;
-      }
-
-      @include for-small-screens {
-        height: 50px;
-      }
-
-      @include for-medium-landscape-screens {
-        height: 40px;
-      }
-
       display: flex;
       justify-content: space-between;
       align-items: center;
