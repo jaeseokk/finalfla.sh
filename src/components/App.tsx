@@ -22,7 +22,7 @@ import Share from './Share'
 import createSoundSource from '../shared/createSoundSource'
 import { Howl } from 'howler'
 import useHistory from '../shared/useHistory'
-import { INITIAL_SEQUENCE, STEPS, LAYERS } from '../shared/constants'
+import { INITIAL_SEQUENCE, STEPS, LAYERS, HOWTO_URL } from '../shared/constants'
 
 const jsonUrlCompressor = jsonUrl('lzma')
 
@@ -190,7 +190,7 @@ function App() {
                   setShowAbout(true)
                 }}
                 onClickHowtoButton={() => {
-                  window.open('http://finalfla.sh', '_blank')
+                  window.open(HOWTO_URL, '_blank')
                 }}
                 onClickShareButton={async () => {
                   pause()

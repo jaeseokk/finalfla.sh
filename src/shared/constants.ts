@@ -111,3 +111,5 @@ export const INITIAL_SEQUENCE: Sequence = [
 
 export const STRINGIFIED_EMPTY_SEQUENCE =
   '-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1-1'
+
+export const HOWTO_URL = 'https://youtu.be/gKO0HJSOZnI'
