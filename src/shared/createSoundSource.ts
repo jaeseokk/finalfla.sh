@@ -4,7 +4,10 @@ import { Sound } from './constants'
 const createSoundSource = (): Promise<Howl> => {
   return new Promise((resolve) => {
     const soundSource = new Howl({
-      src: ['assets/sounds/sprite.webm', 'assets/sounds/sprite.mp3'],
+      src: [
+        require('../assets/sounds/sprite.webm'),
+        require('../assets/sounds/sprite.mp3'),
+      ],
       sprite: {
         [Sound.DR_1]: [0, 1008.0045351473923],
         [Sound.DR_10]: [3000, 1008.0045351473927],

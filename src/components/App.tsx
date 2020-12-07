@@ -16,14 +16,13 @@ import Sequencer from './Sequencer'
 import Loading from './Loading'
 import useMouseIdleTime from '../shared/useMouseIdleTime'
 import Background from './Background'
-import { validateSequence, isEmptySequence } from '../shared/utils'
-import Credit from './Credit'
-import Reference from './Reference'
+import { validateSequence, isEmptySequence, range } from '../shared/utils'
+import About from './About'
 import Share from './Share'
 import createSoundSource from '../shared/createSoundSource'
 import { Howl } from 'howler'
 import useHistory from '../shared/useHistory'
-import { INITIAL_SEQUENCE, STEPS, LAYERS } from '../shared/constants'
+import { INITIAL_SEQUENCE, STEPS, LAYERS, HOWTO_URL } from '../shared/constants'
 
 const jsonUrlCompressor = jsonUrl('lzma')
 
@@ -34,8 +33,7 @@ function App() {
   const [soundSource, setSoundSource] = useState<Howl | null>(null)
   const [loadingExited, setLoadingExited] = useState(false)
   const [startSequencer, setStartSequencer] = useState(false)
-  const [showCredit, setShowCredit] = useState(false)
-  const [showReference, setShowReference] = useState(false)
+  const [showAbout, setShowAbout] = useState(false)
   const [showShare, setShowShare] = useState(false)
   const [shareUrl, setShareUrl] = useState('')
   const [glove, setGlove] = useState(false)
@@ -43,8 +41,10 @@ function App() {
     INITIAL_SEQUENCE
   )
   const { current: sequence } = history
+  const [muteStatus, setMuteStatus] = useState(range(LAYERS, false))
+  const [soloStatus, setSoloStatus] = useState(range(LAYERS, false))
   const { tickIndex, start, pause, resume } = useTicker(STEPS)
-  const showPopup = showCredit || showReference || showShare
+  const showPopup = showAbout || showShare
   const { idle } = useMouseIdleTime({
     active: readyAll && !showPopup,
   })
@@ -97,6 +97,20 @@ function App() {
     },
     [setSequence]
   )
+  const handleChangeMuteStatus = useCallback((layerIndex, state) => {
+    setMuteStatus((prev) => [
+      ...prev.slice(0, layerIndex),
+      state,
+      ...prev.slice(layerIndex + 1),
+    ])
+  }, [])
+  const handleChangeSoloStatus = useCallback((layerIndex, state) => {
+    setSoloStatus((prev) => [
+      ...prev.slice(0, layerIndex),
+      state,
+      ...prev.slice(layerIndex + 1),
+    ])
+  }, [])
   const handleReset = useCallback(() => {
     reset()
   }, [reset])
@@ -128,6 +142,8 @@ function App() {
         windowHeight={windowHeight}
         sequence={sequence}
         soundSource={soundSource}
+        muteStatus={muteStatus}
+        soloStatus={soloStatus}
         onReady={handleReadyAnim}
         tickIndex={tickIndex}
       />
@@ -161,17 +177,20 @@ function App() {
                 stepCount={STEPS}
                 sequence={sequence}
                 tickIndex={tickIndex}
+                muteStatus={muteStatus}
+                soloStatus={soloStatus}
                 onChangeKnobIndex={handleChangeKnobIndex}
+                onChangeMuteStatus={handleChangeMuteStatus}
+                onChangeSoloStatus={handleChangeSoloStatus}
                 onClickTitle={() => {
                   setGlove(true)
                 }}
-                onClickCreditButton={() => {
+                onClickAboutButton={() => {
                   pause()
-                  setShowCredit(true)
+                  setShowAbout(true)
                 }}
-                onClickReferenceButton={() => {
-                  pause()
-                  setShowReference(true)
+                onClickHowtoButton={() => {
+                  window.open(HOWTO_URL, '_blank')
                 }}
                 onClickShareButton={async () => {
                   pause()
@@ -191,18 +210,11 @@ function App() {
           </>
         )}
       </div>
-      <Credit
-        show={showCredit}
+      <About
+        show={showAbout}
         onClose={() => {
           resume()
-          setShowCredit(false)
-        }}
-      />
-      <Reference
-        show={showReference}
-        onClose={() => {
-          resume()
-          setShowReference(false)
+          setShowAbout(false)
         }}
       />
       <Share

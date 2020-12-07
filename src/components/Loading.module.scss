@@ -23,7 +23,7 @@
   .content {
     width: 100%;
     height: 60vh;
-    background-image: url('/assets/loading.gif');
+    background-image: url('../assets/loading.gif');
     background-size: contain;
     background-repeat: no-repeat;
     box-sizing: border-box;
@@ -33,6 +33,8 @@
 
   .text {
     height: 40px;
+    width: 100%;
+    text-align: center;
     font-size: 30px;
     color: #ffffff;
     animation: font-color-anim 0.5s ease-in-out infinite;

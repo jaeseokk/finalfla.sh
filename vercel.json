@@ -1,0 +1,14 @@
+{
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "headers": { "cache-control": "s-maxage=604800" },
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/sprites/(.*)",
+      "headers": { "cache-control": "s-maxage=604800" },
+      "dest": "/sprites/$1"
+    }
+  ]
+}

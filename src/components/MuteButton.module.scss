@@ -1,0 +1,5 @@
+@import '../shared/common.scss';
+
+.MuteButton {
+  @include controller-button;
+}

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Finalflash 8Step Sequencer",
   "author": "Jaeseok Kang <kang89kr@gmail.com>",
-  "hompage": "https://finalfla.sh",
+  "homepage": "https://finalfla.sh",
   "private": true,
   "dependencies": {
     "@babel/core": "7.9.0",

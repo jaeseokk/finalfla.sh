@@ -114,16 +114,24 @@
 
         button {
           @extend %hand-cursor-pointer2;
-          font-size: 35px;
-          padding: 0 30px;
+          font-size: 2rem;
+          padding: 10px 30px;
           background-color: #ffffff;
           border-radius: 2px;
 
           @include for-small-screens {
             font-size: 1rem;
-            height: 30px;
           }
         }
+      }
+    }
+
+    .aboutText {
+      font-size: 2px;
+
+      .title {
+        font-size: 3px;
+        font-weight: bold;
       }
     }
   }

@@ -14,6 +14,8 @@ interface AnimatinoProps {
   tickIndex: number
   windowWidth: number
   windowHeight: number
+  muteStatus: boolean[]
+  soloStatus: boolean[]
   onReady: () => void
 }
 
@@ -23,6 +25,8 @@ const Animation: React.FC<AnimatinoProps> = ({
   tickIndex,
   windowWidth,
   windowHeight,
+  muteStatus,
+  soloStatus,
   onReady,
 }) => {
   const [ready, setReady] = useState(false)
@@ -110,17 +114,17 @@ const Animation: React.FC<AnimatinoProps> = ({
 
     if (isMobile) {
       for (let i = 0; i < 10; i++) {
-        PIXI.Loader.shared.add(`assets/sprites/sprite-0-${i}_mobile.json`)
+        PIXI.Loader.shared.add(`sprites/sprite-0-${i}_mobile.json`)
       }
       for (let i = 0; i < 8; i++) {
-        PIXI.Loader.shared.add(`assets/sprites/sprite-1-${i}_mobile.json`)
+        PIXI.Loader.shared.add(`sprites/sprite-1-${i}_mobile.json`)
       }
     } else {
       for (let i = 0; i < 38; i++) {
-        PIXI.Loader.shared.add(`assets/sprites/sprite-0-${i}.json`)
+        PIXI.Loader.shared.add(`sprites/sprite-0-${i}.json`)
       }
       for (let i = 0; i < 33; i++) {
-        PIXI.Loader.shared.add(`assets/sprites/sprite-1-${i}.json`)
+        PIXI.Loader.shared.add(`sprites/sprite-1-${i}.json`)
       }
     }
 
@@ -145,12 +149,20 @@ const Animation: React.FC<AnimatinoProps> = ({
       return
     }
 
-    sequence[tickIndex].forEach((index) => {
+    sequence[tickIndex].forEach((index, layerIndex) => {
       if (index < 0) {
         return
       }
 
       if (!pixiContainerRef.current) {
+        return
+      }
+
+      if (muteStatus[layerIndex]) {
+        return
+      }
+
+      if (soloStatus.includes(true) && !soloStatus[layerIndex]) {
         return
       }
 

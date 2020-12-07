@@ -37,45 +37,211 @@ $traditional-color: #8711ff;
   position: relative;
   transition: transform 0.2s ease-in-out;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  touch-action: manipulation;
+
+  > svg {
+    flex: none;
+  }
 
   &:hover {
     transform: scale(1.1);
   }
 
   .label {
-    position: absolute;
-    height: 20%;
-    bottom: -20%;
-    left: 50%;
-    transform: translateX(-50%);
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-top: 3px;
+    z-index: 0;
+    width: 150%;
+  }
+}
 
-    @include for-small-screens {
-      height: 15%;
-      bottom: -15%;
+@mixin controller-button {
+  @extend %hand-cursor-pointer2;
+
+  $controller-button-width: 50px;
+  $controller-button-width-for-small: 40px;
+  $controller-button-width-for-smaller: 30px;
+  $controller-button-height: 24px;
+  $controller-button-height-for-small: 20px;
+  $controller-button-height-for-smaller: 15px;
+  $controller-button-padding: 3px;
+  $controller-button-padding-for-small: 2px;
+
+  position: relative;
+  width: $controller-button-width + $controller-button-padding;
+  height: $controller-button-height + $controller-button-padding;
+
+  @include for-small-screens {
+    width: $controller-button-width-for-small +
+      $controller-button-padding-for-small;
+    height: $controller-button-height-for-small +
+      $controller-button-padding-for-small;
+  }
+
+  @include for-medium-landscape-screens {
+    width: $controller-button-width-for-smaller +
+      $controller-button-padding-for-small;
+    height: $controller-button-height-for-smaller +
+      $controller-button-padding-for-small;
+  }
+
+  padding-right: $controller-button-padding;
+  padding-bottom: $controller-button-padding;
+
+  touch-action: manipulation;
+
+  > div {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    &.bg {
+      transform: translate(
+        $controller-button-padding,
+        $controller-button-padding
+      );
+
+      @include for-small-screens {
+        transform: translate(
+          $controller-button-padding-for-small,
+          $controller-button-padding-for-small
+        );
+      }
+      @include for-medium-landscape-screens {
+        transform: translate(
+          $controller-button-padding-for-small,
+          $controller-button-padding-for-small
+        );
+      }
+    }
+
+    &.label {
+      font-size: 1rem;
+      font-weight: bold;
+      line-height: $controller-button-height;
+
+      @include for-small-screens {
+        line-height: $controller-button-height-for-small;
+      }
+
+      @include for-medium-landscape-screens {
+        line-height: $controller-button-height-for-smaller;
+      }
+    }
+
+    &.fore,
+    &.label {
+      transition: transform 0.1s ease-out;
+    }
+  }
+
+  &:hover {
+    > div {
+      &.fore,
+      &.label {
+        transform: translate(
+          $controller-button-padding / 3,
+          $controller-button-padding / 3
+        );
+
+        @include for-small-screens {
+          transform: translate(
+            $controller-button-padding-for-small / 3,
+            $controller-button-padding-for-small / 3
+          );
+        }
+        @include for-medium-landscape-screens {
+          transform: translate(
+            $controller-button-padding-for-small / 3,
+            $controller-button-padding-for-small / 3
+          );
+        }
+      }
+    }
+  }
+
+  &:active {
+    > div {
+      &.fore,
+      &.label {
+        transform: translate(
+          $controller-button-padding,
+          $controller-button-padding
+        );
+
+        @include for-small-screens {
+          transform: translate(
+            $controller-button-padding-for-small,
+            $controller-button-padding-for-small
+          );
+        }
+        @include for-medium-landscape-screens {
+          transform: translate(
+            $controller-button-padding-for-small,
+            $controller-button-padding-for-small
+          );
+        }
+      }
+    }
+  }
+
+  &.active {
+    > div {
+      &.fore {
+        svg {
+          filter: blur($controller-button-padding / 3);
+        }
+      }
+
+      &.fore,
+      &.label {
+        transform: translate(
+          $controller-button-padding,
+          $controller-button-padding
+        );
+
+        @include for-small-screens {
+          transform: translate(
+            $controller-button-padding-for-small,
+            $controller-button-padding-for-small
+          );
+        }
+        @include for-medium-landscape-screens {
+          transform: translate(
+            $controller-button-padding-for-small,
+            $controller-button-padding-for-small
+          );
+        }
+      }
     }
   }
 }
 
 %hand-cursor-default {
-  cursor: url(/assets/hand-cursor-default.png), auto;
+  cursor: url(../assets/hand-cursor-default.png), auto;
 
   @at-root #{selector-unify(':global(#app):global(.glove)', &)} {
-    cursor: url(/assets/glove-cursor-default.png), auto;
+    cursor: url(../assets/glove-cursor-default.png), auto;
   }
 }
 
 %hand-cursor-pointer1 {
-  cursor: url(/assets/hand-cursor-pointer1.png), pointer;
+  cursor: url(../assets/hand-cursor-pointer1.png), pointer;
 
   @at-root :global(#app):global(.glove) & {
-    cursor: url(/assets/glove-cursor-pointer1.png), auto;
+    cursor: url(../assets/glove-cursor-pointer1.png), auto;
   }
 }
 
 %hand-cursor-pointer2 {
-  cursor: url(/assets/hand-cursor-pointer2.png), pointer;
+  cursor: url(../assets/hand-cursor-pointer2.png), pointer;
 
   @at-root :global(#app):global(.glove) & {
-    cursor: url(/assets/glove-cursor-pointer2.png), auto;
+    cursor: url(../assets/glove-cursor-pointer2.png), auto;
   }
 }

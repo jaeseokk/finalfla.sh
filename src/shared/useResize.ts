@@ -10,10 +10,10 @@ const useWindowResize = () => {
   }, [])
 
   useLayoutEffect(() => {
-    window.addEventListener('resize', handleResize)
+    window.addEventListener('resize', handleResize, false)
 
     return () => {
-      window.removeEventListener('resize', handleResize)
+      window.removeEventListener('resize', handleResize, false)
     }
   }, [handleResize])
 

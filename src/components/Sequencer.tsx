@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useMemo } from 'react'
 import Knob from './Knob'
 import styles from './Sequencer.module.scss'
 import { Sequence } from '../shared/types'
@@ -7,24 +7,31 @@ import SequencerTitle from './SequencerTitle'
 import SequencerBolt from './SequencerBolt'
 import RedoButton from './RedoButton'
 import UndoButton from './UndoButton'
-import CreditButton from './CreditButton'
-import ReferenceButton from './ReferenceButton'
+import AboutButton from './AboutButton'
+import HowtoButton from './HowtoButton'
 import ShareButton from './ShareButton'
 import { Category } from '../shared/constants'
 import ClearButton from './ClearButton'
+import MuteButton from './MuteButton'
+import SoloButton from './SoloButton'
+import IconPatterns from './IconPatterns'
 
 interface SequencerProp {
   stepCount: number
   sequence: Sequence
   tickIndex: number
+  muteStatus: boolean[]
+  soloStatus: boolean[]
   onChangeKnobIndex: (
     tickIndex: number,
     layerIndex: number,
     knobIndex: number
   ) => void
+  onChangeMuteStatus: (layerIndex: number, state: boolean) => void
+  onChangeSoloStatus: (layerIndex: number, state: boolean) => void
   onClickTitle: () => void
-  onClickCreditButton: () => void
-  onClickReferenceButton: () => void
+  onClickAboutButton: () => void
+  onClickHowtoButton: () => void
   onClickShareButton: () => void
   onReset: () => void
   onUndo: () => void
@@ -35,17 +42,24 @@ const Sequencer: React.FC<SequencerProp> = ({
   stepCount,
   sequence,
   tickIndex,
+  muteStatus,
+  soloStatus,
   onChangeKnobIndex,
+  onChangeMuteStatus,
+  onChangeSoloStatus,
   onClickTitle,
-  onClickCreditButton,
-  onClickReferenceButton,
+  onClickAboutButton,
+  onClickHowtoButton,
   onClickShareButton,
   onReset,
   onUndo,
   onRedo,
 }) => {
+  const isSoloing = useMemo(() => soloStatus.includes(true), [soloStatus])
+
   return (
     <div className={clsx([styles.Sequencer])}>
+      <IconPatterns />
       <div className={styles.background}>
         <div className={clsx([styles.bolt, styles.top, styles.left])}>
           <SequencerBolt />
@@ -68,8 +82,8 @@ const Sequencer: React.FC<SequencerProp> = ({
           </div>
           <div className={styles.wrapper}>
             <div className={styles.left}>
-              <CreditButton onClick={onClickCreditButton} />
-              <ReferenceButton onClick={onClickReferenceButton} />
+              <AboutButton onClick={onClickAboutButton} />
+              <HowtoButton onClick={onClickHowtoButton} />
               <ShareButton onClick={onClickShareButton} />
             </div>
             <div className={styles.center}>
@@ -93,12 +107,27 @@ const Sequencer: React.FC<SequencerProp> = ({
               Category.TRADITIONAL,
             ].map((category, i) => (
               <div key={category} className={styles.row}>
+                <div className={styles.controller}>
+                  <MuteButton
+                    active={muteStatus[i]}
+                    onClick={() => {
+                      onChangeMuteStatus(i, !muteStatus[i])
+                    }}
+                  />
+                  <SoloButton
+                    active={soloStatus[i]}
+                    onClick={() => {
+                      onChangeSoloStatus(i, !soloStatus[i])
+                    }}
+                  />
+                </div>
                 {Array.from(Array(stepCount), (v, j) => (
                   <Knob
                     key={`${category}-${j}`}
                     category={category}
                     selectedIndex={sequence[j][i]}
                     playing={tickIndex === j}
+                    muted={muteStatus[i] || (isSoloing && !soloStatus[i])}
                     onSelect={(index) => {
                       if (sequence[j][i] === index) {
                         return
