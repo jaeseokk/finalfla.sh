@@ -98,8 +98,6 @@ function App() {
     [setSequence]
   )
   const handleChangeMuteStatus = useCallback((layerIndex, state) => {
-    setSoloStatus(range(LAYERS, false))
-
     setMuteStatus((prev) => [
       ...prev.slice(0, layerIndex),
       state,
@@ -107,8 +105,6 @@ function App() {
     ])
   }, [])
   const handleChangeSoloStatus = useCallback((layerIndex, state) => {
-    setMuteStatus(range(LAYERS, false))
-
     setSoloStatus((prev) => [
       ...prev.slice(0, layerIndex),
       state,
