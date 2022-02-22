@@ -4,11 +4,24 @@ import styles from './HowtoButton.module.scss'
 
 interface HowtoButtonProps {
   onClick: () => void
+  isExibitionMode: boolean
 }
 
-const HowtoButton: React.FC<HowtoButtonProps> = ({ onClick }) => {
+const HowtoButton: React.FC<HowtoButtonProps> = ({
+  isExibitionMode,
+  onClick,
+}) => {
   return (
-    <button className={styles.HowtoButton} onClick={onClick}>
+    <button
+      className={styles.HowtoButton}
+      onClick={() => {
+        if (isExibitionMode) {
+          return
+        }
+
+        onClick()
+      }}
+    >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 106.92 111.23">
         <g>
           <path
@@ -23,7 +36,7 @@ const HowtoButton: React.FC<HowtoButtonProps> = ({ onClick }) => {
           />
         </g>
       </svg>
-      <div className={styles.label}>HOW TO</div>
+      {!isExibitionMode && <div className={styles.label}>HOW TO</div>}
     </button>
   )
 }

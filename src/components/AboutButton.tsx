@@ -3,12 +3,25 @@ import React from 'react'
 import styles from './AboutButton.module.scss'
 
 interface AboutButtonProps {
+  isExibitionMode: boolean
   onClick: () => void
 }
 
-const AboutButton: React.FC<AboutButtonProps> = ({ onClick }) => {
+const AboutButton: React.FC<AboutButtonProps> = ({
+  isExibitionMode,
+  onClick,
+}) => {
   return (
-    <button className={styles.AboutButton} onClick={onClick}>
+    <button
+      className={styles.AboutButton}
+      onClick={() => {
+        if (isExibitionMode) {
+          return
+        }
+
+        onClick()
+      }}
+    >
       <svg
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +67,7 @@ const AboutButton: React.FC<AboutButtonProps> = ({ onClick }) => {
           />
         </g>
       </svg>
-      <div className={styles.label}>ABOUT</div>
+      {!isExibitionMode && <div className={styles.label}>ABOUT</div>}
     </button>
   )
 }

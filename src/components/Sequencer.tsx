@@ -22,6 +22,7 @@ interface SequencerProp {
   tickIndex: number
   muteStatus: boolean[]
   soloStatus: boolean[]
+  isExibitionMode: boolean
   onChangeKnobIndex: (
     tickIndex: number,
     layerIndex: number,
@@ -44,6 +45,7 @@ const Sequencer: React.FC<SequencerProp> = ({
   tickIndex,
   muteStatus,
   soloStatus,
+  isExibitionMode,
   onChangeKnobIndex,
   onChangeMuteStatus,
   onChangeSoloStatus,
@@ -82,9 +84,18 @@ const Sequencer: React.FC<SequencerProp> = ({
           </div>
           <div className={styles.wrapper}>
             <div className={styles.left}>
-              <AboutButton onClick={onClickAboutButton} />
-              <HowtoButton onClick={onClickHowtoButton} />
-              <ShareButton onClick={onClickShareButton} />
+              <AboutButton
+                isExibitionMode={isExibitionMode}
+                onClick={onClickAboutButton}
+              />
+              <HowtoButton
+                isExibitionMode={isExibitionMode}
+                onClick={onClickHowtoButton}
+              />
+              <ShareButton
+                isExibitionMode={isExibitionMode}
+                onClick={onClickShareButton}
+              />
             </div>
             <div className={styles.center}>
               <SequencerTitle onClick={onClickTitle} />

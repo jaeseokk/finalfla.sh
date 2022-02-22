@@ -22,11 +22,13 @@ import Share from './Share'
 import createSoundSource from '../shared/createSoundSource'
 import { Howl } from 'howler'
 import useHistory from '../shared/useHistory'
+import useExibitionMode from '../shared/useExibitionMode'
 import { INITIAL_SEQUENCE, STEPS, LAYERS, HOWTO_URL } from '../shared/constants'
 
 const jsonUrlCompressor = jsonUrl('lzma')
 
 function App() {
+  const { isExibitionMode } = useExibitionMode()
   const [readyAnim, setReadyAnim] = useState(false)
   const [readySound, setReadySound] = useState(false)
   const readyAll = readyAnim && readySound
@@ -179,6 +181,7 @@ function App() {
                 tickIndex={tickIndex}
                 muteStatus={muteStatus}
                 soloStatus={soloStatus}
+                isExibitionMode={isExibitionMode}
                 onChangeKnobIndex={handleChangeKnobIndex}
                 onChangeMuteStatus={handleChangeMuteStatus}
                 onChangeSoloStatus={handleChangeSoloStatus}

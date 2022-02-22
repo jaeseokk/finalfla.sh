@@ -3,12 +3,25 @@ import React from 'react'
 import styles from './ShareButton.module.scss'
 
 interface ShareButtonProps {
+  isExibitionMode: boolean
   onClick: () => void
 }
 
-const ShareButton: React.FC<ShareButtonProps> = ({ onClick }) => {
+const ShareButton: React.FC<ShareButtonProps> = ({
+  isExibitionMode,
+  onClick,
+}) => {
   return (
-    <button className={styles.ShareButton} onClick={onClick}>
+    <button
+      className={styles.ShareButton}
+      onClick={() => {
+        if (isExibitionMode) {
+          return
+        }
+
+        onClick()
+      }}
+    >
       <svg
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +62,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({ onClick }) => {
           />
         </g>
       </svg>
-      <div className={styles.label}>SHARE</div>
+      {!isExibitionMode && <div className={styles.label}>SHARE</div>}
     </button>
   )
 }
